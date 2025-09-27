@@ -57,6 +57,12 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('reports.analytics') ? 'active' : '' }}" href="{{ route('reports.analytics') }}" @if(request()->routeIs('reports.analytics')) aria-current="page" @endif>
+                <i class="ti ti-chart-bar" aria-hidden="true"></i>
+                <span class="nav-link-text">Advanced Analytics</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('printers.*') ? 'active' : '' }}" href="{{ route('printers.index') }}" @if(request()->routeIs('printers.*')) aria-current="page" @endif>
                 <i class="ti ti-printer" aria-hidden="true"></i>
                 <span class="nav-link-text">Printers</span>

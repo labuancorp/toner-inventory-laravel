@@ -2,9 +2,9 @@ import * as Popper from '@popperjs/core';
 import 'bootstrap';
 import '@tabler/core/dist/js/tabler.min.js';
 import PerfectScrollbar from 'perfect-scrollbar';
-import { Chart, LineController, LineElement, PointElement, LinearScale, TimeScale, CategoryScale, Tooltip, Legend } from 'chart.js';
+import { Chart, LineController, LineElement, PointElement, LinearScale, TimeScale, CategoryScale, Tooltip, Legend, PieController, ArcElement, BarController, BarElement } from 'chart.js';
 
-Chart.register(LineController, LineElement, PointElement, LinearScale, TimeScale, CategoryScale, Tooltip, Legend);
+Chart.register(LineController, LineElement, PointElement, LinearScale, TimeScale, CategoryScale, Tooltip, Legend, PieController, ArcElement, BarController, BarElement);
 
 function initPerfectScrollbar() {
   try {
@@ -66,6 +66,121 @@ function initMovementsChart() {
 }
 
 document.addEventListener('DOMContentLoaded', initMovementsChart);
+
+function initAnalyticsCharts() {
+  try {
+    const tsEl = document.getElementById('analyticsMovementsChart');
+    const tsPayload = window.__analyticsTimeseries;
+    if (tsEl && tsPayload) {
+      const { labels, inSeries, outSeries } = tsPayload;
+      new Chart(tsEl, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [
+            {
+              label: 'Stock In',
+              data: inSeries,
+              borderColor: '#4CAF50',
+              backgroundColor: 'rgba(76, 175, 80, 0.2)',
+              tension: 0.3,
+            },
+            {
+              label: 'Stock Out',
+              data: outSeries,
+              borderColor: '#F44336',
+              backgroundColor: 'rgba(244, 67, 54, 0.2)',
+              tension: 0.3,
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: 'top' },
+            tooltip: { enabled: true }
+          },
+          scales: {
+            y: { beginAtZero: true }
+          }
+        }
+      });
+    }
+
+    const pieEl = document.getElementById('categoryPieChart');
+    const piePayload = window.__categoryDistribution;
+    if (pieEl && piePayload && piePayload.labels?.length) {
+      const colors = piePayload.labels.map((_, idx) => {
+        const hue = (idx * 47) % 360;
+        return `hsl(${hue}, 70%, 55%)`;
+      });
+      new Chart(pieEl, {
+        type: 'pie',
+        data: {
+          labels: piePayload.labels,
+          datasets: [
+            {
+              data: piePayload.series,
+              backgroundColor: colors,
+              borderWidth: 1,
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: 'right' },
+            tooltip: { enabled: true }
+          }
+        }
+      });
+    }
+  } catch (e) {
+    console.warn('Analytics charts init skipped:', e?.message || e);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initAnalyticsCharts);
+
+function initYearlyBarChart() {
+  try {
+    const el = document.getElementById('yearlyOutBarChart');
+    const payload = window.__yearlyByCategory;
+    if (!el || !payload || !payload.labels?.length) return;
+    const colors = payload.labels.map((_, idx) => {
+      const hue = (idx * 37) % 360;
+      return `hsl(${hue}, 65%, 55%)`;
+    });
+    new Chart(el, {
+      type: 'bar',
+      data: {
+        labels: payload.labels,
+        datasets: [
+          {
+            label: 'Total OUT',
+            data: payload.series,
+            backgroundColor: colors,
+            borderWidth: 0,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: { enabled: true }
+        },
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  } catch (e) {
+    console.warn('Yearly bar chart init skipped:', e?.message || e);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initYearlyBarChart);
 
 // Theme toggling with persistence
 function applyStoredTheme() {

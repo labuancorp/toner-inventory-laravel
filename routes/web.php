@@ -10,6 +10,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Auth\MfaSettingsController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\PrinterController;
 
@@ -38,13 +39,14 @@ Route::middleware('auth')->group(function () {
 
     // Read-only inventory routes for authenticated users
     Route::get('items', [ItemController::class, 'index'])->name('items.index');
-    Route::get('items/{item}', [ItemController::class, 'show'])->name('items.show');
     Route::get('items/trashed', [ItemController::class, 'trashed'])->name('items.trashed');
     Route::get('items/reorder', [ItemController::class, 'reorderSuggestions'])->name('items.reorder');
     Route::get('items/scan', [ItemController::class, 'scan'])->name('items.scan');
     Route::get('items/lookup/{sku}', [ItemController::class, 'lookupBySku'])->name('items.lookup');
     // JSON endpoint for polling fallback on item page
-    Route::get('items/{item}/json', [ItemController::class, 'showJson'])->name('items.show.json');
+    Route::get('items/{item}/json', [ItemController::class, 'showJson'])->name('items.show.json')->whereNumber('item');
+    // Show route must come after specific paths and be constrained
+    Route::get('items/{item}', [ItemController::class, 'show'])->name('items.show')->whereNumber('item');
 
     // Inventory management restricted to admin or manager roles
     Route::middleware('role:admin,manager')->group(function () {
@@ -78,6 +80,9 @@ Route::middleware('auth')->group(function () {
 
     // Reports
     Route::get('/reports/inventory', [ReportController::class, 'inventory'])->name('reports.inventory');
+    Route::get('/reports/analytics', [AnalyticsController::class, 'index'])->name('reports.analytics');
+    Route::get('/reports/analytics/yearly', [AnalyticsController::class, 'yearly'])->name('reports.analytics.yearly');
+    Route::get('/reports/analytics/yearly/export', [AnalyticsController::class, 'exportYearly'])->name('reports.analytics.yearly.export');
 });
 
 require __DIR__.'/auth.php';

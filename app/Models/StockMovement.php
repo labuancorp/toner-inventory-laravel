@@ -20,6 +20,7 @@ class StockMovement extends Model
 
     protected $casts = [
         'quantity' => 'integer',
+        'reason' => 'encrypted',
     ];
 
     public function item(): BelongsTo

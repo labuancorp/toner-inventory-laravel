@@ -14,7 +14,11 @@ return Application::configure(basePath: dirname(__DIR__))
         // Route middleware aliases
         $middleware->alias([
             'role' => \App\Http\Middleware\EnsureRole::class,
+            'security.headers' => \App\Http\Middleware\SecurityHeaders::class,
         ]);
+
+        // Apply security headers on all web routes
+        $middleware->appendToGroup('web', \App\Http\Middleware\SecurityHeaders::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

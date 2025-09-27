@@ -36,20 +36,25 @@ Route::middleware('auth')->group(function () {
     // MFA settings
     Route::put('/profile/mfa', [MfaSettingsController::class, 'update'])->name('mfa.settings.update');
 
+    // Read-only inventory routes for authenticated users
+    Route::get('items', [ItemController::class, 'index'])->name('items.index');
+    Route::get('items/{item}', [ItemController::class, 'show'])->name('items.show');
+    Route::get('items/trashed', [ItemController::class, 'trashed'])->name('items.trashed');
+    Route::get('items/reorder', [ItemController::class, 'reorderSuggestions'])->name('items.reorder');
+    Route::get('items/scan', [ItemController::class, 'scan'])->name('items.scan');
+    Route::get('items/lookup/{sku}', [ItemController::class, 'lookupBySku'])->name('items.lookup');
+    // JSON endpoint for polling fallback on item page
+    Route::get('items/{item}/json', [ItemController::class, 'showJson'])->name('items.show.json');
+
     // Inventory management restricted to admin or manager roles
     Route::middleware('role:admin,manager')->group(function () {
         Route::resource('categories', CategoryController::class)->except(['show']);
-        Route::resource('items', ItemController::class);
+        // Limit item resource to write operations only
+        Route::resource('items', ItemController::class)->except(['index','show']);
         Route::post('items/{item}/adjust-stock', [ItemController::class, 'adjustStock'])->name('items.adjustStock');
         Route::delete('items/{item}/image', [ItemController::class, 'destroyImage'])->name('items.image.destroy');
-        Route::get('items/trashed', [ItemController::class, 'trashed'])->name('items.trashed');
         Route::post('items/{id}/restore', [ItemController::class, 'restore'])->name('items.restore');
-        Route::get('items/reorder', [ItemController::class, 'reorderSuggestions'])->name('items.reorder');
-        Route::get('items/scan', [ItemController::class, 'scan'])->name('items.scan');
-        Route::get('items/lookup/{sku}', [ItemController::class, 'lookupBySku'])->name('items.lookup');
         Route::post('items/{item}/notify-reorder', [ItemController::class, 'notifyReorder'])->name('items.notifyReorder');
-        // JSON endpoint for polling fallback on item page
-        Route::get('items/{item}/json', [ItemController::class, 'showJson'])->name('items.show.json');
 
         // Printers management & maintenance scheduling
         Route::resource('printers', PrinterController::class);

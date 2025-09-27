@@ -14,19 +14,19 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         <span class="inline-flex items-center gap-2">
-                            <x-icon name="home" class="w-4 h-4" />
+                            <i class="ti ti-home" aria-hidden="true"></i>
                             {{ __('Dashboard') }}
                         </span>
                     </x-nav-link>
                     <x-nav-link :href="route('items.index')" :active="request()->routeIs('items.*')">
                         <span class="inline-flex items-center gap-2">
-                            <x-icon name="stack" class="w-4 h-4" />
+                            <i class="ti ti-box" aria-hidden="true"></i>
                             {{ __('Items') }}
                         </span>
                     </x-nav-link>
                     <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')">
                         <span class="inline-flex items-center gap-2">
-                            <x-icon name="folder" class="w-4 h-4" />
+                            <i class="ti ti-folder" aria-hidden="true"></i>
                             {{ __('Categories') }}
                         </span>
                     </x-nav-link>
@@ -96,25 +96,25 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center gap-4 overflow-x-auto py-2">
                 <a href="{{ route('dashboard') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->routeIs('dashboard') ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-50' }}">
-                    <x-icon name="chart-bar" class="w-4 h-4" />
+                    <i class="ti ti-chart-bar" aria-hidden="true"></i>
                     <span>Dashboard</span>
                 </a>
                 <a href="{{ route('items.index') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->routeIs('items.*') ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-50' }}">
-                    <x-icon name="stack" class="w-4 h-4" />
+                    <i class="ti ti-box" aria-hidden="true"></i>
                     <span>Items</span>
                 </a>
                 <a href="{{ route('categories.index') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->routeIs('categories.*') ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-50' }}">
-                    <x-icon name="folder" class="w-4 h-4" />
+                    <i class="ti ti-folder" aria-hidden="true"></i>
                     <span>Categories</span>
                 </a>
                 @if(Auth::check() && in_array(Auth::user()->role, ['admin','manager']))
                 <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->routeIs('admin.dashboard') ? 'bg-purple-50 text-purple-700' : 'text-gray-700 hover:bg-gray-50' }}">
-                    <x-icon name="shield-check" class="w-4 h-4" />
+                    <i class="ti ti-shield-check" aria-hidden="true"></i>
                     <span>Admin</span>
                 </a>
                 @endif
                 <a href="{{ url('/shop') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->is('shop') ? 'bg-amber-50 text-amber-700' : 'text-gray-700 hover:bg-gray-50' }}">
-                    <x-icon name="shopping-cart" class="w-4 h-4" />
+                    <i class="ti ti-shopping-cart" aria-hidden="true"></i>
                     <span>Shop</span>
                 </a>
             </div>

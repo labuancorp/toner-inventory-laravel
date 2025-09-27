@@ -40,7 +40,7 @@ class OrderController extends Controller
         }
 
         // Record stock out movement (public order)
-        StockMovement::create([
+        $movement = StockMovement::create([
             'item_id' => $item->id,
             'user_id' => null,
             'type' => 'out',

@@ -50,11 +50,11 @@
                 <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex items-center gap-4 overflow-x-auto py-2">
                         <a href="{{ url('/shop') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->is('shop') ? 'bg-amber-50 text-amber-700' : 'text-gray-700 hover:bg-gray-50' }}">
-                            <x-icon name="shopping-cart" class="w-4 h-4" />
+                            <i class="ti ti-shopping-cart" aria-hidden="true"></i>
                             <span>Shop</span>
                         </a>
                         <a href="{{ url('/') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->is('/') ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-50' }}">
-                            <x-icon name="home" class="w-4 h-4" />
+                            <i class="ti ti-home" aria-hidden="true"></i>
                             <span>Home</span>
                         </a>
                     </div>

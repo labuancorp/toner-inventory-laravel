@@ -6,8 +6,8 @@
             <!-- Metric cards -->
             <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-3">
                 <div class="col">
-                    <div class="card">
-                        <div class="card-body border-start border-success border-4">
+                    <div class="card card-elevated card-hover">
+                        <div class="card-body bg-gradient-card border-start border-success border-4">
                             <div class="text-sm text-gray-500">Stock In (Today)</div>
                             <div class="mt-1 text-3xl font-bold text-gray-900">{{ number_format($stockInToday) }}</div>
                             <div class="mt-2 progress" aria-label="Stock in progress">
@@ -17,8 +17,8 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card">
-                        <div class="card-body border-start border-danger border-4">
+                    <div class="card card-elevated card-hover">
+                        <div class="card-body bg-gradient-card border-start border-danger border-4">
                             <div class="text-sm text-gray-500">Stock Out (Today)</div>
                             <div class="mt-1 text-3xl font-bold text-gray-900">{{ number_format($stockOutToday) }}</div>
                             <div class="mt-2 progress" aria-label="Stock out progress">
@@ -138,27 +138,27 @@
             </div>
 
             <!-- Quick actions -->
-            <div class="mt-4 card">
+            <div class="mt-4 card card-elevated">
                 <div class="card-header">
                     <h3 class="card-title">Quick Actions</h3>
                 </div>
-                <div class="card-body">
+                <div class="card-body bg-gradient-card">
                     <div class="row row-cols-1 row-cols-md-3 g-3">
                         <div class="col">
-                            <a href="{{ route('items.index') }}" class="card card-body text-decoration-none">
+                            <a href="{{ route('items.index') }}" class="card card-body card-hover card-elevated bg-gradient-soft text-decoration-none">
                                 <div class="fw-semibold">Browse Items</div>
                                 <div class="text-muted small">Manage and search inventory</div>
                             </a>
                         </div>
                         <div class="col">
-                            <a href="{{ route('categories.index') }}" class="card card-body text-decoration-none">
+                            <a href="{{ route('categories.index') }}" class="card card-body card-hover card-elevated bg-gradient-soft text-decoration-none">
                                 <div class="fw-semibold">Manage Categories</div>
                                 <div class="text-muted small">Organize inventory by type</div>
                             </a>
                         </div>
                         @can('create', App\Models\Item::class)
                         <div class="col">
-                            <a href="{{ route('items.create') }}" class="card card-body text-decoration-none">
+                            <a href="{{ route('items.create') }}" class="card card-body card-hover card-elevated bg-gradient-soft text-decoration-none">
                                 <div class="fw-semibold">Add New Item</div>
                                 <div class="text-muted small">Create new inventory record</div>
                             </a>

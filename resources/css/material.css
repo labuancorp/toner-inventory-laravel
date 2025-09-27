@@ -1,0 +1,203 @@
+/* Local admin CSS entry (Tabler-based) */
+/* Import Tabler Core (Bootstrap 5 + components) */
+@import '@tabler/core/dist/css/tabler.min.css';
+/* Tabler Icons webfont */
+@import '@tabler/icons-webfont/dist/tabler-icons.min.css';
+
+/* Optional: minimal overrides to ensure layout background */
+body.material-layout { background: #f8f9fa; }
+
+/* Theme variables */
+:root {
+  --md-bg: #f8f9fa;
+  --md-surface: #ffffff;
+  --md-text: #212529;
+  --md-muted: #6c757d;
+  --md-border: #dee2e6;
+  --sidebar-width: 280px;
+  /* Typography scale */
+  --font-xs: 0.75rem;   /* 12px */
+  --font-sm: 0.875rem;  /* 14px */
+  --font-base: 0.95rem; /* ~15px */
+  --font-lg: 1.125rem;  /* 18px */
+  --font-xl: 1.5rem;    /* 24px */
+  --line-base: 1.6;
+  --line-tight: 1.25;
+  /* Accent color for active states */
+  --md-accent: #4f46e5; /* indigo-600 */
+}
+
+html { font-size: 16px; }
+body.material-layout { background-color: var(--md-bg); color: var(--md-text); font-size: var(--font-base); line-height: var(--line-base); }
+.navbar-main, .sidenav, .card, .dropdown-menu { background-color: var(--md-surface); color: var(--md-text); }
+.card { border-color: var(--md-border); }
+.table { color: var(--md-text); }
+/* gentle transitions */
+body.material-layout, .navbar-main, .sidenav, .card {
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+
+/* Prevent dropdown show/hide flicker by disabling transitions */
+.dropdown-menu { transition: none !important; }
+
+/* Sidebar sections and accessibility */
+.nav-section { margin-top: 1rem; padding-top: .75rem; border-top: 1px solid var(--md-border); }
+.nav-section-title { display: block; font-weight: 600; font-size: var(--font-xs); text-transform: uppercase; letter-spacing: .05em; color: var(--md-muted); margin-bottom: .5rem; }
+.nav-section-list { margin: 0; padding-left: 0; }
+.nav-item { list-style: none; }
+.nav-link { display: flex; align-items: center; gap: .5rem; padding: .5rem .75rem; border-radius: .375rem; color: var(--md-text); text-decoration: none; }
+.nav-link:hover { background-color: rgba(0,0,0,0.05); }
+.nav-link.active { background-color: rgba(0,0,0,0.08); font-weight: 600; }
+.nav-link:focus-visible { outline: 2px solid #3B82F6; outline-offset: 2px; }
+/* Icon sizing and transitions */
+.nav-link .ti { font-size: 1.1rem; color: inherit; opacity: .9; transition: color 200ms ease, opacity 200ms ease; }
+.nav-link:hover .ti, .nav-link.active .ti { opacity: 1; }
+
+/* Sidebar header (brand/logo) */
+.sidenav-header { padding: 1.5rem 2rem; }
+
+/* Dark theme tuned states */
+body.material-layout.material-dark .nav-link:hover { background-color: rgba(255,255,255,0.06); }
+body.material-layout.material-dark .nav-link.active { background-color: rgba(255,255,255,0.10); }
+body.material-layout.material-dark .nav-link .ti { color: inherit; }
+
+/* Notifications collapse styling inside sidebar */
+#notifCollapse { background-color: var(--md-surface); border-left: 2px solid var(--md-border); border-radius: .375rem; }
+#notifCollapse .dropdown-item { color: var(--md-text); }
+#notifCollapse .dropdown-item:hover, #notifCollapse .dropdown-item:focus { background-color: rgba(0,0,0,0.05); }
+body.material-layout.material-dark #notifCollapse .dropdown-item:hover, body.material-layout.material-dark #notifCollapse .dropdown-item:focus { background-color: rgba(255,255,255,0.06); }
+
+/* Typography system */
+body.material-layout { font-family: 'Figtree', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+.sidenav .navbar-brand { font-weight: 700; font-size: var(--font-sm); }
+.navbar-main .navbar-brand { font-weight: 700; font-size: var(--font-sm); }
+.nav-link-text { font-size: var(--font-base); font-weight: 500; }
+small, .small { font-size: var(--font-sm); color: var(--md-muted); }
+
+/* Headings (content area) */
+.main-content h1, .main-content h2, .main-content h3, .main-content h4, .main-content h5, .main-content h6 { font-weight: 700; line-height: var(--line-tight); }
+.main-content h1 { font-size: var(--font-xl); }
+.main-content h2 { font-size: 1.25rem; }
+.main-content h3 { font-size: 1.125rem; }
+.main-content h4 { font-size: 1rem; }
+.main-content h5 { font-size: var(--font-sm); }
+.main-content h6 { font-size: var(--font-xs); }
+
+/* Tables and form labels */
+.table { font-size: var(--font-sm); }
+.form-label { font-size: var(--font-sm); color: var(--md-muted); }
+.form-control, .form-select { font-size: var(--font-base); }
+
+/* Spacing and visual separation */
+.sidenav .navbar-nav { padding-bottom: 1rem; }
+.nav-section + .nav-section { margin-top: 1rem; }
+
+/* Tabler polish */
+.sidenav { border-right: 1px solid var(--md-border); }
+.card { border-radius: .5rem; box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+.card .card-body { padding: 1rem; }
+.nav-link { padding: .625rem .75rem; display: flex; align-items: center; gap: .5rem; border-radius: .375rem; color: var(--md-text); text-decoration: none; }
+.nav-link i.ti { font-size: 1.1rem; color: var(--md-muted); }
+.nav-link:hover { background-color: rgba(0,0,0,0.04); }
+.nav-link.active { background-color: rgba(79, 70, 229, 0.12); color: var(--md-text); font-weight: 600; }
+.nav-link.active i.ti { color: var(--md-accent); }
+.nav-item + .nav-item { margin-top: .125rem; }
+/* Active indicator bar on the left */
+.nav-link.active { position: relative; }
+.nav-link.active::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px; background-color: var(--md-accent); border-radius: 3px; }
+.nav-section-title { margin-bottom: .5rem; }
+.nav-section-title { margin-bottom: .5rem; }
+/* Allow Bootstrap container classes to control width */
+/* Removing fixed cap to enable fluid/full-width layouts */
+/* .content-container.container-xl { max-width: 1200px; } */
+
+/* Sidebar layout and content alignment */
+aside.sidenav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--sidebar-width);
+  background-color: var(--md-surface);
+  overflow-y: auto;
+}
+.material-layout .main-content {
+  margin-left: var(--sidebar-width);
+}
+
+@media (max-width: 992px) {
+  .material-layout .main-content { margin-left: 0; }
+  aside.sidenav { position: fixed; width: 100%; height: auto; bottom: auto; }
+}
+
+/* Dark theme overrides */
+body.material-layout.material-dark {
+  --md-bg: #121212;
+  --md-surface: #1e1e1e;
+  --md-text: #e0e0e0;
+  --md-muted: #a0a0a0;
+  --md-border: #2a2a2a;
+}
+
+body.material-layout.material-dark .navbar-main,
+body.material-layout.material-dark .sidenav,
+body.material-layout.material-dark .card,
+body.material-layout.material-dark .dropdown-menu {
+  background-color: var(--md-surface);
+  color: var(--md-text);
+}
+
+body.material-layout.material-dark .table th,
+body.material-layout.material-dark .table td { border-color: var(--md-border); }
+
+body.material-layout.material-dark .nav-link,
+body.material-layout.material-dark .navbar-brand { color: var(--md-text); }
+
+/* Badge position fix for notifications */
+#notifBadge { min-width: 20px; }
+.content-container { width: 100%; margin: 0; padding: 0 1rem; }
+.main-content .content-container > * + * { margin-top: 1rem; }
+/* Moved to typography section above */
+
+/* Hide Jetstream/Tailwind top navigation when using Material layout */
+/* Targets nav rendered by resources/views/layouts/navigation.blade.php */
+body.material-layout nav.bg-white.border-b.border-gray-100 { display: none !important; }
+
+/* Ensure the main content area in material layout doesn't have extra top padding from the old nav */
+body.material-layout .py-8 { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
+
+/* Sidebar alignment: ensure left-aligned menu items with full-width links */
+.material-layout .sidenav .navbar-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; /* stretch children to full sidebar width */
+  text-align: left;
+}
+.material-layout .sidenav .nav-section-list {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: left;
+}
+.material-layout .sidenav .nav-item { width: 100%; }
+.material-layout .sidenav .nav-link {
+  width: 100%;
+  justify-content: flex-start; /* keep content aligned left inside link */
+  text-align: left;
+}
+
+/* Stronger specificity to override Tabler/Bootstrap vertical nav centering */
+.material-layout aside.sidenav nav,
+.material-layout aside.sidenav .navbar-nav,
+.material-layout aside.sidenav .nav-section-list {
+  text-align: left !important;
+}
+.material-layout aside.sidenav .navbar-nav {
+  align-items: stretch !important;
+}
+.material-layout aside.sidenav .nav-item { width: 100% !important; }
+.material-layout aside.sidenav .nav-link {
+  width: 100% !important;
+  justify-content: flex-start !important;
+  text-align: left !important;
+}

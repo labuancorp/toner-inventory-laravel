@@ -1,16 +1,20 @@
 @extends('layouts.material')
 
 @section('content')
-<div class="row justify-content-center">
-    <div class="col-12 col-md-6 col-lg-4">
-        <div class="card shadow-sm">
-            <div class="card-header text-center">
+@php($isRegister = request()->routeIs('register'))
+<div class="row justify-content-center w-100">
+    <div class="{{ $isRegister ? 'col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8' : 'col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5' }}">
+        <div class="card shadow-sm w-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
                 <a href="{{ url('/') }}" class="text-decoration-none">{{ config('app.name', 'Laravel') }}</a>
+                <div class="ms-2">
+                    <x-language-switcher />
+                </div>
             </div>
-            <div class="card-body">
+            <div class="card-body p-3 p-md-4">
                 {{ $slot }}
             </div>
         </div>
     </div>
- </div>
+</div>
 @endsection

@@ -14,7 +14,9 @@ use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\PublicReportsController;
 use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\PrinterController;
-use App\Http\Controllers\ShopReportController;
+use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\Admin\SettingsController;
+// use App\Http\Controllers\ShopReportController; // removed: shop report feature
 
 Route::get('/', function () {
     return view('welcome');
@@ -30,16 +32,16 @@ Route::get('/admin', [AdminDashboardController::class, 'index'])
 
 // Public shop & ordering
 Route::get('/shop', [OrderController::class, 'index'])->name('shop');
-Route::post('/order', [OrderController::class, 'store'])->name('order.store');
-// Personal usage report in Shop
-Route::middleware('auth')->group(function () {
-    Route::get('/shop/report', [ShopReportController::class, 'index'])->name('shop.report');
-    Route::get('/shop/report/export', [ShopReportController::class, 'export'])->name('shop.report.export');
-});
+// Restrict order placement to authenticated users
+Route::post('/order', [OrderController::class, 'store'])
+    ->middleware(['auth'])
+    ->name('order.store');
+// Personal usage report in Shop — removed per request
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile/notifications', [ProfileController::class, 'updateNotifications'])->name('profile.notifications.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // MFA settings
@@ -80,6 +82,10 @@ Route::middleware('auth')->group(function () {
             Route::post('users/bulk/roles', [UserManagementController::class, 'bulkUpdateRoles'])->name('users.bulk.roles');
             Route::post('users/bulk/resets', [UserManagementController::class, 'bulkSendResets'])->name('users.bulk.resets');
             Route::get('users/export', [UserManagementController::class, 'export'])->name('users.export');
+
+            // Agency settings (restricted to admin/manager)
+            Route::get('settings', [SettingsController::class, 'index'])->middleware('role:admin,manager')->name('settings.index');
+            Route::post('settings/logo', [SettingsController::class, 'updateLogo'])->middleware('role:admin,manager')->name('settings.logo.update');
         });
     });
 
@@ -104,3 +110,6 @@ require __DIR__.'/auth.php';
 Route::get('/logout', function () {
     return redirect()->route('dashboard')->with('status', 'Use the Log Out button; logout requires POST.');
 })->middleware('auth')->name('logout.get');
+
+// Language switching
+Route::post('/locale', [LocaleController::class, 'switch'])->name('locale.switch');

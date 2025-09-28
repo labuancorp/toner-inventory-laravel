@@ -337,24 +337,30 @@ function initNotificationToasts() {
     const items = collapse.querySelectorAll('.dropdown-item');
     items.forEach((item) => {
       item.addEventListener('click', (e) => {
+        // Always prevent navigation and keep the notifications menu content visible
+        e.preventDefault();
+        e.stopPropagation();
         const hasOrder =
           item.dataset.orderId ||
           item.dataset.orderNumber ||
           item.dataset.customer ||
           item.dataset.itemsCount ||
           item.dataset.total;
-        if (!hasOrder) return; // allow normal navigation for non-order notifications
-        e.preventDefault();
-        const title = item.dataset.orderNumber
-          ? `Order ${item.dataset.orderNumber}`
-          : (item.dataset.orderId ? `Order #${item.dataset.orderId}` : 'Incoming Order');
+        const isOrder = Boolean(hasOrder);
+        const title = isOrder
+          ? (item.dataset.orderNumber
+              ? `Order ${item.dataset.orderNumber}`
+              : (item.dataset.orderId ? `Order #${item.dataset.orderId}` : 'Incoming Order'))
+          : (item.dataset.message || 'Notification');
         const summaryParts = [];
         if (item.dataset.customer) summaryParts.push(`Customer: ${item.dataset.customer}`);
         if (item.dataset.itemsCount) summaryParts.push(`Items: ${item.dataset.itemsCount}`);
         if (item.dataset.total) summaryParts.push(`Total: ${item.dataset.total}`);
-        const summary = summaryParts.join(' • ');
         const message = item.dataset.message || '';
         const createdAt = item.dataset.createdAt || '';
+        // For non-order notifications, show created time as subtle context
+        if (!isOrder && createdAt) summaryParts.push(createdAt);
+        const summary = summaryParts.join(' • ');
         const toastEl = document.createElement('div');
         toastEl.className = 'toast align-items-center show';
         toastEl.setAttribute('role', 'status');
@@ -374,6 +380,16 @@ function initNotificationToasts() {
         container.appendChild(toastEl);
         const closeBtn = toastEl.querySelector('.btn-close');
         if (closeBtn) closeBtn.addEventListener('click', () => toastEl.remove());
+        // Ensure the collapse remains open after click
+        try {
+          const BSCollapse = window.bootstrap?.Collapse;
+          if (BSCollapse) {
+            const inst = BSCollapse.getOrCreateInstance(collapse, { toggle: false });
+            inst.show();
+          } else {
+            collapse.classList.add('show');
+          }
+        } catch (_) { /* noop */ }
         // Auto-hide timer with pause-on-hover
         let remaining = persistMs;
         let timeoutId = null;
@@ -412,3 +428,130 @@ function initNotificationToasts() {
 }
 
 document.addEventListener('DOMContentLoaded', initNotificationToasts);
+
+// Enforce minimum open time and manual close for notifications menu
+function initNotificationCollapseTiming() {
+  try {
+    const collapseEl = document.getElementById('notifCollapse');
+    const toggleBtn = document.querySelector('[data-bs-target="#notifCollapse"]');
+    if (!collapseEl || !toggleBtn) return;
+    const minOpenMs = parseInt(collapseEl.getAttribute('data-min-open-ms') || '3000', 10);
+    let openedAt = 0;
+    let forceClose = false;
+
+    // Track when the menu finishes opening
+    collapseEl.addEventListener('shown.bs.collapse', () => {
+      openedAt = Date.now();
+    });
+
+    // If something tries to hide the collapse before the minimum time, re-open it
+    const ensureMinOpen = (/* event */ e) => {
+      const elapsed = Date.now() - openedAt;
+      if (!forceClose && elapsed < minOpenMs) {
+        try { if (e && typeof e.preventDefault === 'function') e.preventDefault(); } catch (_) {}
+        // Re-open using Bootstrap API if available; otherwise toggle class
+        setTimeout(() => {
+          try {
+            const BSCollapse = window.bootstrap?.Collapse;
+            if (BSCollapse) {
+              const inst = BSCollapse.getOrCreateInstance(collapseEl, { toggle: false });
+              inst.show();
+            } else {
+              collapseEl.classList.add('show');
+            }
+          } catch (_) { /* noop */ }
+        }, 0);
+      }
+    };
+
+    collapseEl.addEventListener('hide.bs.collapse', ensureMinOpen);
+    collapseEl.addEventListener('hidden.bs.collapse', ensureMinOpen);
+
+    // Intercept toggle clicks attempting to close before minimum open time
+    toggleBtn.addEventListener('click', (e) => {
+      const isOpen = collapseEl.classList.contains('show');
+      if (isOpen) {
+        const elapsed = Date.now() - openedAt;
+        if (!forceClose && elapsed < minOpenMs) {
+          e.preventDefault();
+          e.stopPropagation();
+          return;
+        }
+        // Allow close and reset force flag
+        forceClose = false;
+      }
+    });
+
+    // Manual close button inside the menu bypasses timing restriction
+    const internalCloseBtn = document.getElementById('notifCloseBtn');
+    if (internalCloseBtn) {
+      internalCloseBtn.addEventListener('click', () => {
+        forceClose = true;
+        toggleBtn.click();
+      });
+    }
+
+    // Expose a system command to close programmatically, bypassing minimum timing
+    window.closeNotificationsMenu = function closeNotificationsMenu() {
+      try {
+        forceClose = true;
+        toggleBtn.click();
+      } catch (_) {
+        // Fallback: directly hide if toggle fails
+        collapseEl.classList.remove('show');
+        forceClose = false;
+      }
+    };
+  } catch (e) {
+    console.warn('Notification collapse timing init skipped:', e?.message || e);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initNotificationCollapseTiming);
+
+// Mobile sidebar toggle (off-canvas)
+function initSidebarToggle() {
+  try {
+    const body = document.body;
+    if (!body.classList.contains('material-layout')) return;
+    const btn = document.getElementById('sidebarToggle');
+    const overlay = document.getElementById('sidebarOverlay');
+    const aside = document.getElementById('sidenav-main');
+    if (!btn || !aside) return;
+
+    const updateAria = () => {
+      const expanded = body.classList.contains('sidebar-open');
+      btn.setAttribute('aria-expanded', String(expanded));
+    };
+
+    // Toggle on button click
+    btn.addEventListener('click', () => {
+      body.classList.toggle('sidebar-open');
+      updateAria();
+    });
+
+    // Close when clicking overlay
+    if (overlay) {
+      overlay.addEventListener('click', () => {
+        body.classList.remove('sidebar-open');
+        updateAria();
+      });
+    }
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        body.classList.remove('sidebar-open');
+        updateAria();
+      }
+    });
+
+    // Initialize in collapsed state on small screens
+    body.classList.remove('sidebar-open');
+    updateAria();
+  } catch (e) {
+    console.warn('Sidebar toggle init skipped:', e?.message || e);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initSidebarToggle);

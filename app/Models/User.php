@@ -23,6 +23,9 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'pref_order_emails_enabled',
+        'pref_email_format',
+        'pref_notification_frequency',
     ];
 
     /**
@@ -47,6 +50,7 @@ class User extends Authenticatable
             'password' => 'hashed',
             'mfa_enabled' => 'boolean',
             'last_login_at' => 'datetime',
+            'pref_order_emails_enabled' => 'boolean',
         ];
     }
 

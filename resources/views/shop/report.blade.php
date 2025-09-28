@@ -71,7 +71,6 @@
                     <thead class="bg-gray-50">
                         <tr>
                             <th class="px-4 py-2 text-left text-[10px] sm:text-xs font-medium text-gray-500 uppercase tracking-wider">Item</th>
-                            <th class="px-4 py-2 text-left text-[10px] sm:text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
                             <th class="px-4 py-2 text-left text-[10px] sm:text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
                             <th class="px-4 py-2 text-left text-[10px] sm:text-xs font-medium text-gray-500 uppercase tracking-wider">Reorder Level</th>
                             <th class="px-4 py-2 text-left text-[10px] sm:text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
@@ -82,7 +81,6 @@
                         @php $low = $it->quantity <= $it->reorder_level; @endphp
                         <tr class="{{ $low ? 'bg-red-50' : '' }}">
                             <td class="px-4 py-2 break-words">{{ $it->name }}</td>
-                            <td class="px-4 py-2 break-words">{{ optional($it->category)->name }}</td>
                             <td class="px-4 py-2">{{ $it->quantity }}</td>
                             <td class="px-4 py-2">{{ $it->reorder_level }}</td>
                             <td class="px-4 py-2">

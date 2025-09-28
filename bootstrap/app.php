@@ -15,10 +15,13 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'role' => \App\Http\Middleware\EnsureRole::class,
             'security.headers' => \App\Http\Middleware\SecurityHeaders::class,
+            'locale' => \App\Http\Middleware\SetLocale::class,
         ]);
 
         // Apply security headers on all web routes
         $middleware->appendToGroup('web', \App\Http\Middleware\SecurityHeaders::class);
+        // Apply locale setting on all web routes
+        $middleware->appendToGroup('web', \App\Http\Middleware\SetLocale::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

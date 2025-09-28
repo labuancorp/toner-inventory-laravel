@@ -58,36 +58,47 @@
                         <div class="card-header">
                             <h3 class="card-title">Items Needing Top-up</h3>
                         </div>
-                        <div class="card-body">
-                        @if($lowStockItems->isEmpty())
+                        <div class="card-body card-body-scrollable" style="max-height: 24rem">
+                        @if($lowStockItems->count() === 0)
                             <p class="text-gray-500">All items are above reorder levels.</p>
                         @else
-                            <ul class="list-unstyled">
-                                @foreach($lowStockItems as $i)
-                                    <li class="d-flex align-items-center justify-content-between py-2 border-bottom">
-                                        <div>
-                                            <div class="fw-semibold">{{ $i->name }}</div>
-                                            <div class="text-muted small">SKU: {{ $i->sku }} • {{ $i->category->name }}</div>
-                                        </div>
-                                        <div style="width: 12rem;">
-                                            <div class="d-flex align-items-center justify-content-between small text-muted">
-                                                <span>Qty: {{ $i->quantity }}</span>
-                                                <span>Reorder: {{ $i->reorder_level }}</span>
+                            <div>
+                                <ul class="list-unstyled">
+                                    @foreach($lowStockItems as $i)
+                                        <li class="d-flex align-items-center justify-content-between py-2 border-bottom">
+                                            <div>
+                                                <div class="fw-semibold">{{ $i->name }}</div>
+                                                <div class="text-muted small">SKU: {{ $i->sku }} • {{ $i->category->name }}
+                                                    @if($i->needs_reorder)
+                                                        <span class="ms-2 badge bg-warning text-dark">Low stock</span>
+                                                    @endif
+                                                </div>
                                             </div>
-                                            <div class="mt-1 progress" aria-label="Item progress">
-                                                <div class="progress-bar {{ $i->progress_pct < 50 ? 'bg-danger' : 'bg-warning' }}" role="progressbar" style="width: {{ $i->progress_pct }}%" aria-valuenow="{{ $i->progress_pct }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div style="width: 12rem;">
+                                                <div class="d-flex align-items-center justify-content-between small text-muted">
+                                                    <span>Qty: {{ $i->quantity }}</span>
+                                                    <span>Reorder: {{ $i->reorder_level }}</span>
+                                                </div>
+                                                <div class="mt-1 progress" aria-label="Item progress">
+                                                    <div class="progress-bar {{ $i->progress_pct < 50 ? 'bg-danger' : 'bg-warning' }}" role="progressbar" style="width: {{ $i->progress_pct }}%" aria-valuenow="{{ $i->progress_pct }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                @endforeach
-                            </ul>
-                            <div class="mt-4">
-                                <a href="{{ route('items.index', ['q' => '', 'category' => '']) }}" class="btn btn-link">View all items</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
                             </div>
                         @endif
                         </div>
-                    </div>
+                        @if($lowStockItems->hasPages())
+                            <div class="mt-3 d-flex justify-content-end">
+                                {{ $lowStockItems->withQueryString()->links() }}
+                            </div>
+                        @endif
+                        <div class="card-footer">
+                            <a href="{{ route('items.index', ['q' => '', 'category' => '']) }}" class="btn btn-link">View all items</a>
+                        </div>
                 </div>
+            </div>
 
                 <!-- Recent movements -->
                 <div class="col">
@@ -95,7 +106,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Recent Stock Movements</h3>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body card-body-scrollable" style="max-height: 24rem">
                         @if($recentMovements->isEmpty())
                             <p class="text-gray-500">No movements recorded yet.</p>
                         @else
@@ -133,6 +144,13 @@
                             </div>
                         @endif
                         </div>
+                        @if($recentMovements instanceof \Illuminate\Pagination\AbstractPaginator && $recentMovements->hasPages())
+                        <div class="card-footer">
+                            <div class="d-flex justify-content-end">
+                                {{ $recentMovements->withQueryString()->links() }}
+                            </div>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>

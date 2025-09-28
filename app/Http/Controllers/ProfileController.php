@@ -38,6 +38,26 @@ class ProfileController extends Controller
     }
 
     /**
+     * Update the user's notification preferences.
+     */
+    public function updateNotifications(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'pref_order_emails_enabled' => ['nullable', 'boolean'],
+            'pref_email_format' => ['required', 'in:html,text'],
+            'pref_notification_frequency' => ['required', 'in:immediate,daily,weekly'],
+        ]);
+
+        $user = $request->user();
+        $user->pref_order_emails_enabled = (bool) ($validated['pref_order_emails_enabled'] ?? false);
+        $user->pref_email_format = $validated['pref_email_format'];
+        $user->pref_notification_frequency = $validated['pref_notification_frequency'];
+        $user->save();
+
+        return Redirect::route('profile.edit')->with('status', 'notifications-updated');
+    }
+
+    /**
      * Delete the user's account.
      */
     public function destroy(Request $request): RedirectResponse

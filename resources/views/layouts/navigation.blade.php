@@ -16,19 +16,19 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         <span class="inline-flex items-center gap-2">
                             <i class="ti ti-home" aria-hidden="true"></i>
-                            {{ __('Dashboard') }}
+                            {{ __('app.nav.dashboard') }}
                         </span>
                     </x-nav-link>
                     <x-nav-link :href="route('items.index')" :active="request()->routeIs('items.*')">
                         <span class="inline-flex items-center gap-2">
                             <i class="ti ti-box" aria-hidden="true"></i>
-                            {{ __('Items') }}
+                            {{ __('app.nav.items') }}
                         </span>
                     </x-nav-link>
                     <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')">
                         <span class="inline-flex items-center gap-2">
                             <i class="ti ti-folder" aria-hidden="true"></i>
-                            {{ __('Categories') }}
+                            {{ __('app.nav.categories') }}
                         </span>
                     </x-nav-link>
                 </div>
@@ -37,6 +37,8 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <!-- Language Switcher -->
+                <x-language-switcher />
                 <!-- Theme Toggle -->
                 <button id="themeToggle" type="button" aria-pressed="false" aria-label="Toggle theme" title="Switch theme" onclick="toggleTheme()" class="inline-flex items-center gap-2 px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-600 bg-white hover:text-gray-800 dark:text-gray-300 dark:bg-gray-800 dark:hover:text-white focus:outline-none transition-colors duration-200 me-3">
                     <!-- Sun icon (light) -->
@@ -100,25 +102,25 @@
                 @if(Auth::check() && in_array(Auth::user()->role, ['admin','manager']))
                 <a href="{{ route('dashboard') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->routeIs('dashboard') ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-50' }}">
                     <i class="ti ti-chart-bar" aria-hidden="true"></i>
-                    <span>Dashboard</span>
+                    <span>{{ __('app.nav.dashboard') }}</span>
                 </a>
                 <a href="{{ route('items.index') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->routeIs('items.*') ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-50' }}">
                     <i class="ti ti-box" aria-hidden="true"></i>
-                    <span>Items</span>
+                    <span>{{ __('app.nav.items') }}</span>
                 </a>
                 <a href="{{ route('categories.index') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->routeIs('categories.*') ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-50' }}">
                     <i class="ti ti-folder" aria-hidden="true"></i>
-                    <span>Categories</span>
+                    <span>{{ __('app.nav.categories') }}</span>
                 </a>
                 @endif
                 <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->routeIs('admin.dashboard') ? 'bg-purple-50 text-purple-700' : 'text-gray-700 hover:bg-gray-50' }}">
                     <i class="ti ti-shield-check" aria-hidden="true"></i>
-                    <span>Admin</span>
+                    <span>{{ __('app.nav.admin') }}</span>
                 </a>
                 @endif
                 <a href="{{ url('/shop') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->is('shop') ? 'bg-amber-50 text-amber-700' : 'text-gray-700 hover:bg-gray-50' }}">
                     <i class="ti ti-shopping-cart" aria-hidden="true"></i>
-                    <span>Shop</span>
+                    <span>{{ __('app.nav.shop') }}</span>
                 </a>
             </div>
         </div>
@@ -129,26 +131,26 @@
         <div class="pt-2 pb-3 space-y-1">
             @if(Auth::check() && in_array(Auth::user()->role, ['admin','manager']))
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                {{ __('app.nav.dashboard') }}
             </x-responsive-nav-link>
             @endif
             @if(Auth::check() && in_array(Auth::user()->role, ['admin','manager']))
             @if(Auth::check() && in_array(Auth::user()->role, ['admin','manager']))
             <x-responsive-nav-link :href="route('items.index')" :active="request()->routeIs('items.*')">
-                {{ __('Items') }}
+                {{ __('app.nav.items') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')">
-                {{ __('Categories') }}
+                {{ __('app.nav.categories') }}
             </x-responsive-nav-link>
             @endif
             @if(Auth::check() && in_array(Auth::user()->role, ['admin','manager']))
             <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
-                {{ __('Admin') }}
+                {{ __('app.nav.admin') }}
             </x-responsive-nav-link>
             @endif
             @endif
             <x-responsive-nav-link :href="url('/shop')" :active="request()->is('shop')">
-                {{ __('Shop') }}
+                {{ __('app.nav.shop') }}
             </x-responsive-nav-link>
         </div>
 

@@ -38,21 +38,22 @@ class DashboardController extends Controller
         $lowStockItems = Item::with('category')
             ->whereColumn('quantity', '<=', 'reorder_level')
             ->orderBy('quantity')
-            ->limit(8)
-            ->get();
+            ->paginate(3);
 
         $recentMovements = StockMovement::with(['item', 'user'])
             ->latest()
             ->limit(10)
             ->get();
 
-        // Compute simple percentage bars for low stock items
-        $lowStockItems->transform(function ($item) {
-            $target = max($item->reorder_level, 1);
-            $pct = min(100, (int) floor(($item->quantity / $target) * 100));
-            $item->progress_pct = $pct;
-            return $item;
-        });
+        // Compute simple percentage bars for low stock items (current page)
+        $lowStockItems->setCollection(
+            $lowStockItems->getCollection()->map(function ($item) {
+                $target = max($item->reorder_level, 1);
+                $pct = min(100, (int) floor(($item->quantity / $target) * 100));
+                $item->progress_pct = $pct;
+                return $item;
+            })
+        );
 
         return view('dashboard', compact(
             'stockInToday',

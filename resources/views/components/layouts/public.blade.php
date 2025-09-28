@@ -24,6 +24,8 @@
                         <span class="font-semibold">{{ config('app.name', 'Laravel') }}</span>
                     </a>
                     <div class="flex items-center gap-3">
+                        <!-- Language Switcher -->
+                        <x-language-switcher />
                         <!-- Theme Toggle -->
                         <button id="themeToggle" type="button" aria-pressed="false" aria-label="Toggle theme" title="Switch theme" onclick="toggleTheme()" class="inline-flex items-center gap-2 px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-600 bg-white hover:text-gray-800 dark:text-gray-300 dark:bg-gray-800 dark:hover:text-white focus:outline-none transition-colors duration-200">
                             <!-- Sun icon (light) -->
@@ -38,6 +40,10 @@
                         </button>
                         @auth
                             <a href="{{ route('dashboard') }}" class="text-sm text-gray-700 hover:text-indigo-700">Admin</a>
+                            <form method="POST" action="{{ route('logout') }}" class="inline-block ml-3">
+                                @csrf
+                                <button type="submit" class="text-sm text-gray-700 hover:text-rose-700">Log Out</button>
+                            </form>
                         @else
                             <a href="{{ route('login') }}" class="text-sm text-gray-700 hover:text-indigo-700">Login</a>
                         @endauth
@@ -53,16 +59,8 @@
                         <i class="ti ti-shopping-cart" aria-hidden="true"></i>
                         <span>Shop</span>
                     </a>
-                    @auth
-                    <a href="{{ route('shop.report') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->routeIs('shop.report') ? 'bg-violet-50 text-violet-700' : 'text-gray-700 hover:bg-gray-50' }}">
-                        <i class="ti ti-report" aria-hidden="true"></i>
-                        <span>My Report</span>
-                    </a>
-                    @endauth
-                    <a href="{{ route('reports.public') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->routeIs('reports.public') ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-50' }}">
-                        <i class="ti ti-chart-bar" aria-hidden="true"></i>
-                        <span>Reports</span>
-                    </a>
+                    {{-- My Report tab removed per request --}}
+                        {{-- Public Reports tab removed per request --}}
                     <a href="{{ url('/') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->is('/') ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-50' }}">
                         <i class="ti ti-home" aria-hidden="true"></i>
                         <span>Home</span>

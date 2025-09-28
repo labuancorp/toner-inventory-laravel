@@ -58,6 +58,16 @@
     <div class="col-12 col-lg-6 mb-4">
         <div class="card">
             <div class="card-header">
+                <h6 class="mb-0">{{ __('Notification Settings') }}</h6>
+            </div>
+            <div class="card-body">
+                @include('profile.partials.notification-settings')
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-lg-6 mb-4">
+        <div class="card">
+            <div class="card-header">
                 <h6 class="mb-0">{{ __('Delete Account') }}</h6>
             </div>
             <div class="card-body">

@@ -8,8 +8,11 @@
         <span class="badge rounded-pill bg-danger" id="notifBadge" aria-label="Unread notifications">{{ $unreadCount }}</span>
         @endif
     </button>
-    <div id="notifCollapse" class="collapse" aria-labelledby="notifCollapse" data-persist-ms="12000" data-autohide="false">
+    <div id="notifCollapse" class="collapse" aria-labelledby="notifCollapse" data-persist-ms="12000" data-autohide="false" data-min-open-ms="3000">
         <ul class="list-unstyled ps-3 pe-2 py-2 mb-0">
+            <li class="d-flex justify-content-end mb-2">
+                <button type="button" class="btn btn-sm btn-outline-secondary" id="notifCloseBtn" aria-label="Close notifications">Close</button>
+            </li>
             @php
                 $unread = optional(auth()->user())->unreadNotifications()->take(5)->get();
             @endphp

@@ -1,12 +1,32 @@
+{{-- Agency brand (logo) --}}
+@php($agencyLogo = \App\Models\Setting::get('agency_logo_path'))
+<li class="nav-section" aria-label="Agency">
+    <div class="d-flex align-items-center justify-content-start px-2 py-3">
+        @if($agencyLogo)
+            <img src="{{ asset('storage/'.$agencyLogo) }}" alt="Agency Logo" class="img-fluid" style="max-height: 40px; width: auto; object-fit: contain;" />
+        @else
+            <img src="{{ asset('images/pl-logo.svg') }}" alt="Agency Logo" class="img-fluid" style="max-height: 40px; width: auto; object-fit: contain;" />
+        @endif
+    </div>
+    <ul class="nav-section-list" role="list">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.settings.index') }}">
+                <i class="ti ti-settings" aria-hidden="true"></i>
+                <span class="nav-link-text">Agency Settings</span>
+            </a>
+        </li>
+    </ul>
+</li>
+
 {{-- General Section --}}
 <li class="nav-section" aria-label="General">
-    <span class="nav-section-title">General</span>
+    <span class="nav-section-title">{{ __('app.nav.admin') }}</span>
     <ul class="nav-section-list" role="list">
         @if(Auth::check() && in_array(Auth::user()->role, ['admin','manager']))
         <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}" @if(request()->routeIs('dashboard')) aria-current="page" @endif>
                 <i class="ti ti-layout-dashboard" aria-hidden="true"></i>
-                <span class="nav-link-text">Dashboard</span>
+                <span class="nav-link-text">{{ __('app.nav.dashboard') }}</span>
             </a>
         </li>
         @endif
@@ -14,14 +34,14 @@
         <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}" @if(request()->routeIs('admin.dashboard')) aria-current="page" @endif>
                 <i class="ti ti-shield" aria-hidden="true"></i>
-                <span class="nav-link-text">Admin Dashboard</span>
+                <span class="nav-link-text">{{ __('app.nav.admin_dashboard') }}</span>
             </a>
         </li>
         @endif
         <li class="nav-item">
             <a class="nav-link {{ request()->is('shop') ? 'active' : '' }}" href="{{ url('/shop') }}" @if(request()->is('shop')) aria-current="page" @endif>
                 <i class="ti ti-shopping-cart" aria-hidden="true"></i>
-                <span class="nav-link-text">Shop</span>
+                <span class="nav-link-text">{{ __('app.nav.shop') }}</span>
             </a>
         </li>
     </ul>
@@ -49,19 +69,19 @@
         <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('items.reorder') ? 'active' : '' }}" href="{{ route('items.reorder') }}" @if(request()->routeIs('items.reorder')) aria-current="page" @endif>
                 <i class="ti ti-arrows-down-up" aria-hidden="true"></i>
-                <span class="nav-link-text">Reorder Suggestions</span>
+                <span class="nav-link-text">{{ __('app.nav.reorder_suggestions') }}</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('items.scan') ? 'active' : '' }}" href="{{ route('items.scan') }}" @if(request()->routeIs('items.scan')) aria-current="page" @endif>
                 <i class="ti ti-barcode" aria-hidden="true"></i>
-                <span class="nav-link-text">Scan Barcode</span>
+                <span class="nav-link-text">{{ __('app.nav.scan_barcode') }}</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('reports.analytics') ? 'active' : '' }}" href="{{ route('reports.analytics') }}" @if(request()->routeIs('reports.analytics')) aria-current="page" @endif>
                 <i class="ti ti-chart-bar" aria-hidden="true"></i>
-                <span class="nav-link-text">Advanced Analytics</span>
+                <span class="nav-link-text">{{ __('app.nav.advanced_analytics') }}</span>
             </a>
         </li>
         <li class="nav-item">
@@ -138,6 +158,11 @@
                     <i class="ti ti-sun-moon" aria-hidden="true"></i>
                     <span>Dark mode</span>
                 </label>
+            </div>
+        </li>
+        <li class="nav-item">
+            <div class="px-2 py-2">
+                <x-language-switcher />
             </div>
         </li>
     </ul>

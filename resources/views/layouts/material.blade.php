@@ -19,6 +19,8 @@
     </style>
 </head>
 <body class="material-layout bg-gray-100" data-theme="light">
+    @php($isAuthPage = request()->routeIs('login') || request()->routeIs('register'))
+    @unless($isAuthPage)
     <!-- Sidebar (WCAG-compliant nav) -->
     <aside class="sidenav navbar navbar-vertical bg-white fixed-start" id="sidenav-main" aria-label="Admin sidebar navigation">
         <div class="sidenav-header">
@@ -35,12 +37,26 @@
             </nav>
         </div>
     </aside>
+    <!-- Mobile overlay to close sidebar when open -->
+    <div id="sidebarOverlay" class="mobile-overlay" aria-hidden="true"></div>
+    @endunless
 
     <!-- Main content -->
     <main class="main-content position-relative border-radius-lg">
         <!-- No top navbar; all navigation is in the sidebar for clarity -->
 
-        <div class="content-container container-fluid py-4">
+        <!-- Mobile topbar with hamburger to toggle sidebar (visible on all pages) -->
+        <div class="d-lg-none sticky-top bg-white border-bottom">
+            <div class="container-fluid d-flex align-items-center justify-content-between px-3 py-2">
+                <button id="sidebarToggle" class="btn btn-outline-secondary" type="button" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidebar">
+                    <i class="ti ti-menu-2" aria-hidden="true"></i>
+                    <span class="ms-1">Menu</span>
+                </button>
+                <a href="{{ route('admin.dashboard') }}" class="text-decoration-none fw-semibold text-dark">Admin</a>
+            </div>
+        </div>
+
+        <div class="{{ $isAuthPage ? 'container py-4 d-flex justify-content-center align-items-center min-vh-100' : 'content-container container-fluid py-4' }}">
             @yield('content')
         </div>
     </main>

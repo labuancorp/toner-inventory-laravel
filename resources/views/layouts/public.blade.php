@@ -53,6 +53,16 @@
                             <i class="ti ti-shopping-cart" aria-hidden="true"></i>
                             <span>Shop</span>
                         </a>
+                        @auth
+                        <a href="{{ route('shop.report') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->routeIs('shop.report') ? 'bg-violet-50 text-violet-700' : 'text-gray-700 hover:bg-gray-50' }}">
+                            <i class="ti ti-report" aria-hidden="true"></i>
+                            <span>My Report</span>
+                        </a>
+                        @endauth
+                        <a href="{{ route('reports.public') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->routeIs('reports.public') ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-50' }}">
+                            <i class="ti ti-chart-bar" aria-hidden="true"></i>
+                            <span>Reports</span>
+                        </a>
                         <a href="{{ url('/') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->is('/') ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-50' }}">
                             <i class="ti ti-home" aria-hidden="true"></i>
                             <span>Home</span>
@@ -66,5 +76,6 @@
                 {{ $slot }}
             </main>
         </div>
+        @stack('scripts')
     </body>
 </html>

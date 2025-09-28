@@ -10,9 +10,18 @@
 
                 <div class="flex items-center justify-between mb-6">
                     <h1 class="text-2xl font-semibold tracking-tight">Order Toners</h1>
+                    <div class="flex items-center gap-2" aria-label="View toggle">
+                        <button id="shopToggleComfortable" type="button" class="px-3 py-1 text-sm rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-50">Comfortable</button>
+                        <button id="shopToggleCompact" type="button" class="px-3 py-1 text-sm rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-50">Compact</button>
+                    </div>
                 </div>
                 <div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-5 sm:gap-6 md:gap-8 xl:gap-10 justify-items-stretch">
+                    <!-- safelist classes for Tailwind build -->
+                    <div class="hidden">
+                        <span class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4"></span>
+                        <span class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3"></span>
+                    </div>
+                    <div id="shopGrid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-5 sm:gap-6 md:gap-8 xl:gap-10 justify-items-stretch">
                         @foreach($items as $item)
                             <div class="group rounded-lg border border-gray-200 bg-white/80 bg-gradient-card backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow duration-200 h-full flex flex-col w-full p-5 md:p-6">
                                 <div class="flex items-start justify-between">
@@ -53,4 +62,34 @@
             </div>
         </div>
     </div>
+@push('scripts')
+<script>
+  (function(){
+    const grid = document.getElementById('shopGrid');
+    const btnCompact = document.getElementById('shopToggleCompact');
+    const btnComfort = document.getElementById('shopToggleComfortable');
+    if(!grid || !btnCompact || !btnComfort) return;
+
+    const clsCompact = 'grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-5 sm:gap-6 md:gap-8 xl:gap-10 justify-items-stretch';
+    const clsComfort = 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5 sm:gap-6 md:gap-8 xl:gap-10 justify-items-stretch';
+
+    function setActive(mode){
+      if(mode === 'compact'){
+        grid.className = clsCompact;
+        btnCompact.classList.add('bg-amber-50','border-amber-300','text-amber-700');
+        btnComfort.classList.remove('bg-amber-50','border-amber-300','text-amber-700');
+      } else {
+        grid.className = clsComfort;
+        btnComfort.classList.add('bg-amber-50','border-amber-300','text-amber-700');
+        btnCompact.classList.remove('bg-amber-50','border-amber-300','text-amber-700');
+      }
+    }
+
+    const saved = localStorage.getItem('shopViewMode') || 'compact';
+    setActive(saved);
+    btnCompact.addEventListener('click', function(){ localStorage.setItem('shopViewMode','compact'); setActive('compact'); });
+    btnComfort.addEventListener('click', function(){ localStorage.setItem('shopViewMode','comfortable'); setActive('comfortable'); });
+  })();
+</script>
+@endpush
 </x-layouts.public>

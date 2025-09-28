@@ -11,14 +11,17 @@ use App\Http\Controllers\Auth\MfaSettingsController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\AnalyticsController;
+use App\Http\Controllers\PublicReportsController;
 use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\PrinterController;
+use App\Http\Controllers\ShopReportController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->name('dashboard');
 
 // Admin dashboard (Material UI)
 Route::get('/admin', [AdminDashboardController::class, 'index'])
@@ -28,6 +31,11 @@ Route::get('/admin', [AdminDashboardController::class, 'index'])
 // Public shop & ordering
 Route::get('/shop', [OrderController::class, 'index'])->name('shop');
 Route::post('/order', [OrderController::class, 'store'])->name('order.store');
+// Personal usage report in Shop
+Route::middleware('auth')->group(function () {
+    Route::get('/shop/report', [ShopReportController::class, 'index'])->name('shop.report');
+    Route::get('/shop/report/export', [ShopReportController::class, 'export'])->name('shop.report.export');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -37,16 +45,16 @@ Route::middleware('auth')->group(function () {
     // MFA settings
     Route::put('/profile/mfa', [MfaSettingsController::class, 'update'])->name('mfa.settings.update');
 
-    // Read-only inventory routes for authenticated users
-    Route::get('items', [ItemController::class, 'index'])->name('items.index');
-    Route::get('items/trashed', [ItemController::class, 'trashed'])->name('items.trashed');
-    Route::get('items/reorder', [ItemController::class, 'reorderSuggestions'])->name('items.reorder');
-    Route::get('items/scan', [ItemController::class, 'scan'])->name('items.scan');
-    Route::get('items/lookup/{sku}', [ItemController::class, 'lookupBySku'])->name('items.lookup');
+    // Read-only inventory routes restricted to admin/manager roles
+    Route::get('items', [ItemController::class, 'index'])->middleware('role:admin,manager')->name('items.index');
+    Route::get('items/trashed', [ItemController::class, 'trashed'])->middleware('role:admin,manager')->name('items.trashed');
+    Route::get('items/reorder', [ItemController::class, 'reorderSuggestions'])->middleware('role:admin,manager')->name('items.reorder');
+    Route::get('items/scan', [ItemController::class, 'scan'])->middleware('role:admin,manager')->name('items.scan');
+    Route::get('items/lookup/{sku}', [ItemController::class, 'lookupBySku'])->middleware('role:admin,manager')->name('items.lookup');
     // JSON endpoint for polling fallback on item page
-    Route::get('items/{item}/json', [ItemController::class, 'showJson'])->name('items.show.json')->whereNumber('item');
+    Route::get('items/{item}/json', [ItemController::class, 'showJson'])->middleware('role:admin,manager')->name('items.show.json')->whereNumber('item');
     // Show route must come after specific paths and be constrained
-    Route::get('items/{item}', [ItemController::class, 'show'])->name('items.show')->whereNumber('item');
+    Route::get('items/{item}', [ItemController::class, 'show'])->middleware('role:admin,manager')->name('items.show')->whereNumber('item');
 
     // Inventory management restricted to admin or manager roles
     Route::middleware('role:admin,manager')->group(function () {
@@ -79,10 +87,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/notifications/read-all', [NotificationController::class, 'readAll'])->name('notifications.readAll');
 
     // Reports
-    Route::get('/reports/inventory', [ReportController::class, 'inventory'])->name('reports.inventory');
+    Route::get('/reports/inventory', [ReportController::class, 'inventory'])
+        ->middleware('role:admin,manager')
+        ->name('reports.inventory');
     Route::get('/reports/analytics', [AnalyticsController::class, 'index'])->name('reports.analytics');
     Route::get('/reports/analytics/yearly', [AnalyticsController::class, 'yearly'])->name('reports.analytics.yearly');
     Route::get('/reports/analytics/yearly/export', [AnalyticsController::class, 'exportYearly'])->name('reports.analytics.yearly.export');
+    // Public-friendly reports for normal users (no inventory details)
+    Route::get('/reports/public', [PublicReportsController::class, 'index'])->name('reports.public');
 });
 
 require __DIR__.'/auth.php';

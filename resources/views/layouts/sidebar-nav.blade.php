@@ -2,12 +2,14 @@
 <li class="nav-section" aria-label="General">
     <span class="nav-section-title">General</span>
     <ul class="nav-section-list" role="list">
+        @if(Auth::check() && in_array(Auth::user()->role, ['admin','manager']))
         <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}" @if(request()->routeIs('dashboard')) aria-current="page" @endif>
                 <i class="ti ti-layout-dashboard" aria-hidden="true"></i>
                 <span class="nav-link-text">Dashboard</span>
             </a>
         </li>
+        @endif
         @if(Auth::check() && in_array(Auth::user()->role, ['admin','manager']))
         <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}" @if(request()->routeIs('admin.dashboard')) aria-current="page" @endif>
@@ -26,7 +28,7 @@
 </li>
 
 {{-- Inventory Section (for Admin/Manager) --}}
-@can('viewAny', App\Models\Item::class)
+@if(Auth::check() && in_array(Auth::user()->role, ['admin','manager']))
 <li class="nav-section" aria-label="Inventory">
     <span class="nav-section-title">Inventory</span>
     <ul class="nav-section-list" role="list">
@@ -76,7 +78,7 @@
         </li>
     </ul>
 </li>
-@endcan
+@endif
 
 {{-- Administration Section (for Admin/Manager) --}}
 @if(Auth::check() && in_array(Auth::user()->role, ['admin','manager']))

@@ -182,6 +182,46 @@ function initYearlyBarChart() {
 
 document.addEventListener('DOMContentLoaded', initYearlyBarChart);
 
+function initPublicReportBarChart() {
+  try {
+    const el = document.getElementById('publicReportBarChart');
+    const payload = window.__publicByCategory;
+    if (!el || !payload || !payload.labels?.length) return;
+    const colors = payload.labels.map((_, idx) => {
+      const hue = (idx * 29) % 360;
+      return `hsl(${hue}, 65%, 55%)`;
+    });
+    new Chart(el, {
+      type: 'bar',
+      data: {
+        labels: payload.labels,
+        datasets: [
+          {
+            label: 'Total OUT',
+            data: payload.series,
+            backgroundColor: colors,
+            borderWidth: 0,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: { enabled: true }
+        },
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  } catch (e) {
+    console.warn('Public report bar chart init skipped:', e?.message || e);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initPublicReportBarChart);
+
 // Theme toggling with persistence
 function applyStoredTheme() {
   try {
@@ -231,6 +271,48 @@ function initThemeToggle() {
 }
 
 document.addEventListener('DOMContentLoaded', initThemeToggle);
+
+// Shop Personal Report Chart (My Report)
+function initShopPersonalReportChart() {
+  try {
+    const el = document.getElementById('shopPersonalReportChart');
+    const payload = window.__shopPersonalReportData;
+    if (!el || !payload || !payload.labels?.length) return;
+    new Chart(el, {
+      type: 'line',
+      data: {
+        labels: payload.labels,
+        datasets: [
+          {
+            label: 'Toner OUT',
+            data: payload.series,
+            borderColor: '#4f46e5',
+            backgroundColor: 'rgba(79,70,229,0.15)',
+            tension: 0.25,
+            fill: true,
+            pointRadius: 3,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true },
+          tooltip: { enabled: true }
+        },
+        scales: {
+          x: { display: true, ticks: { autoSkip: true, maxTicksLimit: 12 } },
+          y: { display: true, beginAtZero: true }
+        }
+      }
+    });
+  } catch (e) {
+    console.warn('Shop personal report chart init skipped:', e?.message || e);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initShopPersonalReportChart);
 
 // Enhance accessibility: preserve focus outlines globally
 try {

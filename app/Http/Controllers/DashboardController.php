@@ -15,6 +15,12 @@ class DashboardController extends Controller
 
     public function index(Request $request)
     {
+        // Redirect non-admin/manager users to public shop
+        $user = $request->user();
+        if (! $user || ! in_array($user->role, ['admin','manager'], true)) {
+            return redirect()->route('shop');
+        }
+
         $today = now()->toDateString();
 
         $stockInToday = StockMovement::where('type', 'in')

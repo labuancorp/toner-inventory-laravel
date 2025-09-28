@@ -5,12 +5,13 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ (Auth::check() && in_array(Auth::user()->role, ['admin','manager'])) ? route('dashboard') : route('shop') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
 
-                <!-- Navigation Links -->
+                <!-- Navigation Links (Admin/Manager only) -->
+                @if(Auth::check() && in_array(Auth::user()->role, ['admin','manager']))
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         <span class="inline-flex items-center gap-2">
@@ -31,6 +32,7 @@
                         </span>
                     </x-nav-link>
                 </div>
+                @endif
             </div>
 
             <!-- Settings Dropdown -->
@@ -95,6 +97,7 @@
     <div class="border-t bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center gap-4 overflow-x-auto py-2">
+                @if(Auth::check() && in_array(Auth::user()->role, ['admin','manager']))
                 <a href="{{ route('dashboard') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->routeIs('dashboard') ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-50' }}">
                     <i class="ti ti-chart-bar" aria-hidden="true"></i>
                     <span>Dashboard</span>
@@ -107,7 +110,7 @@
                     <i class="ti ti-folder" aria-hidden="true"></i>
                     <span>Categories</span>
                 </a>
-                @if(Auth::check() && in_array(Auth::user()->role, ['admin','manager']))
+                @endif
                 <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->routeIs('admin.dashboard') ? 'bg-purple-50 text-purple-700' : 'text-gray-700 hover:bg-gray-50' }}">
                     <i class="ti ti-shield-check" aria-hidden="true"></i>
                     <span>Admin</span>
@@ -124,19 +127,25 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
+            @if(Auth::check() && in_array(Auth::user()->role, ['admin','manager']))
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            @endif
+            @if(Auth::check() && in_array(Auth::user()->role, ['admin','manager']))
+            @if(Auth::check() && in_array(Auth::user()->role, ['admin','manager']))
             <x-responsive-nav-link :href="route('items.index')" :active="request()->routeIs('items.*')">
                 {{ __('Items') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')">
                 {{ __('Categories') }}
             </x-responsive-nav-link>
+            @endif
             @if(Auth::check() && in_array(Auth::user()->role, ['admin','manager']))
             <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                 {{ __('Admin') }}
             </x-responsive-nav-link>
+            @endif
             @endif
             <x-responsive-nav-link :href="url('/shop')" :active="request()->is('shop')">
                 {{ __('Shop') }}

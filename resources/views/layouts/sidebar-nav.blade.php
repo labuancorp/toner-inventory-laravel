@@ -85,6 +85,12 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('shop.history') ? 'active' : '' }}" href="{{ route('shop.history') }}" @if(request()->routeIs('shop.history')) aria-current="page" @endif>
+                <i class="ti ti-history" aria-hidden="true"></i>
+                <span class="nav-link-text">Shop History</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('printers.*') ? 'active' : '' }}" href="{{ route('printers.index') }}" @if(request()->routeIs('printers.*')) aria-current="page" @endif>
                 <i class="ti ti-printer" aria-hidden="true"></i>
                 <span class="nav-link-text">Printers</span>

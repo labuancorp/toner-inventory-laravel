@@ -13,15 +13,7 @@ class AdminNewOrder extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    /**
-     * Queue name for this notification.
-     */
-    public $queue = 'emails';
-
-    /**
-     * Number of retry attempts.
-     */
-    public $tries = 3;
+    // Avoid redeclaring $queue and $tries; use Queueable's properties and set them in constructor.
 
     /**
      * Backoff schedule between retries (seconds).
@@ -40,6 +32,7 @@ class AdminNewOrder extends Notification implements ShouldQueue
         public ?string $notes = null,
     ) {
         $this->onQueue('mail');
+        $this->tries = 3;
     }
 
     public function via(object $notifiable): array

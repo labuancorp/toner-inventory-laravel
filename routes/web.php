@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\PrinterController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\ShopHistoryController;
 // use App\Http\Controllers\ShopReportController; // removed: shop report feature
 
 Route::get('/', function () {
@@ -101,6 +102,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/reports/analytics/yearly/export', [AnalyticsController::class, 'exportYearly'])->name('reports.analytics.yearly.export');
     // Public-friendly reports for normal users (no inventory details)
     Route::get('/reports/public', [PublicReportsController::class, 'index'])->name('reports.public');
+
+    // Shop History (audit of orders/withdrawals)
+    Route::get('/shop/history', [ShopHistoryController::class, 'index'])->name('shop.history');
+    Route::get('/shop/history/export', [ShopHistoryController::class, 'export'])->name('shop.history.export');
 });
 
 require __DIR__.'/auth.php';

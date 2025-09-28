@@ -13,15 +13,8 @@ class OrderConfirmation extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    /**
-     * Queue name for this notification.
-     */
-    public $queue = 'emails';
-
-    /**
-     * Number of retry attempts.
-     */
-    public $tries = 3;
+    // Use Queueable's built-in $queue and $tries properties; avoid redeclaration to
+    // prevent PHP trait property conflicts. Configure them in the constructor instead.
 
     /**
      * Backoff schedule between retries (seconds).
@@ -38,8 +31,9 @@ class OrderConfirmation extends Notification implements ShouldQueue
         public ?string $shippingAddress = null,
         public ?string $notes = null,
     ) {
-        // Queue configuration (queue name can be customized per channel)
+        // Configure queue and retry attempts using Queueable's properties
         $this->onQueue('mail');
+        $this->tries = 3;
     }
 
     public function via(object $notifiable): array

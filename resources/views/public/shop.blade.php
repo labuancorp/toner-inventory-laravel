@@ -44,13 +44,13 @@
                                             <input id="quantity-{{ $item->id }}" type="number" name="quantity" min="1" max="{{ max($item->quantity, 1) }}" required class="border rounded-md px-2 py-1 w-full sm:w-24 md:w-28 focus:outline-none focus:ring-2 focus:ring-indigo-500" aria-label="Order quantity for {{ $item->name }}" />
                                         </div>
                                         <div>
-                                            <input type="text" name="customer_name" placeholder="{{ __('app.shop.customer_name_placeholder') }}" class="border rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                                            <input type="text" name="customer_name" placeholder="{{ __('app.form.customer_name_placeholder') }}" class="border rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500" />
                                         </div>
                                         <div>
-                                            <input type="text" name="shipping_address" placeholder="{{ __('app.shop.shipping_address_placeholder') }}" class="border rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                                            <input type="text" name="shipping_address" placeholder="{{ __('app.form.shipping_address_placeholder') }}" class="border rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500" />
                                         </div>
                                         <div>
-                                            <input type="text" name="notes" placeholder="{{ __('app.shop.notes_placeholder') }}" class="border rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                                            <input type="text" name="notes" placeholder="{{ __('app.form.notes_placeholder') }}" class="border rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500" />
                                         </div>
                                         @error('quantity')
                                             <p class="text-sm text-rose-600">{{ $message }}</p>

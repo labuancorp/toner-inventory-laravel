@@ -157,13 +157,24 @@
 <li class="nav-section" aria-label="Appearance">
     <span class="nav-section-title">Appearance</span>
     <ul class="nav-section-list" role="list">
+        {{-- Link to the new Appearance Settings page --}}
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('admin.settings.appearance') ? 'active' : '' }}" href="{{ route('admin.settings.appearance') }}">
+                <i class="ti ti-palette" aria-hidden="true"></i>
+                <span class="nav-link-text">Appearance</span>
+            </a>
+        </li>
+
+        {{-- The one, correct theme toggle --}}
         <li class="nav-item d-flex align-items-center justify-content-between px-3 py-2">
-            <label for="themeToggle" class="d-flex align-items-center gap-2 m-0">
+            <div class="d-flex align-items-center gap-2">
                 <i class="ti ti-sun-moon" aria-hidden="true"></i>
-                <span>Theme</span>
-            </label>
+                <span>Dark Mode</span>
+            </div>
             <x-theme-toggle />
         </li>
+
+        {{-- Language switcher remains --}}
         <li class="nav-item">
             <div class="px-2 py-2">
                 <x-language-switcher />

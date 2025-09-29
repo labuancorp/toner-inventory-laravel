@@ -16,11 +16,11 @@
     --tblr-border-color: #334155; /* slate-700 */
     --tblr-border-color-translucent: rgba(203, 213, 225, 0.15); /* slate-300 with alpha */
 
-    /* Primary & Accent Colors */
-    --tblr-primary: #3b82f6; /* blue-500 */
-    --tblr-primary-rgb: 59, 130, 246;
-    --tblr-link-color: #60a5fa; /* blue-400 */
-    --tblr-link-hover-color: #93c5fd; /* blue-300 */
+    /* Primary & Accent Colors (now driven by JS) */
+    --tblr-primary: var(--theme-primary-color, #3b82f6); /* Default to blue */
+    /* Note: --tblr-primary-rgb is harder to set dynamically without more complex JS */
+    --tblr-link-color: var(--theme-primary-color, #60a5fa);
+    --tblr-link-hover-color: var(--theme-primary-color, #93c5fd);
 
     /* Component Backgrounds */
     --tblr-card-bg: #283447; /* A slightly lighter slate */

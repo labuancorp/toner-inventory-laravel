@@ -30,4 +30,9 @@ class SettingsController extends Controller
 
         return redirect()->route('admin.settings.index')->with('status', 'No file uploaded');
     }
+
+    public function appearance()
+    {
+        return view('admin.settings.appearance');
+    }
 }

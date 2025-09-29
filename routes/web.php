@@ -87,6 +87,7 @@ Route::middleware('auth')->group(function () {
             // Agency settings (restricted to admin/manager)
             Route::get('settings', [SettingsController::class, 'index'])->middleware('role:admin,manager')->name('settings.index');
             Route::post('settings/logo', [SettingsController::class, 'updateLogo'])->middleware('role:admin,manager')->name('settings.logo.update');
+            Route::get('settings/appearance', [SettingsController::class, 'appearance'])->middleware('role:admin,manager')->name('settings.appearance');
         });
     });
 

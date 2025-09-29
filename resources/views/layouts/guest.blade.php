@@ -7,7 +7,8 @@
         <div class="card shadow-sm w-100">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <a href="{{ url('/') }}" class="text-decoration-none">{{ config('app.name', 'Laravel') }}</a>
-                <div class="ms-2">
+                <div class="ms-2 d-flex align-items-center">
+                    <x-theme-toggle />
                     <x-language-switcher />
                 </div>
             </div>

@@ -157,14 +157,12 @@
 <li class="nav-section" aria-label="Appearance">
     <span class="nav-section-title">Appearance</span>
     <ul class="nav-section-list" role="list">
-        <li class="nav-item d-flex align-items-center">
-            <div class="form-check form-switch mb-0">
-                <input class="form-check-input" type="checkbox" id="themeSwitch" aria-label="Toggle dark mode">
-                <label class="form-check-label d-flex align-items-center gap-2" for="themeSwitch">
-                    <i class="ti ti-sun-moon" aria-hidden="true"></i>
-                    <span>Dark mode</span>
-                </label>
-            </div>
+        <li class="nav-item d-flex align-items-center justify-content-between px-3 py-2">
+            <label for="themeToggle" class="d-flex align-items-center gap-2 m-0">
+                <i class="ti ti-sun-moon" aria-hidden="true"></i>
+                <span>Theme</span>
+            </label>
+            <x-theme-toggle />
         </li>
         <li class="nav-item">
             <div class="px-2 py-2">

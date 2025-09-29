@@ -40,17 +40,7 @@
                 <!-- Language Switcher -->
                 <x-language-switcher />
                 <!-- Theme Toggle -->
-                <button id="themeToggle" type="button" aria-pressed="false" aria-label="Toggle theme" title="Switch theme" onclick="toggleTheme()" class="inline-flex items-center gap-2 px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-600 bg-white hover:text-gray-800 dark:text-gray-300 dark:bg-gray-800 dark:hover:text-white focus:outline-none transition-colors duration-200 me-3">
-                    <!-- Sun icon (light) -->
-                    <svg class="w-4 h-4 light-icon block dark:hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M12 7a5 5 0 100 10 5 5 0 000-10z" />
-                    </svg>
-                    <!-- Moon icon (dark) -->
-                    <svg class="w-4 h-4 dark-icon hidden dark:block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M21.752 15.002A9.718 9.718 0 0112.001 21c-5.385 0-9.73-4.364-9.73-9.75 0-3.83 2.269-7.123 5.543-8.66a.75.75 0 01.967.967A8.251 8.251 0 0012.001 19.5c3.676 0 6.8-2.396 7.885-5.748a.75.75 0 011.866.25z" />
-                    </svg>
-                    <span class="hidden sm:inline" id="themeLabel">Light</span>
-                </button>
+                <x-theme-toggle class="me-3" />
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -181,25 +171,3 @@
     </div>
 </nav>
 
-<script>
-    (function initTheme() {
-        try {
-            const stored = localStorage.getItem('theme') || 'light';
-            const isDark = stored === 'dark';
-            document.documentElement.classList.toggle('dark', isDark);
-            const btn = document.getElementById('themeToggle');
-            const label = document.getElementById('themeLabel');
-            if (btn) btn.setAttribute('aria-pressed', String(isDark));
-            if (label) label.textContent = isDark ? 'Dark' : 'Light';
-        } catch (e) { /* noop */ }
-    })();
-    function toggleTheme() {
-        const nowDark = !document.documentElement.classList.contains('dark');
-        document.documentElement.classList.toggle('dark', nowDark);
-        localStorage.setItem('theme', nowDark ? 'dark' : 'light');
-        const btn = document.getElementById('themeToggle');
-        const label = document.getElementById('themeLabel');
-        if (btn) btn.setAttribute('aria-pressed', String(nowDark));
-        if (label) label.textContent = nowDark ? 'Dark' : 'Light';
-    }
-</script>

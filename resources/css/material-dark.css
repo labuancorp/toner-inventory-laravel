@@ -1,0 +1,77 @@
+/*
+ * Tabler/Material Dark Theme Overrides
+ *
+ * This file defines the CSS variables for the dark mode of the Material admin theme.
+ * It is loaded dynamically by `material.js` when the user selects the dark theme.
+ *
+ * Color palette is inspired by modern dark UIs, focusing on soft, desaturated
+ * colors to reduce eye strain, with clear accent colors for interactive elements.
+ */
+
+[data-theme="dark"] {
+    /* Core Colors */
+    --tblr-body-bg: #1e293b; /* slate-800 */
+    --tblr-body-color: #f1f5f9; /* slate-100 */
+    --tblr-heading-color: #ffffff;
+    --tblr-border-color: #334155; /* slate-700 */
+    --tblr-border-color-translucent: rgba(203, 213, 225, 0.15); /* slate-300 with alpha */
+
+    /* Primary & Accent Colors */
+    --tblr-primary: #3b82f6; /* blue-500 */
+    --tblr-primary-rgb: 59, 130, 246;
+    --tblr-link-color: #60a5fa; /* blue-400 */
+    --tblr-link-hover-color: #93c5fd; /* blue-300 */
+
+    /* Component Backgrounds */
+    --tblr-card-bg: #283447; /* A slightly lighter slate */
+    --tblr-card-cap-bg: #334155; /* slate-700 */
+    --tblr-list-group-bg: var(--tblr-card-bg);
+    --tblr-table-bg: var(--tblr-card-bg);
+    --tblr-modal-content-bg: var(--tblr-card-bg);
+
+    /* Text & Muted Colors */
+    --tblr-secondary-color: #94a3b8; /* slate-400 */
+    --tblr-secondary-bg: #334155; /* slate-700 */
+    --tblr-muted: #64748b; /* slate-500 */
+    --tblr-light: #475569; /* slate-600 */
+    --tblr-light-rgb: 71, 85, 105;
+
+    /* Forms */
+    --tblr-form-control-bg: #334155; /* slate-700 */
+    --tblr-form-control-color: var(--tblr-body-color);
+    --tblr-form-select-bg: var(--tblr-form-control-bg);
+    --tblr-input-group-addon-bg: var(--tblr-secondary-bg);
+    --tblr-input-border-color: #475569; /* slate-600 */
+    --tblr-input-focus-border-color: var(--tblr-primary);
+
+    /* Tables */
+    --tblr-table-striped-bg: #2c3a4f;
+    --tblr-table-hover-bg: #314158;
+    --tblr-table-border-color: var(--tblr-border-color);
+
+    /* Buttons */
+    --tblr-btn-bg: var(--tblr-primary);
+    --tblr-btn-border-color: var(--tblr-primary);
+    --tblr-btn-hover-bg: #2563eb; /* blue-600 */
+    --tblr-btn-hover-border-color: #2563eb;
+
+    /* Dropdowns */
+    --tblr-dropdown-bg: var(--tblr-card-bg);
+    --tblr-dropdown-link-color: var(--tblr-body-color);
+    --tblr-dropdown-link-hover-bg: #334155; /* slate-700 */
+    --tblr-dropdown-divider-bg: var(--tblr-border-color);
+
+    /* Navbar & Sidenav */
+    --tblr-navbar-bg: var(--tblr-card-bg);
+    --tblr-sidenav-bg: var(--tblr-card-bg);
+    --tblr-navbar-nav-link-padding-x: 1rem;
+    --tblr-navbar-brand-color: var(--tblr-heading-color);
+
+    /* Alerts */
+    --tblr-alert-bg-subtle-level: -9; /* Make alerts darker */
+    --tblr-alert-border-subtle-level: -6;
+
+    /* Badges */
+    --tblr-badge-bg: var(--tblr-secondary-bg);
+    --tblr-badge-color: var(--tblr-heading-color);
+}

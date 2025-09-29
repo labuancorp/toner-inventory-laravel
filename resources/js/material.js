@@ -222,55 +222,7 @@ function initPublicReportBarChart() {
 
 document.addEventListener('DOMContentLoaded', initPublicReportBarChart);
 
-// Theme toggling with persistence
-function applyStoredTheme() {
-  try {
-    const stored = localStorage.getItem('theme') || 'light';
-    const body = document.body;
-    if (!body.classList.contains('material-layout')) return;
-    if (stored === 'dark') {
-      body.classList.add('material-dark');
-      document.documentElement.classList.add('dark');
-      document.documentElement.setAttribute('data-bs-theme', 'dark');
-    } else {
-      body.classList.remove('material-dark');
-      document.documentElement.classList.remove('dark');
-      document.documentElement.setAttribute('data-bs-theme', 'light');
-    }
-    const switchEl = document.getElementById('themeSwitch');
-    if (switchEl) switchEl.checked = stored === 'dark';
-  } catch (e) {
-    console.warn('Theme apply skipped:', e?.message || e);
-  }
-}
-
-function initThemeToggle() {
-  try {
-    applyStoredTheme();
-    const switchEl = document.getElementById('themeSwitch');
-    if (!switchEl) return;
-    switchEl.addEventListener('change', (e) => {
-      const isDark = !!e.target.checked;
-      const body = document.body;
-      if (!body.classList.contains('material-layout')) return;
-      if (isDark) {
-        body.classList.add('material-dark');
-        localStorage.setItem('theme', 'dark');
-        document.documentElement.classList.add('dark');
-        document.documentElement.setAttribute('data-bs-theme', 'dark');
-      } else {
-        body.classList.remove('material-dark');
-        localStorage.setItem('theme', 'light');
-        document.documentElement.classList.remove('dark');
-        document.documentElement.setAttribute('data-bs-theme', 'light');
-      }
-    });
-  } catch (e) {
-    console.warn('Theme toggle init skipped:', e?.message || e);
-  }
-}
-
-document.addEventListener('DOMContentLoaded', initThemeToggle);
+// Theme-related logic is now handled globally in app.js.
 
 // Shop Personal Report Chart (My Report)
 function initShopPersonalReportChart() {

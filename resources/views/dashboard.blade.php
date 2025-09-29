@@ -1,152 +1,150 @@
 @extends('layouts.material')
 @section('title', 'Inventory Dashboard')
 @section('content')
-    <div class="py-4">
-        <div class="container-fluid">
+    <div class="win11-py-4">
+        <div class="win11-container-fluid">
             <!-- Metric cards -->
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-3">
-                <div class="col">
-                    <div class="card card-elevated card-hover">
-                        <div class="card-body bg-gradient-card border-start border-success border-4">
-                            <div class="text-sm text-gray-500">Stock In (Today)</div>
-                            <div class="mt-1 text-3xl font-bold text-gray-900">{{ number_format($stockInToday) }}</div>
-                            <div class="mt-2 progress" aria-label="Stock in progress">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ min(100, $stockInToday) }}%" aria-valuenow="{{ min(100, $stockInToday) }}" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="win11-grid win11-grid-cols-4 win11-gap-lg">
+                <div class="win11-stagger-item">
+                    <div class="win11-card win11-card-acrylic">
+                        <div class="win11-p-lg" style="border-left: 4px solid #107c10;">
+                            <div class="win11-text-sm win11-text-secondary">Stock In (Today)</div>
+                            <div class="win11-mt-2 win11-text-3xl win11-font-bold win11-text-primary">{{ number_format($stockInToday) }}</div>
+                            <div class="win11-mt-3 win11-progress" aria-label="Stock in progress">
+                                <div class="win11-progress-bar" style="width: {{ min(100, $stockInToday) }}%; background-color: #107c10;" role="progressbar" aria-valuenow="{{ min(100, $stockInToday) }}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card card-elevated card-hover">
-                        <div class="card-body bg-gradient-card border-start border-danger border-4">
-                            <div class="text-sm text-gray-500">Stock Out (Today)</div>
-                            <div class="mt-1 text-3xl font-bold text-gray-900">{{ number_format($stockOutToday) }}</div>
-                            <div class="mt-2 progress" aria-label="Stock out progress">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ min(100, $stockOutToday) }}%" aria-valuenow="{{ min(100, $stockOutToday) }}" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="win11-stagger-item">
+                    <div class="win11-card win11-card-acrylic">
+                        <div class="win11-p-lg" style="border-left: 4px solid #d13438;">
+                            <div class="win11-text-sm win11-text-secondary">Stock Out (Today)</div>
+                            <div class="win11-mt-2 win11-text-3xl win11-font-bold win11-text-primary">{{ number_format($stockOutToday) }}</div>
+                            <div class="win11-mt-3 win11-progress" aria-label="Stock out progress">
+                                <div class="win11-progress-bar" style="width: {{ min(100, $stockOutToday) }}%; background-color: #d13438;" role="progressbar" aria-valuenow="{{ min(100, $stockOutToday) }}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body border-start border-primary border-4">
-                            <div class="text-sm text-gray-500">Stock Left</div>
-                            <div class="mt-1 text-3xl font-bold text-gray-900">{{ number_format($stockLeft) }}</div>
-                            <div class="mt-2 progress" aria-label="Stock left progress">
-                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{ min(100, max(1, $stockLeft/10)) }}%" aria-valuenow="{{ min(100, max(1, $stockLeft/10)) }}" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="win11-stagger-item">
+                    <div class="win11-card win11-card-acrylic">
+                        <div class="win11-p-lg" style="border-left: 4px solid var(--win11-accent-primary);">
+                            <div class="win11-text-sm win11-text-secondary">Stock Left</div>
+                            <div class="win11-mt-2 win11-text-3xl win11-font-bold win11-text-primary">{{ number_format($stockLeft) }}</div>
+                            <div class="win11-mt-3 win11-progress" aria-label="Stock left progress">
+                                <div class="win11-progress-bar" style="width: {{ min(100, max(1, $stockLeft/10)) }}%;" role="progressbar" aria-valuenow="{{ min(100, max(1, $stockLeft/10)) }}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body border-start border-warning border-4">
-                            <div class="text-sm text-gray-500">Stock Need Topup</div>
-                            <div class="mt-1 text-3xl font-bold text-gray-900">{{ number_format($needTopupCount) }}</div>
-                            <div class="mt-2 progress" aria-label="Topup need progress">
-                                <div class="progress-bar bg-warning" role="progressbar" style="width: {{ min(100, $needTopupCount * 10) }}%" aria-valuenow="{{ min(100, $needTopupCount * 10) }}" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="win11-stagger-item">
+                    <div class="win11-card win11-card-acrylic">
+                        <div class="win11-p-lg" style="border-left: 4px solid #ff8c00;">
+                            <div class="win11-text-sm win11-text-secondary">Stock Need Topup</div>
+                            <div class="win11-mt-2 win11-text-3xl win11-font-bold win11-text-primary">{{ number_format($needTopupCount) }}</div>
+                            <div class="win11-mt-3 win11-progress" aria-label="Topup need progress">
+                                <div class="win11-progress-bar" style="width: {{ min(100, $needTopupCount * 10) }}%; background-color: #ff8c00;" role="progressbar" aria-valuenow="{{ min(100, $needTopupCount * 10) }}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Low stock items -->
-            <div class="mt-4 row row-cols-1 row-cols-lg-2 g-3">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Items Needing Top-up</h3>
+            <!-- Items Needing Top-up -->
+            <div class="win11-grid win11-grid-cols-2 win11-gap-lg win11-mt-lg">
+                <div class="win11-stagger-item">
+                    <div class="win11-card win11-card-acrylic">
+                        <div class="win11-card-header">
+                            <h5 class="win11-card-title">Items Needing Top-up</h5>
                         </div>
-                        <div class="card-body card-body-scrollable" style="max-height: 24rem">
-                        @if($lowStockItems->count() === 0)
-                            <p class="text-gray-500">All items are above reorder levels.</p>
-                        @else
-                            <div>
-                                <ul class="list-unstyled">
+                        <div class="win11-card-body">
+                            @if($lowStockItems->count() === 0)
+                                <p class="win11-text-secondary">All items are above reorder levels.</p>
+                            @else
+                                <div class="win11-list-group">
                                     @foreach($lowStockItems as $i)
-                                        <li class="d-flex align-items-center justify-content-between py-2 border-bottom">
-                                            <div>
-                                                <div class="fw-semibold">{{ $i->name }}</div>
-                                                <div class="text-muted small">SKU: {{ $i->sku }} • {{ $i->category->name }}
-                                                    @if($i->needs_reorder)
-                                                        <span class="ms-2 badge bg-warning text-dark">Low stock</span>
-                                                    @endif
+                                        <div class="win11-list-item">
+                                            <div class="win11-flex win11-justify-between win11-items-start">
+                                                <div class="win11-flex-1">
+                                                    <div class="win11-font-semibold win11-text-primary">{{ $i->name }}</div>
+                                                    <div class="win11-text-sm win11-text-secondary win11-mt-1">SKU: {{ $i->sku }} • {{ $i->category->name }}
+                                                        @if($i->needs_reorder)
+                                                            <span class="win11-badge win11-badge-warning win11-ml-2">Low stock</span>
+                                                        @endif
+                                                    </div>
+                                                    <div class="win11-mt-2">
+                                                        <div class="win11-flex win11-justify-between win11-text-sm win11-text-secondary">
+                                                            <span>Qty: {{ $i->quantity }}</span>
+                                                            <span>Reorder: {{ $i->reorder_level }}</span>
+                                                        </div>
+                                                        <div class="win11-progress win11-mt-2" aria-label="Item progress">
+                                                            <div class="win11-progress-bar" style="width: {{ $i->progress_pct }}%; background-color: {{ $i->progress_pct < 50 ? '#d13438' : '#ff8c00' }};" role="progressbar" aria-valuenow="{{ $i->progress_pct }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div style="width: 12rem;">
-                                                <div class="d-flex align-items-center justify-content-between small text-muted">
-                                                    <span>Qty: {{ $i->quantity }}</span>
-                                                    <span>Reorder: {{ $i->reorder_level }}</span>
-                                                </div>
-                                                <div class="mt-1 progress" aria-label="Item progress">
-                                                    <div class="progress-bar {{ $i->progress_pct < 50 ? 'bg-danger' : 'bg-warning' }}" role="progressbar" style="width: {{ $i->progress_pct }}%" aria-valuenow="{{ $i->progress_pct }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        </div>
-                        @if($lowStockItems->hasPages())
-                            <div class="mt-3 d-flex justify-content-end">
-                                {{ $lowStockItems->withQueryString()->links() }}
-                            </div>
-                        @endif
-                        <div class="card-footer">
-                            <a href="{{ route('items.index', ['q' => '', 'category' => '']) }}" class="btn btn-link">View all items</a>
-                        </div>
-                </div>
-            </div>
-
-                <!-- Recent movements -->
-                <div class="col">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Recent Stock Movements</h3>
-                        </div>
-                        <div class="card-body card-body-scrollable" style="max-height: 24rem">
-                        @if($recentMovements->isEmpty())
-                            <p class="text-gray-500">No movements recorded yet.</p>
-                        @else
-                            <div>
-                                <ul class="list-unstyled">
-                                    @foreach($recentMovements as $m)
-                                    <li>
-                                        <div class="py-3 border-bottom d-flex align-items-start gap-3">
-                                            <div class="flex-shrink-0">
-                                                @if($m->type === 'in')
-                                                    <span class="badge bg-success">IN</span>
-                                                @else
-                                                    <span class="badge bg-danger">OUT</span>
-                                                @endif
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <div class="small">
-                                                    <a href="{{ route('items.show', $m->item) }}" class="fw-semibold">{{ $m->item->name }}</a>
-                                                </div>
-                                                <p class="mb-1 text-muted small">
-                                                    {{ $m->quantity }} units • SKU {{ $m->item->sku }}
-                                                    @if($m->user)
-                                                        • by {{ $m->user->name }}
-                                                    @endif
-                                                </p>
-                                                @if($m->reason)
-                                                    <p class="mb-1 text-muted small">Reason: {{ $m->reason }}</p>
-                                                @endif
-                                                <p class="text-muted small">{{ $m->created_at->diffForHumans() }}</p>
                                             </div>
                                         </div>
-                                    </li>
                                     @endforeach
-                                </ul>
+                                </div>
+                            @endif
+                            @if($lowStockItems->hasPages())
+                                <div class="win11-mt-3 win11-flex win11-justify-end">
+                                    {{ $lowStockItems->withQueryString()->links() }}
+                                </div>
+                            @endif
+                        </div>
+                        <div class="win11-card-footer">
+                            <a href="{{ route('items.index', ['q' => '', 'category' => '']) }}" class="win11-btn win11-btn-link">View all items</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent movements -->
+                <div class="win11-stagger-item">
+                    <div class="win11-card win11-card-acrylic">
+                        <div class="win11-card-header">
+                            <h5 class="win11-card-title">Recent Stock Movements</h5>
+                        </div>
+                        <div class="win11-card-body" style="max-height: 24rem; overflow-y: auto;">
+                        @if($recentMovements->isEmpty())
+                            <p class="win11-text-secondary">No movements recorded yet.</p>
+                        @else
+                            <div class="win11-list-group">
+                                @foreach($recentMovements as $m)
+                                <div class="win11-list-item">
+                                    <div class="win11-flex win11-items-start win11-gap-3">
+                                        <div class="win11-flex-shrink-0">
+                                            @if($m->type === 'in')
+                                                <span class="win11-badge win11-badge-success">IN</span>
+                                            @else
+                                                <span class="win11-badge win11-badge-danger">OUT</span>
+                                            @endif
+                                        </div>
+                                        <div class="win11-flex-1">
+                                            <div class="win11-text-sm">
+                                                <a href="{{ route('items.show', $m->item) }}" class="win11-font-semibold win11-text-primary">{{ $m->item->name }}</a>
+                                            </div>
+                                            <div class="win11-text-sm win11-text-secondary win11-mt-1">
+                                                {{ $m->quantity }} units • SKU {{ $m->item->sku }}
+                                                @if($m->user)
+                                                    • by {{ $m->user->name }}
+                                                @endif
+                                            </div>
+                                            @if($m->reason)
+                                                <div class="win11-text-sm win11-text-secondary">Reason: {{ $m->reason }}</div>
+                                            @endif
+                                            <div class="win11-text-sm win11-text-secondary">{{ $m->created_at->diffForHumans() }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
                             </div>
                         @endif
                         </div>
                         @if($recentMovements instanceof \Illuminate\Pagination\AbstractPaginator && $recentMovements->hasPages())
-                        <div class="card-footer">
-                            <div class="d-flex justify-content-end">
+                        <div class="win11-card-footer">
+                            <div class="win11-flex win11-justify-end">
                                 {{ $recentMovements->withQueryString()->links() }}
                             </div>
                         </div>
@@ -156,32 +154,46 @@
             </div>
 
             <!-- Quick actions -->
-            <div class="mt-4 card card-elevated">
-                <div class="card-header">
-                    <h3 class="card-title">Quick Actions</h3>
-                </div>
-                <div class="card-body bg-gradient-card">
-                    <div class="row row-cols-1 row-cols-md-3 g-3">
-                        <div class="col">
-                            <a href="{{ route('items.index') }}" class="card card-body card-hover card-elevated bg-gradient-soft text-decoration-none">
-                                <div class="fw-semibold">Browse Items</div>
-                                <div class="text-muted small">Manage and search inventory</div>
-                            </a>
+            <div class="win11-mt-lg">
+                <div class="win11-stagger-item">
+                    <div class="win11-card win11-card-acrylic">
+                        <div class="win11-card-header">
+                            <h5 class="win11-card-title">Quick Actions</h5>
                         </div>
-                        <div class="col">
-                            <a href="{{ route('categories.index') }}" class="card card-body card-hover card-elevated bg-gradient-soft text-decoration-none">
-                                <div class="fw-semibold">Manage Categories</div>
-                                <div class="text-muted small">Organize inventory by type</div>
-                            </a>
+                        <div class="win11-card-body">
+                            <div class="win11-grid win11-grid-cols-3 win11-gap-md">
+                                <div class="win11-stagger-item">
+                                    <a href="{{ route('items.index') }}" class="win11-btn win11-btn-outline win11-w-full win11-h-full win11-flex win11-flex-col win11-items-center win11-justify-center win11-py-lg">
+                                        <svg class="win11-icon win11-icon-xl win11-mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                            <polyline points="3.27,6.96 12,12.01 20.73,6.96"/>
+                                            <line x1="12" y1="22.08" x2="12" y2="12"/>
+                                        </svg>
+                                        <span>Browse Items</span>
+                                    </a>
+                                </div>
+                                <div class="win11-stagger-item">
+                                    <a href="{{ route('categories.index') }}" class="win11-btn win11-btn-outline win11-w-full win11-h-full win11-flex win11-flex-col win11-items-center win11-justify-center win11-py-lg">
+                                        <svg class="win11-icon win11-icon-xl win11-mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+                                            <line x1="7" y1="7" x2="7.01" y2="7"/>
+                                        </svg>
+                                        <span>Manage Categories</span>
+                                    </a>
+                                </div>
+                                @can('create', App\Models\Item::class)
+                                    <div class="win11-stagger-item">
+                                        <a href="{{ route('items.create') }}" class="win11-btn win11-btn-outline win11-w-full win11-h-full win11-flex win11-flex-col win11-items-center win11-justify-center win11-py-lg">
+                                            <svg class="win11-icon win11-icon-xl win11-mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <line x1="12" y1="5" x2="12" y2="19"/>
+                                                <line x1="5" y1="12" x2="19" y2="12"/>
+                                            </svg>
+                                            <span>Add New Item</span>
+                                        </a>
+                                    </div>
+                                @endcan
+                            </div>
                         </div>
-                        @can('create', App\Models\Item::class)
-                        <div class="col">
-                            <a href="{{ route('items.create') }}" class="card card-body card-hover card-elevated bg-gradient-soft text-decoration-none">
-                                <div class="fw-semibold">Add New Item</div>
-                                <div class="text-muted small">Create new inventory record</div>
-                            </a>
-                        </div>
-                        @endcan
                     </div>
                 </div>
             </div>

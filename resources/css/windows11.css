@@ -1,0 +1,340 @@
+/* Windows 11 Theme - Official Color Palette and Design System */
+
+/* Import Segoe UI Variable font */
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;500;600;700&display=swap');
+
+/* Windows 11 Color Palette - CSS Variables */
+:root {
+  /* Light Theme Colors */
+  --win11-accent-primary: #0078d4;
+  --win11-accent-secondary: #106ebe;
+  --win11-accent-tertiary: #005a9e;
+  --win11-accent-disabled: #8bb8e8;
+  
+  /* System Colors - Light */
+  --win11-system-base-high: #000000;
+  --win11-system-base-medium-high: #161616;
+  --win11-system-base-medium: #767676;
+  --win11-system-base-medium-low: #e1e1e1;
+  --win11-system-base-low: #f3f3f3;
+  --win11-system-alt-high: #ffffff;
+  --win11-system-alt-medium-high: #f9f9f9;
+  --win11-system-alt-medium: #e6e6e6;
+  --win11-system-alt-medium-low: #cccccc;
+  --win11-system-alt-low: #b3b3b3;
+  
+  /* Background Colors - Light */
+  --win11-bg-solid-base: #f3f3f3;
+  --win11-bg-solid-secondary: #eeeeee;
+  --win11-bg-solid-tertiary: #f9f9f9;
+  --win11-bg-solid-quarternary: #ffffff;
+  
+  /* Acrylic/Transparency Colors - Light */
+  --win11-bg-acrylic-base: rgba(243, 243, 243, 0.8);
+  --win11-bg-acrylic-secondary: rgba(238, 238, 238, 0.8);
+  --win11-bg-acrylic-tertiary: rgba(249, 249, 249, 0.8);
+  --win11-bg-acrylic-quarternary: rgba(255, 255, 255, 0.8);
+  
+  /* Text Colors - Light */
+  --win11-text-primary: #000000;
+  --win11-text-secondary: #161616;
+  --win11-text-tertiary: #767676;
+  --win11-text-disabled: #a6a6a6;
+  --win11-text-accent: #0078d4;
+  
+  /* Border Colors - Light */
+  --win11-border-stroke-default: #e1e1e1;
+  --win11-border-stroke-flyout: #cccccc;
+  --win11-border-divider-default: #e1e1e1;
+  
+  /* Control Colors - Light */
+  --win11-control-fill-default: rgba(255, 255, 255, 0.7);
+  --win11-control-fill-secondary: rgba(249, 249, 249, 0.5);
+  --win11-control-fill-tertiary: rgba(249, 249, 249, 0.3);
+  --win11-control-fill-disabled: rgba(249, 249, 249, 0.3);
+  --win11-control-fill-transparent: transparent;
+  --win11-control-fill-input-active: rgba(255, 255, 255, 0.7);
+  
+  /* Control Stroke Colors - Light */
+  --win11-control-stroke-default: rgba(0, 0, 0, 0.06);
+  --win11-control-stroke-secondary: rgba(0, 0, 0, 0.12);
+  --win11-control-stroke-on-accent-default: rgba(255, 255, 255, 0.08);
+  --win11-control-stroke-on-accent-secondary: rgba(0, 0, 0, 0.14);
+  --win11-control-stroke-on-accent-tertiary: rgba(0, 0, 0, 0.2);
+  --win11-control-stroke-on-accent-disabled: rgba(255, 255, 255, 0.04);
+  
+  /* Elevation/Shadow Colors - Light */
+  --win11-elevation-shadow-flyout: 0 8px 16px rgba(0, 0, 0, 0.14);
+  --win11-elevation-shadow-tooltip: 0 4px 8px rgba(0, 0, 0, 0.14);
+  --win11-elevation-shadow-card: 0 2px 4px rgba(0, 0, 0, 0.14);
+  --win11-elevation-shadow-dialog: 0 16px 32px rgba(0, 0, 0, 0.14);
+  
+  /* Typography Scale */
+  --win11-font-family: 'Segoe UI', 'Segoe UI Variable', system-ui, -apple-system, sans-serif;
+  --win11-font-size-caption: 12px;
+  --win11-font-size-body: 14px;
+  --win11-font-size-body-strong: 14px;
+  --win11-font-size-subtitle: 20px;
+  --win11-font-size-title: 28px;
+  --win11-font-size-title-large: 40px;
+  --win11-font-size-display: 68px;
+  
+  /* Font Weights */
+  --win11-font-weight-light: 300;
+  --win11-font-weight-regular: 400;
+  --win11-font-weight-medium: 500;
+  --win11-font-weight-semibold: 600;
+  --win11-font-weight-bold: 700;
+  
+  /* Line Heights */
+  --win11-line-height-caption: 16px;
+  --win11-line-height-body: 20px;
+  --win11-line-height-subtitle: 28px;
+  --win11-line-height-title: 36px;
+  --win11-line-height-title-large: 52px;
+  --win11-line-height-display: 92px;
+  
+  /* Border Radius */
+  --win11-border-radius-small: 4px;
+  --win11-border-radius-medium: 8px;
+  --win11-border-radius-large: 12px;
+  --win11-border-radius-circle: 50%;
+  
+  /* Spacing Scale */
+  --win11-spacing-xs: 4px;
+  --win11-spacing-sm: 8px;
+  --win11-spacing-md: 12px;
+  --win11-spacing-lg: 16px;
+  --win11-spacing-xl: 20px;
+  --win11-spacing-xxl: 24px;
+  --win11-spacing-xxxl: 32px;
+  
+  /* Animation Durations */
+  --win11-duration-fast: 150ms;
+  --win11-duration-normal: 250ms;
+  --win11-duration-slow: 350ms;
+  
+  /* Animation Easings */
+  --win11-easing-standard: cubic-bezier(0.4, 0.0, 0.2, 1);
+  --win11-easing-decelerate: cubic-bezier(0.0, 0.0, 0.2, 1);
+  --win11-easing-accelerate: cubic-bezier(0.4, 0.0, 1, 1);
+}
+
+/* Dark Theme Colors */
+[data-theme="dark"] {
+  /* System Colors - Dark */
+  --win11-system-base-high: #ffffff;
+  --win11-system-base-medium-high: #e4e4e4;
+  --win11-system-base-medium: #9d9d9d;
+  --win11-system-base-medium-low: #323130;
+  --win11-system-base-low: #2b2a29;
+  --win11-system-alt-high: #000000;
+  --win11-system-alt-medium-high: #0f0f0f;
+  --win11-system-alt-medium: #1a1a1a;
+  --win11-system-alt-medium-low: #262626;
+  --win11-system-alt-low: #333333;
+  
+  /* Background Colors - Dark */
+  --win11-bg-solid-base: #202020;
+  --win11-bg-solid-secondary: #1c1c1c;
+  --win11-bg-solid-tertiary: #282828;
+  --win11-bg-solid-quarternary: #2c2c2c;
+  
+  /* Acrylic/Transparency Colors - Dark */
+  --win11-bg-acrylic-base: rgba(32, 32, 32, 0.8);
+  --win11-bg-acrylic-secondary: rgba(28, 28, 28, 0.8);
+  --win11-bg-acrylic-tertiary: rgba(40, 40, 40, 0.8);
+  --win11-bg-acrylic-quarternary: rgba(44, 44, 44, 0.8);
+  
+  /* Text Colors - Dark */
+  --win11-text-primary: #ffffff;
+  --win11-text-secondary: #e4e4e4;
+  --win11-text-tertiary: #9d9d9d;
+  --win11-text-disabled: #6d6d6d;
+  --win11-text-accent: #60cdff;
+  
+  /* Border Colors - Dark */
+  --win11-border-stroke-default: #323130;
+  --win11-border-stroke-flyout: #454545;
+  --win11-border-divider-default: #323130;
+  
+  /* Control Colors - Dark */
+  --win11-control-fill-default: rgba(255, 255, 255, 0.06);
+  --win11-control-fill-secondary: rgba(255, 255, 255, 0.08);
+  --win11-control-fill-tertiary: rgba(255, 255, 255, 0.04);
+  --win11-control-fill-disabled: rgba(255, 255, 255, 0.04);
+  --win11-control-fill-transparent: transparent;
+  --win11-control-fill-input-active: rgba(0, 0, 0, 0.7);
+  
+  /* Control Stroke Colors - Dark */
+  --win11-control-stroke-default: rgba(255, 255, 255, 0.08);
+  --win11-control-stroke-secondary: rgba(255, 255, 255, 0.12);
+  --win11-control-stroke-on-accent-default: rgba(0, 0, 0, 0.08);
+  --win11-control-stroke-on-accent-secondary: rgba(255, 255, 255, 0.14);
+  --win11-control-stroke-on-accent-tertiary: rgba(255, 255, 255, 0.2);
+  --win11-control-stroke-on-accent-disabled: rgba(255, 255, 255, 0.04);
+  
+  /* Elevation/Shadow Colors - Dark */
+  --win11-elevation-shadow-flyout: 0 8px 16px rgba(0, 0, 0, 0.4);
+  --win11-elevation-shadow-tooltip: 0 4px 8px rgba(0, 0, 0, 0.4);
+  --win11-elevation-shadow-card: 0 2px 4px rgba(0, 0, 0, 0.4);
+  --win11-elevation-shadow-dialog: 0 16px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Auto Theme Detection */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    /* Apply dark theme variables when system prefers dark and no explicit theme is set */
+    --win11-system-base-high: #ffffff;
+    --win11-system-base-medium-high: #e4e4e4;
+    --win11-system-base-medium: #9d9d9d;
+    --win11-system-base-medium-low: #323130;
+    --win11-system-base-low: #2b2a29;
+    --win11-system-alt-high: #000000;
+    --win11-system-alt-medium-high: #0f0f0f;
+    --win11-system-alt-medium: #1a1a1a;
+    --win11-system-alt-medium-low: #262626;
+    --win11-system-alt-low: #333333;
+    
+    --win11-bg-solid-base: #202020;
+    --win11-bg-solid-secondary: #1c1c1c;
+    --win11-bg-solid-tertiary: #282828;
+    --win11-bg-solid-quarternary: #2c2c2c;
+    
+    --win11-bg-acrylic-base: rgba(32, 32, 32, 0.8);
+    --win11-bg-acrylic-secondary: rgba(28, 28, 28, 0.8);
+    --win11-bg-acrylic-tertiary: rgba(40, 40, 40, 0.8);
+    --win11-bg-acrylic-quarternary: rgba(44, 44, 44, 0.8);
+    
+    --win11-text-primary: #ffffff;
+    --win11-text-secondary: #e4e4e4;
+    --win11-text-tertiary: #9d9d9d;
+    --win11-text-disabled: #6d6d6d;
+    --win11-text-accent: #60cdff;
+    
+    --win11-border-stroke-default: #323130;
+    --win11-border-stroke-flyout: #454545;
+    --win11-border-divider-default: #323130;
+    
+    --win11-control-fill-default: rgba(255, 255, 255, 0.06);
+    --win11-control-fill-secondary: rgba(255, 255, 255, 0.08);
+    --win11-control-fill-tertiary: rgba(255, 255, 255, 0.04);
+    --win11-control-fill-disabled: rgba(255, 255, 255, 0.04);
+    --win11-control-fill-transparent: transparent;
+    --win11-control-fill-input-active: rgba(0, 0, 0, 0.7);
+    
+    --win11-control-stroke-default: rgba(255, 255, 255, 0.08);
+    --win11-control-stroke-secondary: rgba(255, 255, 255, 0.12);
+    --win11-control-stroke-on-accent-default: rgba(0, 0, 0, 0.08);
+    --win11-control-stroke-on-accent-secondary: rgba(255, 255, 255, 0.14);
+    --win11-control-stroke-on-accent-tertiary: rgba(255, 255, 255, 0.2);
+    --win11-control-stroke-on-accent-disabled: rgba(255, 255, 255, 0.04);
+    
+    --win11-elevation-shadow-flyout: 0 8px 16px rgba(0, 0, 0, 0.4);
+    --win11-elevation-shadow-tooltip: 0 4px 8px rgba(0, 0, 0, 0.4);
+    --win11-elevation-shadow-card: 0 2px 4px rgba(0, 0, 0, 0.4);
+    --win11-elevation-shadow-dialog: 0 16px 32px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--win11-font-family);
+  font-size: var(--win11-font-size-body);
+  line-height: var(--win11-line-height-body);
+  color: var(--win11-text-primary);
+  background-color: var(--win11-bg-solid-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--win11-bg-solid-base);
+  color: var(--win11-text-primary);
+  transition: background-color var(--win11-duration-normal) var(--win11-easing-standard),
+              color var(--win11-duration-normal) var(--win11-easing-standard);
+}
+
+/* Typography Classes */
+.win11-caption {
+  font-size: var(--win11-font-size-caption);
+  line-height: var(--win11-line-height-caption);
+  font-weight: var(--win11-font-weight-regular);
+}
+
+.win11-body {
+  font-size: var(--win11-font-size-body);
+  line-height: var(--win11-line-height-body);
+  font-weight: var(--win11-font-weight-regular);
+}
+
+.win11-body-strong {
+  font-size: var(--win11-font-size-body-strong);
+  line-height: var(--win11-line-height-body);
+  font-weight: var(--win11-font-weight-semibold);
+}
+
+.win11-subtitle {
+  font-size: var(--win11-font-size-subtitle);
+  line-height: var(--win11-line-height-subtitle);
+  font-weight: var(--win11-font-weight-semibold);
+}
+
+.win11-title {
+  font-size: var(--win11-font-size-title);
+  line-height: var(--win11-line-height-title);
+  font-weight: var(--win11-font-weight-semibold);
+}
+
+.win11-title-large {
+  font-size: var(--win11-font-size-title-large);
+  line-height: var(--win11-line-height-title-large);
+  font-weight: var(--win11-font-weight-semibold);
+}
+
+.win11-display {
+  font-size: var(--win11-font-size-display);
+  line-height: var(--win11-line-height-display);
+  font-weight: var(--win11-font-weight-light);
+}
+
+/* Text Color Classes */
+.win11-text-primary { color: var(--win11-text-primary); }
+.win11-text-secondary { color: var(--win11-text-secondary); }
+.win11-text-tertiary { color: var(--win11-text-tertiary); }
+.win11-text-disabled { color: var(--win11-text-disabled); }
+.win11-text-accent { color: var(--win11-text-accent); }
+
+/* Background Color Classes */
+.win11-bg-base { background-color: var(--win11-bg-solid-base); }
+.win11-bg-secondary { background-color: var(--win11-bg-solid-secondary); }
+.win11-bg-tertiary { background-color: var(--win11-bg-solid-tertiary); }
+.win11-bg-quarternary { background-color: var(--win11-bg-solid-quarternary); }
+
+/* Acrylic Background Classes */
+.win11-bg-acrylic-base { 
+  background-color: var(--win11-bg-acrylic-base);
+  backdrop-filter: blur(30px) saturate(125%);
+  -webkit-backdrop-filter: blur(30px) saturate(125%);
+}
+.win11-bg-acrylic-secondary { 
+  background-color: var(--win11-bg-acrylic-secondary);
+  backdrop-filter: blur(30px) saturate(125%);
+  -webkit-backdrop-filter: blur(30px) saturate(125%);
+}
+.win11-bg-acrylic-tertiary { 
+  background-color: var(--win11-bg-acrylic-tertiary);
+  backdrop-filter: blur(30px) saturate(125%);
+  -webkit-backdrop-filter: blur(30px) saturate(125%);
+}
+.win11-bg-acrylic-quarternary { 
+  background-color: var(--win11-bg-acrylic-quarternary);
+  backdrop-filter: blur(30px) saturate(125%);
+  -webkit-backdrop-filter: blur(30px) saturate(125%);
+}

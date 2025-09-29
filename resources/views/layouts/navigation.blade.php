@@ -123,21 +123,15 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('app.nav.dashboard') }}
             </x-responsive-nav-link>
-            @endif
-            @if(Auth::check() && in_array(Auth::user()->role, ['admin','manager']))
-            @if(Auth::check() && in_array(Auth::user()->role, ['admin','manager']))
             <x-responsive-nav-link :href="route('items.index')" :active="request()->routeIs('items.*')">
                 {{ __('app.nav.items') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')">
                 {{ __('app.nav.categories') }}
             </x-responsive-nav-link>
-            @endif
-            @if(Auth::check() && in_array(Auth::user()->role, ['admin','manager']))
             <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                 {{ __('app.nav.admin') }}
             </x-responsive-nav-link>
-            @endif
             @endif
             <x-responsive-nav-link :href="url('/shop')" :active="request()->is('shop')">
                 {{ __('app.nav.shop') }}

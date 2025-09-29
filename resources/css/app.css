@@ -1,12 +1,136 @@
+/* Windows 11 Theme Imports */
+@import 'windows11.css';
+@import 'windows11-components.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* Smooth theme transitions across pages */
 :root { color-scheme: light dark; }
+
+/* Windows 11 Base Styles */
 html, body {
-  font-family: 'Figtree', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
-  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+  font-family: var(--win11-font-family);
+  transition: background-color var(--win11-duration-normal) var(--win11-easing-standard), 
+              color var(--win11-duration-normal) var(--win11-easing-standard), 
+              border-color var(--win11-duration-normal) var(--win11-easing-standard);
+  background-color: var(--win11-bg-solid-base);
+  color: var(--win11-text-primary);
+  line-height: var(--win11-line-height-body);
+}
+
+/* Windows 11 Layout Overrides */
+.win11-layout {
+  background-color: var(--win11-bg-solid-base);
+  min-height: 100vh;
+}
+
+.win11-topbar {
+  background-color: var(--win11-bg-acrylic-base);
+  backdrop-filter: blur(30px) saturate(125%);
+  -webkit-backdrop-filter: blur(30px) saturate(125%);
+  border-bottom: 1px solid var(--win11-border-stroke-default);
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--win11-spacing-lg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.win11-main-content {
+  padding: var(--win11-spacing-xl);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Windows 11 Card Layouts */
+.win11-page-card {
+  background-color: var(--win11-bg-acrylic-quarternary);
+  backdrop-filter: blur(30px) saturate(125%);
+  -webkit-backdrop-filter: blur(30px) saturate(125%);
+  border: 1px solid var(--win11-border-stroke-default);
+  border-radius: var(--win11-border-radius-large);
+  box-shadow: var(--win11-elevation-shadow-card);
+  padding: var(--win11-spacing-xxl);
+  margin-bottom: var(--win11-spacing-xl);
+}
+
+/* Windows 11 Navigation Styles */
+.win11-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--win11-spacing-md);
+  color: var(--win11-text-primary);
+  text-decoration: none;
+  font-weight: var(--win11-font-weight-semibold);
+  font-size: var(--win11-font-size-body-large);
+}
+
+.win11-nav-brand:hover {
+  color: var(--win11-accent-primary);
+}
+
+/* Windows 11 Form Overrides */
+.win11-form-group {
+  margin-bottom: var(--win11-spacing-lg);
+}
+
+.win11-form-label {
+  display: block;
+  margin-bottom: var(--win11-spacing-sm);
+  color: var(--win11-text-primary);
+  font-weight: var(--win11-font-weight-medium);
+  font-size: var(--win11-font-size-body);
+}
+
+/* Windows 11 Grid System */
+.win11-grid {
+  display: grid;
+  gap: var(--win11-spacing-lg);
+}
+
+.win11-grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+.win11-grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.win11-grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.win11-grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 768px) {
+  .win11-grid-cols-2,
+  .win11-grid-cols-3,
+  .win11-grid-cols-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .win11-grid-cols-3,
+  .win11-grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Windows 11 Responsive Utilities */
+.win11-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--win11-spacing-lg);
+}
+
+@media (max-width: 768px) {
+  .win11-container {
+    padding: 0 var(--win11-spacing-md);
+  }
+  
+  .win11-main-content {
+    padding: var(--win11-spacing-lg);
+  }
+  
+  .win11-page-card {
+    padding: var(--win11-spacing-xl);
+  }
 }
 
 /* Material admin styles are imported via JS to avoid PostCSS warnings */

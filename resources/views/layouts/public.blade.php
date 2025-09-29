@@ -27,7 +27,14 @@
                         <!-- Language Switcher -->
                         <x-language-switcher />
                         <!-- Theme Toggle -->
-                        <x-theme-toggle />
+                        <button id="theme-toggle" class="win11-button win11-flex items-center win11-gap-sm">
+                            <svg class="w-5 h-5 theme-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                            <svg class="w-5 h-5 theme-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                            </svg>
+                        </button>
                         @auth
                             <a href="{{ route('dashboard') }}" class="text-sm text-gray-700 hover:text-indigo-700">Admin</a>
                             <form method="POST" action="{{ route('logout') }}" class="inline-block ml-3">
@@ -65,5 +72,124 @@
             </main>
         </div>
         @stack('scripts')
+        
+        <script>
+            // Enhanced Windows 11 Theme Detection and Management
+            class Win11ThemeManager {
+                constructor() {
+                    this.themeToggle = document.getElementById('theme-toggle');
+                    this.html = document.documentElement;
+                    this.mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+                    
+                    this.init();
+                }
+                
+                init() {
+                    // Set initial theme
+                    this.setInitialTheme();
+                    
+                    // Listen for system theme changes
+                    this.mediaQuery.addEventListener('change', (e) => {
+                        if (!localStorage.getItem('theme')) {
+                            this.applyTheme(e.matches ? 'dark' : 'light');
+                        }
+                    });
+                    
+                    // Theme toggle click handler
+                    this.themeToggle.addEventListener('click', () => {
+                        this.toggleTheme();
+                    });
+                    
+                    // Add Windows 11 reveal effect to theme toggle
+                    this.addRevealEffect();
+                }
+                
+                setInitialTheme() {
+                    const savedTheme = localStorage.getItem('theme');
+                    const systemPrefersDark = this.mediaQuery.matches;
+                    
+                    if (savedTheme) {
+                        this.applyTheme(savedTheme);
+                    } else {
+                        this.applyTheme(systemPrefersDark ? 'dark' : 'light');
+                    }
+                }
+                
+                applyTheme(theme) {
+                    this.html.setAttribute('data-theme', theme);
+                    
+                    // Add smooth transition class
+                    this.html.classList.add('win11-theme-transition');
+                    
+                    // Update theme toggle icon with animation
+                    this.updateThemeIcon(theme);
+                    
+                    // Remove transition class after animation
+                    setTimeout(() => {
+                        this.html.classList.remove('win11-theme-transition');
+                    }, 300);
+                }
+                
+                toggleTheme() {
+                    const currentTheme = this.html.getAttribute('data-theme');
+                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    
+                    this.applyTheme(newTheme);
+                    localStorage.setItem('theme', newTheme);
+                    
+                    // Add micro-interaction
+                    this.themeToggle.classList.add('win11-micro-bounce');
+                    setTimeout(() => {
+                        this.themeToggle.classList.remove('win11-micro-bounce');
+                    }, 200);
+                }
+                
+                updateThemeIcon(theme) {
+                    const sunIcon = this.themeToggle.querySelector('.theme-sun');
+                    const moonIcon = this.themeToggle.querySelector('.theme-moon');
+                    
+                    if (theme === 'dark') {
+                        sunIcon.style.opacity = '1';
+                        moonIcon.style.opacity = '0';
+                    } else {
+                        sunIcon.style.opacity = '0';
+                        moonIcon.style.opacity = '1';
+                    }
+                }
+                
+                addRevealEffect() {
+                    this.themeToggle.classList.add('win11-reveal');
+                }
+            }
+            
+            // Initialize theme manager when DOM is loaded
+            document.addEventListener('DOMContentLoaded', () => {
+                new Win11ThemeManager();
+            });
+            
+            // Add Windows 11 page entrance animation
+            document.addEventListener('DOMContentLoaded', () => {
+                document.body.classList.add('win11-page-enter');
+            });
+        </script>
+        
+        <style>
+            /* Windows 11 Theme Transition */
+            .win11-theme-transition {
+                transition: background-color var(--win11-duration-normal) var(--win11-easing-standard),
+                            color var(--win11-duration-normal) var(--win11-easing-standard);
+            }
+            
+            .win11-theme-transition * {
+                transition: background-color var(--win11-duration-normal) var(--win11-easing-standard),
+                            color var(--win11-duration-normal) var(--win11-easing-standard),
+                            border-color var(--win11-duration-normal) var(--win11-easing-standard);
+            }
+            
+            /* Theme toggle icon transitions */
+            #theme-toggle svg {
+                transition: opacity var(--win11-duration-fast) var(--win11-easing-standard);
+            }
+        </style>
     </body>
 </html>

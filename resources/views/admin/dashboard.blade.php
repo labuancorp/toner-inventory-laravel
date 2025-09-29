@@ -1,111 +1,132 @@
-@extends('layouts.material')
+@extends('layouts.app')
 
 @section('content')
-{{-- Page Header --}}
-<div class="page-header d-print-none mb-4">
-    <div class="row align-items-center">
-        <div class="col">
-            <h2 class="page-title">
-                Admin Dashboard
-            </h2>
-            <div class="text-muted mt-1">
-                Overview of inventory metrics and recent activity.
-            </div>
-        </div>
-    </div>
-</div>
-
-{{-- Metric Cards Row --}}
-<div class="row row-deck row-cards mb-4">
-    <div class="col-sm-6 col-lg-3">
-        <x-info-card
-            title="Total Items"
-            :value="number_format($metrics['items'])"
-            icon="box"
-            :href="route('items.index')"
-        />
-    </div>
-    <div class="col-sm-6 col-lg-3">
-        <x-info-card
-            title="Items Needing Top-up"
-            :value="number_format($metrics['need_topup'])"
-            icon="alert-triangle"
-            :href="route('items.index', ['low' => 1])"
-        />
-    </div>
-    <div class="col-sm-6 col-lg-3">
-        <x-info-card
-            title="Stock In (Today)"
-            :value="number_format($metrics['stock_in_today'])"
-            icon="trending-up"
-            :href="route('items.index', ['action' => 'in'])"
-        />
-    </div>
-    <div class="col-sm-6 col-lg-3">
-        <x-info-card
-            title="Stock Out (Today)"
-            :value="number_format($metrics['stock_out_today'])"
-            icon="trending-down"
-            :href="route('items.index', ['action' => 'out'])"
-        />
-    </div>
-</div>
-
-{{-- Charts and Tables Row --}}
-<div class="row row-deck row-cards">
-    {{-- 7-Day Movements Chart --}}
-    <div class="col-lg-8 mb-4 mb-lg-0">
-        <div class="card h-100">
-            <div class="card-header">
-                <h3 class="card-title">7-Day Stock Movements</h3>
-            </div>
-            <div class="card-body">
-                <canvas id="movementsChart" height="150"></canvas>
-            </div>
-        </div>
+<div class="win11-space-y-lg">
+    {{-- Page Header --}}
+    <div class="win11-space-y-sm">
+        <h1 class="win11-text-3xl win11-font-semibold win11-tracking-tight">Admin Dashboard</h1>
+        <p class="win11-text-secondary">Overview of inventory metrics and recent activity.</p>
     </div>
 
-    {{-- Low Stock Items --}}
-    <div class="col-lg-4">
-        <div class="card h-100">
-            <div class="card-header">
-                <h3 class="card-title">Low Stock Items</h3>
-            </div>
-
-            @if($lowStockItems->isEmpty())
-                <div class="card-body text-center d-flex flex-column justify-content-center">
-                    <div class="text-muted">
-                        <i class="ti ti-circle-check" style="font-size: 3rem;"></i>
-                        <p class="mt-2">All items are sufficiently stocked.</p>
-                    </div>
+    {{-- Metric Cards Row --}}
+    <div class="win11-grid win11-grid-cols-1 sm:win11-grid-cols-2 lg:win11-grid-cols-4 win11-gap-md">
+        <div class="win11-card win11-p-md">
+            <div class="win11-flex win11-items-center win11-justify-between">
+                <div>
+                    <p class="win11-text-sm win11-text-secondary">Total Items</p>
+                    <p class="win11-text-2xl win11-font-semibold">{{ number_format($metrics['items']) }}</p>
                 </div>
-            @else
-                <div class="list-group list-group-flush list-group-hoverable overflow-auto" style="max-height: 350px;">
-                    @foreach($lowStockItems as $item)
-                        <div class="list-group-item">
-                            <div class="row align-items-center">
-                                <div class="col text-truncate">
-                                    <a href="{{ route('items.show', $item) }}" class="text-reset d-block">{{ $item->name }}</a>
-                                    <div class="d-block text-muted text-truncate mt-n1">
-                                        {{ $item->category->name }} &bull; SKU: {{ $item->sku }}
+                <div class="win11-p-3 win11-bg-primary/10 win11-rounded-lg">
+                    <svg class="win11-w-6 win11-h-6 win11-text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                    </svg>
+                </div>
+            </div>
+            <a href="{{ route('items.index') }}" class="win11-link win11-text-sm win11-mt-2 win11-inline-block">View all items →</a>
+        </div>
+
+        <div class="win11-card win11-p-md">
+            <div class="win11-flex win11-items-center win11-justify-between">
+                <div>
+                    <p class="win11-text-sm win11-text-secondary">Items Needing Top-up</p>
+                    <p class="win11-text-2xl win11-font-semibold win11-text-warning">{{ number_format($metrics['need_topup']) }}</p>
+                </div>
+                <div class="win11-p-3 win11-bg-warning/10 win11-rounded-lg">
+                    <svg class="win11-w-6 win11-h-6 win11-text-warning" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                    </svg>
+                </div>
+            </div>
+            <a href="{{ route('items.index', ['low' => 1]) }}" class="win11-link win11-text-sm win11-mt-2 win11-inline-block">View low stock →</a>
+        </div>
+
+        <div class="win11-card win11-p-md">
+            <div class="win11-flex win11-items-center win11-justify-between">
+                <div>
+                    <p class="win11-text-sm win11-text-secondary">Stock In (Today)</p>
+                    <p class="win11-text-2xl win11-font-semibold win11-text-success">{{ number_format($metrics['stock_in_today']) }}</p>
+                </div>
+                <div class="win11-p-3 win11-bg-success/10 win11-rounded-lg">
+                    <svg class="win11-w-6 win11-h-6 win11-text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                </div>
+            </div>
+            <a href="{{ route('items.index', ['action' => 'in']) }}" class="win11-link win11-text-sm win11-mt-2 win11-inline-block">View stock in →</a>
+        </div>
+
+        <div class="win11-card win11-p-md">
+            <div class="win11-flex win11-items-center win11-justify-between">
+                <div>
+                    <p class="win11-text-sm win11-text-secondary">Stock Out (Today)</p>
+                    <p class="win11-text-2xl win11-font-semibold win11-text-danger">{{ number_format($metrics['stock_out_today']) }}</p>
+                </div>
+                <div class="win11-p-3 win11-bg-danger/10 win11-rounded-lg">
+                    <svg class="win11-w-6 win11-h-6 win11-text-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
+                    </svg>
+                </div>
+            </div>
+            <a href="{{ route('items.index', ['action' => 'out']) }}" class="win11-link win11-text-sm win11-mt-2 win11-inline-block">View stock out →</a>
+        </div>
+    </div>
+
+    {{-- Charts and Tables Row --}}
+    <div class="win11-grid win11-grid-cols-1 lg:win11-grid-cols-3 win11-gap-md">
+        {{-- 7-Day Movements Chart --}}
+        <div class="lg:win11-col-span-2">
+            <div class="win11-card win11-h-full">
+                <div class="win11-card-header">
+                    <h3 class="win11-text-lg win11-font-semibold">7-Day Stock Movements</h3>
+                </div>
+                <div class="win11-card-body">
+                    <canvas id="movementsChart" height="150"></canvas>
+                </div>
+            </div>
+        </div>
+
+        {{-- Low Stock Items --}}
+        <div class="win11-col-span-1">
+            <div class="win11-card win11-h-full">
+                <div class="win11-card-header">
+                    <h3 class="win11-text-lg win11-font-semibold">Low Stock Items</h3>
+                </div>
+
+                @if($lowStockItems->isEmpty())
+                    <div class="win11-card-body win11-flex win11-flex-col win11-items-center win11-justify-center win11-text-center win11-py-xl">
+                        <div class="win11-text-secondary">
+                            <svg class="win11-w-16 win11-h-16 win11-mx-auto win11-mb-4 win11-text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <p>All items are sufficiently stocked.</p>
+                        </div>
+                    </div>
+                @else
+                    <div class="win11-card-body win11-p-0">
+                        <div class="win11-space-y-0 win11-max-h-80 win11-overflow-y-auto">
+                            @foreach($lowStockItems as $item)
+                                <div class="win11-flex win11-items-center win11-justify-between win11-p-md win11-border-b win11-border-divider last:win11-border-b-0 hover:win11-bg-surface-hover">
+                                    <div class="win11-flex-1 win11-min-w-0">
+                                        <a href="{{ route('items.show', $item) }}" class="win11-link win11-block win11-font-medium win11-truncate">{{ $item->name }}</a>
+                                        <div class="win11-text-sm win11-text-secondary win11-truncate">
+                                            {{ $item->category->name }} • SKU: {{ $item->sku }}
+                                        </div>
+                                    </div>
+                                    <div class="win11-flex-shrink-0 win11-ml-4">
+                                        <span class="win11-badge win11-badge-danger">
+                                            {{ $item->quantity }} / {{ $item->reorder_level }}
+                                        </span>
                                     </div>
                                 </div>
-                                <div class="col-auto">
-                                    <span class="badge bg-danger-lt">
-                                        {{ $item->quantity }} / {{ $item->reorder_level }}
-                                    </span>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
-                    @endforeach
-                </div>
-            @endif
+                    </div>
 
-            @if($lowStockItems->isNotEmpty())
-            <div class="card-footer text-center">
-                <a href="{{ route('items.index', ['low' => 1]) }}">View All Low Stock Items</a>
+                    <div class="win11-card-footer win11-text-center">
+                        <a href="{{ route('items.index', ['low' => 1]) }}" class="win11-link">View All Low Stock Items</a>
+                    </div>
+                @endif
             </div>
-            @endif
         </div>
     </div>
 </div>

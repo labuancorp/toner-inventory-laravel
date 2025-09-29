@@ -1,137 +1,117 @@
 @extends('layouts.material')
 
 @section('content')
-<div class="row">
-    <div class="col-12 mb-4">
-        <div class="card">
-            <div class="card-header pb-0 d-flex align-items-center justify-content-between">
-                <h6 class="mb-0">7-Day Stock Movements</h6>
-                <small class="text-secondary">Daily totals for In/Out</small>
-            </div>
-            <div class="card-body">
-                <canvas id="movementsChart" height="120"></canvas>
-            </div>
-        </div>
-    </div>
-    <!-- Metrics cards -->
-    <div class="col-12 col-md-6 col-xl-3 mb-4">
-        <div class="card">
-            <div class="card-body">
-                <p class="text-sm text-secondary mb-0">Categories</p>
-                <h5 class="mb-0">{{ number_format($metrics['categories']) }}</h5>
-            </div>
-        </div>
-    </div>
-    <div class="col-12 col-md-6 col-xl-3 mb-4">
-        <div class="card">
-            <div class="card-body">
-                <p class="text-sm text-secondary mb-0">Items</p>
-                <h5 class="mb-0">{{ number_format($metrics['items']) }}</h5>
-            </div>
-        </div>
-    </div>
-    <div class="col-12 col-md-6 col-xl-3 mb-4">
-        <a href="{{ route('items.index') }}?action=in" class="text-decoration-none">
-            <div class="card">
-                <div class="card-body">
-                    <p class="text-sm text-secondary mb-0">Stock In (Today)</p>
-                    <h5 class="mb-0">{{ number_format($metrics['stock_in_today']) }}</h5>
-                </div>
-            </div>
-        </a>
-    </div>
-    <div class="col-12 col-md-6 col-xl-3 mb-4">
-        <a href="{{ route('items.index') }}?action=out" class="text-decoration-none">
-            <div class="card">
-                <div class="card-body">
-                    <p class="text-sm text-secondary mb-0">Stock Out (Today)</p>
-                    <h5 class="mb-0">{{ number_format($metrics['stock_out_today']) }}</h5>
-                </div>
-            </div>
-        </a>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-12 col-xl-4 mb-4">
-        <a href="{{ route('items.index') }}" class="text-decoration-none">
-            <div class="card">
-                <div class="card-header pb-0">
-                    <h6>Stock Left</h6>
-                </div>
-                <div class="card-body">
-                    <h2 class="mb-0">{{ number_format($metrics['stock_left']) }}</h2>
-                    <p class="text-sm text-secondary">Total units across all items</p>
-                </div>
-            </div>
-        </a>
-    </div>
-    <div class="col-12 col-xl-4 mb-4">
-        <a href="{{ route('items.index', ['low' => 1]) }}" class="text-decoration-none">
-            <div class="card">
-                <div class="card-header pb-0">
-                    <h6>Need Top-up</h6>
-                </div>
-                <div class="card-body">
-                    <h2 class="mb-0">{{ number_format($metrics['need_topup']) }}</h2>
-                    <p class="text-sm text-secondary">Items at or below reorder level</p>
-                </div>
-            </div>
-        </a>
-    </div>
-    <div class="col-12 col-xl-4 mb-4">
-        <div class="card">
-            <div class="card-header pb-0">
-                <h6>Movements Recorded</h6>
-            </div>
-            <div class="card-body">
-                <h2 class="mb-0">{{ number_format($metrics['movements_total']) }}</h2>
-                <p class="text-sm text-secondary">Total stock movement events</p>
+{{-- Page Header --}}
+<div class="page-header d-print-none mb-4">
+    <div class="row align-items-center">
+        <div class="col">
+            <h2 class="page-title">
+                Admin Dashboard
+            </h2>
+            <div class="text-muted mt-1">
+                Overview of inventory metrics and recent activity.
             </div>
         </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-12 mb-4">
-        <div class="card">
-            <div class="card-header pb-0">
-                <h6>Items Needing Top-up</h6>
+{{-- Metric Cards Row --}}
+<div class="row row-deck row-cards mb-4">
+    <div class="col-sm-6 col-lg-3">
+        <x-info-card
+            title="Total Items"
+            :value="number_format($metrics['items'])"
+            icon="box"
+            :href="route('items.index')"
+        />
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <x-info-card
+            title="Items Needing Top-up"
+            :value="number_format($metrics['need_topup'])"
+            icon="alert-triangle"
+            :href="route('items.index', ['low' => 1])"
+        />
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <x-info-card
+            title="Stock In (Today)"
+            :value="number_format($metrics['stock_in_today'])"
+            icon="trending-up"
+            :href="route('items.index', ['action' => 'in'])"
+        />
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <x-info-card
+            title="Stock Out (Today)"
+            :value="number_format($metrics['stock_out_today'])"
+            icon="trending-down"
+            :href="route('items.index', ['action' => 'out'])"
+        />
+    </div>
+</div>
+
+{{-- Charts and Tables Row --}}
+<div class="row row-deck row-cards">
+    {{-- 7-Day Movements Chart --}}
+    <div class="col-lg-8 mb-4 mb-lg-0">
+        <div class="card h-100">
+            <div class="card-header">
+                <h3 class="card-title">7-Day Stock Movements</h3>
             </div>
             <div class="card-body">
-                @if($lowStockItems->isEmpty())
-                    <p class="text-secondary">All items are above reorder levels.</p>
-                @else
-                    <div class="table-responsive">
-                        <table class="table align-items-center">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>SKU</th>
-                                    <th>Category</th>
-                                    <th>Quantity</th>
-                                    <th>Reorder Level</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($lowStockItems as $i)
-                                    <tr>
-                                        <td><a href="{{ route('items.show', $i) }}">{{ $i->name }}</a></td>
-                                        <td>{{ $i->sku }}</td>
-                                        <td>{{ $i->category->name }}</td>
-                                        <td>{{ $i->quantity }}</td>
-                                        <td>{{ $i->reorder_level }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                <canvas id="movementsChart" height="150"></canvas>
+            </div>
+        </div>
+    </div>
+
+    {{-- Low Stock Items --}}
+    <div class="col-lg-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h3 class="card-title">Low Stock Items</h3>
+            </div>
+
+            @if($lowStockItems->isEmpty())
+                <div class="card-body text-center d-flex flex-column justify-content-center">
+                    <div class="text-muted">
+                        <i class="ti ti-circle-check" style="font-size: 3rem;"></i>
+                        <p class="mt-2">All items are sufficiently stocked.</p>
                     </div>
-                @endif
+                </div>
+            @else
+                <div class="list-group list-group-flush list-group-hoverable overflow-auto" style="max-height: 350px;">
+                    @foreach($lowStockItems as $item)
+                        <div class="list-group-item">
+                            <div class="row align-items-center">
+                                <div class="col text-truncate">
+                                    <a href="{{ route('items.show', $item) }}" class="text-reset d-block">{{ $item->name }}</a>
+                                    <div class="d-block text-muted text-truncate mt-n1">
+                                        {{ $item->category->name }} &bull; SKU: {{ $item->sku }}
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <span class="badge bg-danger-lt">
+                                        {{ $item->quantity }} / {{ $item->reorder_level }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+
+            @if($lowStockItems->isNotEmpty())
+            <div class="card-footer text-center">
+                <a href="{{ route('items.index', ['low' => 1]) }}">View All Low Stock Items</a>
             </div>
+            @endif
         </div>
     </div>
 </div>
+
 <script>
+    // Pass chart data to the material.js script
     window.__movementsChartData = @json($chartData ?? null);
 </script>
 @endsection

@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.material')
 
 @section('content')
 <div class="win11-container win11-mx-auto win11-px-md">
     <div class="win11-mb-lg">
         <div class="win11-flex win11-items-center win11-justify-between">
             <h5 class="win11-text-xl win11-font-semibold win11-flex win11-items-center">
-                <svg class="win11-w-6 win11-h-6 win11-mr-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="win11-w-4 win11-h-4 win11-mr-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
                 {{ __('Profile') }}

@@ -14,9 +14,12 @@
 </head>
 <body class="win11-body win11-page-enter" data-theme="light">
     @php($isAuthPage = request()->routeIs('login') || request()->routeIs('register'))
+    
     @unless($isAuthPage)
-    <!-- Windows 11 Sidebar -->
-    <aside class="win11-sidebar" id="sidenav-main" aria-label="Admin sidebar navigation">
+    <!-- Layout Container -->
+    <div class="win11-flex win11-min-h-screen">
+        <!-- Windows 11 Sidebar -->
+        <aside class="win11-sidebar" id="sidenav-main" aria-label="Admin sidebar navigation">
         <div class="win11-sidebar-header">
             <a class="win11-sidebar-brand" href="{{ route('admin.dashboard') }}">
                 <span class="win11-text-lg win11-font-semibold">Stock Manager Admin</span>
@@ -30,13 +33,12 @@
                 </ul>
             </nav>
         </div>
-    </aside>
-    <!-- Mobile overlay -->
-    <div id="sidebarOverlay" class="win11-overlay" aria-hidden="true"></div>
-    @endunless
-
-    <!-- Main content -->
-    <main class="win11-main-content">
+        </aside>
+        <!-- Mobile overlay -->
+        <div id="sidebarOverlay" class="win11-overlay" aria-hidden="true"></div>
+        
+        <!-- Main content -->
+        <main class="win11-main-content win11-flex-1">
         <!-- Mobile topbar -->
         <div class="win11-mobile-topbar lg:win11-hidden">
             <div class="win11-flex win11-items-center win11-justify-between">
@@ -52,10 +54,17 @@
             </div>
         </div>
 
-        <div class="{{ $isAuthPage ? 'win11-container win11-py-4 win11-flex win11-justify-center win11-items-center win11-min-h-screen' : 'win11-content-container win11-container-fluid win11-py-4' }}">
-            @yield('content')
-        </div>
-    </main>
+            <div class="{{ $isAuthPage ? 'win11-container win11-py-4 win11-flex win11-justify-center win11-items-center win11-min-h-screen' : 'win11-content-container win11-container-fluid win11-py-4' }}">
+                @yield('content')
+            </div>
+        </main>
+    </div>
+    @else
+    <!-- Auth page content -->
+    <div class="win11-container win11-py-4 win11-flex win11-justify-center win11-items-center win11-min-h-screen">
+        @yield('content')
+    </div>
+    @endunless
 
     <!-- Notification toast container -->
     <div id="notifToastContainer" class="win11-notification-container" aria-live="polite" aria-atomic="true"></div>

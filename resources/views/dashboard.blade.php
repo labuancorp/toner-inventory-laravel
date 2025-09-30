@@ -164,7 +164,7 @@
                             <div class="win11-grid win11-grid-cols-3 win11-gap-md">
                                 <div class="win11-stagger-item">
                                     <a href="{{ route('items.index') }}" class="win11-btn win11-btn-outline win11-w-full win11-h-full win11-flex win11-flex-col win11-items-center win11-justify-center win11-py-lg">
-                                        <svg class="win11-icon win11-icon-xl win11-mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <svg class="win11-icon win11-icon-md win11-mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
                                             <polyline points="3.27,6.96 12,12.01 20.73,6.96"/>
                                             <line x1="12" y1="22.08" x2="12" y2="12"/>
@@ -174,7 +174,7 @@
                                 </div>
                                 <div class="win11-stagger-item">
                                     <a href="{{ route('categories.index') }}" class="win11-btn win11-btn-outline win11-w-full win11-h-full win11-flex win11-flex-col win11-items-center win11-justify-center win11-py-lg">
-                                        <svg class="win11-icon win11-icon-xl win11-mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <svg class="win11-icon win11-icon-md win11-mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                             <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
                                             <line x1="7" y1="7" x2="7.01" y2="7"/>
                                         </svg>
@@ -184,7 +184,7 @@
                                 @can('create', App\Models\Item::class)
                                     <div class="win11-stagger-item">
                                         <a href="{{ route('items.create') }}" class="win11-btn win11-btn-outline win11-w-full win11-h-full win11-flex win11-flex-col win11-items-center win11-justify-center win11-py-lg">
-                                            <svg class="win11-icon win11-icon-xl win11-mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <svg class="win11-icon win11-icon-md win11-mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <line x1="12" y1="5" x2="12" y2="19"/>
                                                 <line x1="5" y1="12" x2="19" y2="12"/>
                                             </svg>

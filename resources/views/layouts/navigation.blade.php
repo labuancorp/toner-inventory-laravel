@@ -102,7 +102,6 @@
                     <i class="ti ti-folder" aria-hidden="true"></i>
                     <span>{{ __('app.nav.categories') }}</span>
                 </a>
-                @endif
                 <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->routeIs('admin.dashboard') ? 'bg-purple-50 text-purple-700' : 'text-gray-700 hover:bg-gray-50' }}">
                     <i class="ti ti-shield-check" aria-hidden="true"></i>
                     <span>{{ __('app.nav.admin') }}</span>

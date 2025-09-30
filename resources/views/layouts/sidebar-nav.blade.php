@@ -26,7 +26,7 @@
     <span class="win11-nav-section-title">General</span>
     <ul class="win11-nav-section-list" role="list">
         <li class="win11-nav-item">
-            <a class="win11-nav-link {{ request()->routeIs('dashboard') ? 'win11-nav-link-active' : '' }}" href="{{ route('dashboard') }}" @if(request()->routeIs('dashboard')) aria-current="page" @endif>
+            <a class="win11-nav-link {{ request()->routeIs('dashboard') ? 'win11-nav-link-active' : '' }}" href="{{ route('dashboard') }}" {{ request()->routeIs('dashboard') ? 'aria-current=page' : '' }}>
                 <svg class="win11-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="3" y="3" width="7" height="7"></rect>
                     <rect x="14" y="3" width="7" height="7"></rect>
@@ -38,7 +38,7 @@
         </li>
         @if(Auth::check() && in_array(Auth::user()->role, ['admin','manager']))
         <li class="win11-nav-item">
-            <a class="win11-nav-link {{ request()->routeIs('admin.dashboard') ? 'win11-nav-link-active' : '' }}" href="{{ route('admin.dashboard') }}" @if(request()->routeIs('admin.dashboard')) aria-current="page" @endif>
+            <a class="win11-nav-link {{ request()->routeIs('admin.dashboard') ? 'win11-nav-link-active' : '' }}" href="{{ route('admin.dashboard') }}" {{ request()->routeIs('admin.dashboard') ? 'aria-current=page' : '' }}>
                 <svg class="win11-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                     <path d="M9 12l2 2 4-4"></path>
@@ -48,7 +48,7 @@
         </li>
         @endif
         <li class="win11-nav-item">
-            <a class="win11-nav-link {{ request()->is('shop') ? 'win11-nav-link-active' : '' }}" href="{{ url('/shop') }}" @if(request()->is('shop')) aria-current="page" @endif>
+            <a class="win11-nav-link {{ request()->is('shop') ? 'win11-nav-link-active' : '' }}" href="{{ url('/shop') }}" {{ request()->is('shop') ? 'aria-current=page' : '' }}>
                 <svg class="win11-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="9" cy="21" r="1"></circle>
                     <circle cx="20" cy="21" r="1"></circle>
@@ -66,7 +66,7 @@
     <span class="win11-nav-section-title">Inventory</span>
     <ul class="win11-nav-section-list" role="list">
         <li class="win11-nav-item">
-            <a class="win11-nav-link {{ request()->routeIs('items.index') ? 'win11-nav-link-active' : '' }}" href="{{ route('items.index') }}" @if(request()->routeIs('items.index')) aria-current="page" @endif>
+            <a class="win11-nav-link {{ request()->routeIs('items.index') ? 'win11-nav-link-active' : '' }}" href="{{ route('items.index') }}" {{ request()->routeIs('items.index') ? 'aria-current=page' : '' }}>
                 <svg class="win11-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
                     <polyline points="3.27,6.96 12,12.01 20.73,6.96"></polyline>
@@ -77,7 +77,7 @@
             </a>
         </li>
         <li class="win11-nav-item">
-            <a class="win11-nav-link {{ request()->routeIs('items.trashed') ? 'win11-nav-link-active' : '' }}" href="{{ route('items.trashed') }}" @if(request()->routeIs('items.trashed')) aria-current="page" @endif>
+            <a class="win11-nav-link {{ request()->routeIs('items.trashed') ? 'win11-nav-link-active' : '' }}" href="{{ route('items.trashed') }}" {{ request()->routeIs('items.trashed') ? 'aria-current=page' : '' }}>
                 <svg class="win11-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <polyline points="3,6 5,6 21,6"></polyline>
                     <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
@@ -89,7 +89,7 @@
             </a>
         </li>
         <li class="win11-nav-item">
-            <a class="win11-nav-link {{ request()->routeIs('items.reorder') ? 'win11-nav-link-active' : '' }}" href="{{ route('items.reorder') }}" @if(request()->routeIs('items.reorder')) aria-current="page" @endif>
+            <a class="win11-nav-link {{ request()->routeIs('items.reorder') ? 'win11-nav-link-active' : '' }}" href="{{ route('items.reorder') }}" {{ request()->routeIs('items.reorder') ? 'aria-current=page' : '' }}>
                 <svg class="win11-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                 </svg>
@@ -97,7 +97,7 @@
             </a>
         </li>
         <li class="win11-nav-item">
-            <a class="win11-nav-link {{ request()->routeIs('items.scan') ? 'win11-nav-link-active' : '' }}" href="{{ route('items.scan') }}" @if(request()->routeIs('items.scan')) aria-current="page" @endif>
+            <a class="win11-nav-link {{ request()->routeIs('items.scan') ? 'win11-nav-link-active' : '' }}" href="{{ route('items.scan') }}" {{ request()->routeIs('items.scan') ? 'aria-current=page' : '' }}>
                 <svg class="win11-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M3 5a2 2 0 0 1 2-2h3m13 0h-3a2 2 0 0 1 2 2v3m0 13v-3a2 2 0 0 1-2 2h-3m-13 0h3a2 2 0 0 1-2-2v-3"></path>
                     <path d="M8 12h8"></path>
@@ -108,7 +108,7 @@
             </a>
         </li>
         <li class="win11-nav-item">
-            <a class="win11-nav-link {{ request()->routeIs('reports.analytics') ? 'win11-nav-link-active' : '' }}" href="{{ route('reports.analytics') }}" @if(request()->routeIs('reports.analytics')) aria-current="page" @endif>
+            <a class="win11-nav-link {{ request()->routeIs('reports.analytics') ? 'win11-nav-link-active' : '' }}" href="{{ route('reports.analytics') }}" {{ request()->routeIs('reports.analytics') ? 'aria-current=page' : '' }}>
                 <svg class="win11-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <line x1="12" y1="20" x2="12" y2="10"></line>
                     <line x1="18" y1="20" x2="18" y2="4"></line>
@@ -118,7 +118,7 @@
             </a>
         </li>
         <li class="win11-nav-item">
-            <a class="win11-nav-link {{ request()->routeIs('shop.history') ? 'win11-nav-link-active' : '' }}" href="{{ route('shop.history') }}" @if(request()->routeIs('shop.history')) aria-current="page" @endif>
+            <a class="win11-nav-link {{ request()->routeIs('shop.history') ? 'win11-nav-link-active' : '' }}" href="{{ route('shop.history') }}" {{ request()->routeIs('shop.history') ? 'aria-current=page' : '' }}>
                 <svg class="win11-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10"></circle>
                     <polyline points="12,6 12,12 16,14"></polyline>
@@ -127,7 +127,7 @@
             </a>
         </li>
         <li class="win11-nav-item">
-            <a class="win11-nav-link {{ request()->routeIs('printers.*') ? 'win11-nav-link-active' : '' }}" href="{{ route('printers.index') }}" @if(request()->routeIs('printers.*')) aria-current="page" @endif>
+            <a class="win11-nav-link {{ request()->routeIs('printers.*') ? 'win11-nav-link-active' : '' }}" href="{{ route('printers.index') }}" {{ request()->routeIs('printers.*') ? 'aria-current=page' : '' }}>
                 <svg class="win11-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <polyline points="6,9 6,2 18,2 18,9"></polyline>
                     <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
@@ -137,7 +137,7 @@
             </a>
         </li>
         <li class="win11-nav-item">
-            <a class="win11-nav-link {{ request()->routeIs('categories.*') ? 'win11-nav-link-active' : '' }}" href="{{ route('categories.index') }}" @if(request()->routeIs('categories.*')) aria-current="page" @endif>
+            <a class="win11-nav-link {{ request()->routeIs('categories.*') ? 'win11-nav-link-active' : '' }}" href="{{ route('categories.index') }}" {{ request()->routeIs('categories.*') ? 'aria-current=page' : '' }}>
                 <svg class="win11-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
                     <line x1="7" y1="7" x2="7.01" y2="7"></line>
@@ -155,7 +155,7 @@
     <span class="win11-nav-section-title">Administration</span>
     <ul class="win11-nav-section-list" role="list">
         <li class="win11-nav-item">
-            <a class="win11-nav-link {{ request()->routeIs('admin.users.*') ? 'win11-nav-link-active' : '' }}" href="{{ route('admin.users.index') }}" @if(request()->routeIs('admin.users.*')) aria-current="page" @endif>
+            <a class="win11-nav-link {{ request()->routeIs('admin.users.*') ? 'win11-nav-link-active' : '' }}" href="{{ route('admin.users.index') }}" {{ request()->routeIs('admin.users.*') ? 'aria-current=page' : '' }}>
                 <svg class="win11-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                     <circle cx="9" cy="7" r="4"></circle>
@@ -175,7 +175,7 @@
     <span class="win11-nav-section-title">Account</span>
     <ul class="win11-nav-section-list" role="list">
         <li class="win11-nav-item">
-            <a class="win11-nav-link {{ request()->routeIs('profile.edit') ? 'win11-nav-link-active' : '' }}" href="{{ route('profile.edit') }}" @if(request()->routeIs('profile.edit')) aria-current="page" @endif>
+            <a class="win11-nav-link {{ request()->routeIs('profile.edit') ? 'win11-nav-link-active' : '' }}" href="{{ route('profile.edit') }}" {{ request()->routeIs('profile.edit') ? 'aria-current=page' : '' }}>
                 <svg class="win11-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                     <circle cx="12" cy="7" r="4"></circle>
@@ -184,7 +184,7 @@
             </a>
         </li>
         <li class="win11-nav-item">
-            <a class="win11-nav-link {{ request()->routeIs('reports.inventory') ? 'win11-nav-link-active' : '' }}" href="{{ route('reports.inventory') }}" @if(request()->routeIs('reports.inventory')) aria-current="page" @endif>
+            <a class="win11-nav-link {{ request()->routeIs('reports.inventory') ? 'win11-nav-link-active' : '' }}" href="{{ route('reports.inventory') }}" {{ request()->routeIs('reports.inventory') ? 'aria-current=page' : '' }}>
                 <svg class="win11-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                     <polyline points="14,2 14,8 20,8"></polyline>

@@ -704,6 +704,7 @@
   z-index: 1000;
   transform: translateX(-100%);
   transition: transform var(--win11-duration-normal) var(--win11-ease-standard);
+  flex-shrink: 0;
 }
 
 @media (min-width: 1024px) {
@@ -711,7 +712,6 @@
     transform: translateX(0);
     position: relative;
     width: 280px;
-    flex-shrink: 0;
   }
 }
 
@@ -796,12 +796,6 @@
   min-height: 100vh;
   background: var(--win11-surface-primary);
   margin-left: 0;
-}
-
-@media (min-width: 1024px) {
-  .win11-main-content {
-    margin-left: 280px;
-  }
 }
 
 .win11-mobile-topbar {

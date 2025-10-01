@@ -1,0 +1,200 @@
+<!DOCTYPE html><html lang="en" data-theme="light" style="--theme-primary-color: #206bc4;"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Admin | Stock Manager</title>
+
+    <!-- Windows 11 Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet">
+
+    <!-- Vite local assets with Windows 11 theme -->
+    <link rel="preload" as="style" href="http://127.0.0.1:8000/build/assets/app-B2TMJOvy.css"><link rel="preload" as="style" href="http://127.0.0.1:8000/build/assets/app-fjJvDDun.css"><link rel="modulepreload" as="script" href="http://127.0.0.1:8000/build/assets/app-DsrQTFLd.js"><link rel="stylesheet" href="http://127.0.0.1:8000/build/assets/app-B2TMJOvy.css"><link rel="stylesheet" href="http://127.0.0.1:8000/build/assets/app-fjJvDDun.css"><script type="module" src="http://127.0.0.1:8000/build/assets/app-DsrQTFLd.js"></script></head>
+<body class="win11-body win11-page-enter" data-theme="light">
+
+        <!-- Auth page content -->
+    <div class="win11-container win11-py-4 win11-flex win11-justify-center win11-items-center win11-min-h-screen">
+        <div class="row justify-content-center w-100">
+    <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-sm w-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <a href="http://127.0.0.1:8000" class="text-decoration-none">Laravel</a>
+                <div class="ms-2 d-flex align-items-center">
+                    <button id="themeToggle" type="button" aria-pressed="false" aria-label="Toggle theme" onclick="toggleTheme()" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+    <span class="sr-only">Toggle theme</span>
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-6 w-6 block dark:hidden" fill="none" stroke="currentColor" stroke-width="2">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-6.364-.386l1.591-1.591M3 12h2.25m.386-6.364l1.591 1.591"></path>
+</svg>    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-6 w-6 hidden dark:block" fill="none" stroke="currentColor" stroke-width="2">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"></path>
+</svg>
+
+    <span id="themeLabel" class="sr-only">Light Mode</span>
+</button>                    <div class="inline-flex items-center gap-1" role="group" aria-label="Language switcher">
+    <form method="POST" action="http://127.0.0.1:8000/locale">
+        <input type="hidden" name="_token" value="f5L87ROyowf4we8ca4eB91t8sRZ8fPPjUmM02BDO" autocomplete="off">        <input type="hidden" name="locale" value="en">
+        <button type="submit" class="px-2 py-1 text-sm rounded-md border bg-indigo-600 text-white border-indigo-600" aria-pressed="true" aria-label="Switch to English">EN</button>
+    </form>
+    <form method="POST" action="http://127.0.0.1:8000/locale">
+        <input type="hidden" name="_token" value="f5L87ROyowf4we8ca4eB91t8sRZ8fPPjUmM02BDO" autocomplete="off">        <input type="hidden" name="locale" value="ms">
+        <button type="submit" class="px-2 py-1 text-sm rounded-md border bg-white text-gray-700 border-gray-300 hover:bg-gray-50" aria-pressed="false" aria-label="Tukar ke Bahasa Melayu">BM</button>
+    </form>
+</div>                </div>
+            </div>
+            <div class="card-body p-3 p-md-4">
+                <!-- Session Status -->
+
+    <div class="win11-space-y-lg">
+        <div class="win11-text-center">
+            <h1 class="win11-text-2xl win11-font-semibold win11-tracking-tight">Welcome back</h1>
+            <p class="win11-text-sm win11-text-secondary">Sign in to manage your toner inventory</p>
+        </div>
+
+        <form method="POST" action="http://127.0.0.1:8000/login" class="win11-space-y-md" aria-describedby="loginHelp">
+            <input type="hidden" name="_token" value="f5L87ROyowf4we8ca4eB91t8sRZ8fPPjUmM02BDO" autocomplete="off">
+            <div id="loginHelp" class="win11-sr-only">Enter your email and password to sign in.</div>
+
+            <!-- Email Address -->
+            <div>
+                <label for="email" class="win11-block win11-text-sm win11-font-medium win11-text-primary">Email</label>
+                <input id="email" type="email" name="email" value="" required="" autofocus="" autocomplete="username" class="win11-mt-1 win11-block win11-w-full win11-input win11-text-sm">
+                            </div>
+
+            <!-- Password with visibility toggle -->
+            <div>
+                <label for="password" class="win11-block win11-text-sm win11-font-medium win11-text-primary">Password</label>
+                <div class="win11-mt-1 win11-relative">
+                    <input id="password" type="password" name="password" required="" autocomplete="current-password" class="win11-block win11-w-full win11-input win11-text-sm win11-pr-10">
+                    <button type="button" id="togglePassword" aria-label="Toggle password visibility" aria-controls="password" aria-pressed="false" class="win11-absolute win11-inset-y-0 win11-right-0 win11-px-3 win11-flex win11-items-center win11-text-secondary hover:win11-text-primary win11-focus-outline-none win11-focus-ring-2 win11-focus-ring-accent win11-transition">
+                        <svg id="iconEye" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="win11-h-5 win11-w-5" fill="none" stroke="currentColor" stroke-width="2">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path><circle cx="12" cy="12" r="3"></circle>
+</svg>                        <svg id="iconEyeOff" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="win11-h-5 win11-w-5 win11-hidden" fill="none" stroke="currentColor" stroke-width="2">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M17.94 17.94A10.94 10.94 0 0112 20c-7 0-11-8-11-8a21.58 21.58 0 015.06-6.94M9.88 4.12A10.94 10.94 0 0112 4c7 0 11 8 11 8a21.58 21.58 0 01-4.62 6.2"></path><path d="M1 1l22 22"></path>
+</svg>                    </button>
+                </div>
+                            </div>
+
+            <!-- Remember Me & Forgot Password -->
+            <div class="win11-flex win11-flex-col sm:win11-flex-row sm:win11-items-center sm:win11-justify-between win11-gap-2">
+                <label for="remember_me" class="win11-inline-flex win11-items-center win11-gap-2">
+                    <input id="remember_me" type="checkbox" class="win11-checkbox" name="remember">
+                    <span class="win11-text-sm win11-text-secondary">Remember me</span>
+                </label>
+                                <a class="win11-link win11-text-sm" href="http://127.0.0.1:8000/forgot-password">
+                    Forgot your password?
+                </a>
+                            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="win11-w-full win11-btn win11-btn-primary win11-inline-flex win11-items-center win11-justify-center win11-gap-2">
+                <span>Log in</span>
+            </button>
+
+            <!-- Divider -->
+            <div class="win11-flex win11-items-center win11-gap-3">
+                <div class="win11-h-px win11-flex-1 win11-bg-border"></div>
+                <span class="win11-text-xs win11-text-secondary">or</span>
+                <div class="win11-h-px win11-flex-1 win11-bg-border"></div>
+            </div>
+
+            <!-- Optional Social Login (placeholders) -->
+            <div class="win11-grid win11-grid-cols-1 sm:win11-grid-cols-2 win11-gap-3" aria-label="Social login options">
+                <button type="button" aria-disabled="true" title="Social login coming soon" class="win11-btn win11-btn-outline win11-inline-flex win11-items-center win11-justify-center win11-gap-2">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="win11-h-4 win11-w-4">
+    <path fill="#EA4335" d="M12 10.2v3.6h5.1c-.2 1.1-1.2 3.2-5.1 3.2-3 0-5.4-2.5-5.4-5.6s2.4-5.6 5.4-5.6c1.7 0 2.9.7 3.6 1.3l2.4-2.3C16.8 3.4 14.6 2.4 12 2.4 6.9 2.4 2.7 6.6 2.7 11.7s4.2 9.3 9.3 9.3c5.4 0 9-3.8 9-9.2 0-.6-.1-1-.2-1.5H12z"></path>
+</svg>                    <span>Continue with Google</span>
+                </button>
+                <button type="button" aria-disabled="true" title="Social login coming soon" class="win11-btn win11-btn-outline win11-inline-flex win11-items-center win11-justify-center win11-gap-2">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="win11-h-4 win11-w-4">
+    <path fill="#F25022" d="M11 11H3V3h8z"></path><path fill="#7FBA00" d="M21 11h-8V3h8z"></path><path fill="#00A4EF" d="M11 21H3v-8h8z"></path><path fill="#FFB900" d="M21 21h-8v-8h8z"></path>
+</svg>                    <span>Continue with Microsoft</span>
+                </button>
+            </div>
+        </form>
+    </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+
+    <!-- Notification toast container -->
+    <div id="notifToastContainer" class="win11-notification-container" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Windows 11 Theme Management -->
+    <script>
+        class Win11AdminThemeManager {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                // Set initial theme
+                const savedTheme = localStorage.getItem('theme');
+                const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                const theme = savedTheme || systemTheme;
+
+                this.setTheme(theme);
+
+                // Listen for system theme changes
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                    if (!localStorage.getItem('theme')) {
+                        this.setTheme(e.matches ? 'dark' : 'light');
+                    }
+                });
+
+                // Setup sidebar toggle
+                this.setupSidebarToggle();
+            }
+
+            setTheme(theme) {
+                document.body.setAttribute('data-theme', theme);
+                document.documentElement.setAttribute('data-theme', theme);
+            }
+
+            setupSidebarToggle() {
+                const toggle = document.getElementById('sidebarToggle');
+                const sidebar = document.getElementById('sidenav-main');
+                const overlay = document.getElementById('sidebarOverlay');
+
+                if (toggle && sidebar && overlay) {
+                    toggle.addEventListener('click', () => {
+                        sidebar.classList.toggle('win11-sidebar-open');
+                        overlay.classList.toggle('win11-overlay-active');
+                        toggle.setAttribute('aria-expanded', sidebar.classList.contains('win11-sidebar-open'));
+                    });
+
+                    overlay.addEventListener('click', () => {
+                        sidebar.classList.remove('win11-sidebar-open');
+                        overlay.classList.remove('win11-overlay-active');
+                        toggle.setAttribute('aria-expanded', 'false');
+                    });
+                }
+            }
+        }
+
+        // Initialize theme manager when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            new Win11AdminThemeManager();
+        });
+    </script>
+
+        <script>
+    (function(){
+        const input = document.getElementById('password');
+        const btn = document.getElementById('togglePassword');
+        const eye = document.getElementById('iconEye');
+        const off = document.getElementById('iconEyeOff');
+        if(!input || !btn || !eye || !off) return;
+        btn.addEventListener('click', function(){
+            const nowText = input.type === 'text';
+            input.type = nowText ? 'password' : 'text';
+            this.setAttribute('aria-pressed', String(!nowText));
+            const isText = input.type === 'text';
+            eye.classList.toggle('hidden', isText);
+            off.classList.toggle('hidden', !isText);
+        });
+    })();
+    </script>
+
+
+</body></html>

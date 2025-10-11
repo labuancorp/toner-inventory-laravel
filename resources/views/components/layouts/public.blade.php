@@ -7,13 +7,8 @@
 
         <title>{{ config('app.name', 'Laravel') }} - Shop</title>
 
-        <!-- Windows 11 Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600;700&display=swap" rel="stylesheet">
-
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/css/theme.css', 'resources/js/app.js'])
     </head>
     <body class="win11-layout">
         <div class="min-h-screen">

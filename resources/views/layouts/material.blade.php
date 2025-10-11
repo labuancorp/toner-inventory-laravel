@@ -5,14 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Admin | Stock Manager</title>
 
-    <!-- Windows 11 Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
-    
-    <!-- Vite local assets with Windows 11 theme -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- Vite assets: app then global theme overrides -->
+    @vite(['resources/css/app.css', 'resources/css/theme.css', 'resources/js/app.js'])
 </head>
-<body class="win11-body win11-page-enter" data-theme="light">
+<body class="win11-body win11-page-enter {{ (request()->routeIs('login') || request()->routeIs('register')) ? 'auth-layout' : 'material-layout' }}" data-theme="light">
     @php($isAuthPage = request()->routeIs('login') || request()->routeIs('register'))
     
     @unless($isAuthPage)

@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Ensure demo admin exists
+        $this->call(DemoAdminSeeder::class);
         // Admin user
         User::updateOrCreate(
             ['email' => 'admin@example.com'],

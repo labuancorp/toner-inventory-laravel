@@ -35,7 +35,9 @@ function applyColor(colorName) {
 }
 
 function applyDensity(densityName) {
-    document.body.classList.toggle('layout-compact', densityName === 'compact');
+    // Uniform modern theme: no density class toggling
+    try { localStorage.setItem('theme_density', densityName); } catch (e) {}
+    document.documentElement.classList.remove('layout-compact-material');
 }
 
 // --- Global Functions & Event Listeners ---
@@ -64,8 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const color = localStorage.getItem('theme_color') || 'blue';
         applyColor(color);
 
-        const density = localStorage.getItem('theme_density') || 'comfortable';
-        applyDensity(density);
+    const density = localStorage.getItem('theme_density') || 'default';
+    applyDensity(density);
     } catch (e) {
         console.error("Failed to apply theme settings from localStorage.", e);
     }

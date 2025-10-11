@@ -134,3 +134,26 @@ html, body {
 }
 
 /* Material admin styles are imported via JS to avoid PostCSS warnings */
+
+/* Compact density overrides: set on root html for consistent typography */
+html.layout-compact-material {
+  /* Typography */
+  --win11-font-size-body: 13px;
+  --win11-line-height-body: 18px;
+  --win11-font-size-subtitle: 18px;
+  --win11-font-size-title: 24px;
+  --win11-font-size-title-large: 34px;
+  /* Spacing scale */
+  --win11-spacing-xs: 3px;
+  --win11-spacing-sm: 6px;
+  --win11-spacing-md: 10px;
+  --win11-spacing-lg: 14px;
+  --win11-spacing-xl: 18px;
+  --win11-spacing-xxl: 22px;
+  --win11-spacing-xxxl: 28px;
+}
+
+/* Minor component tweaks under compact density */
+html.layout-compact-material body.material-layout .win11-topbar { height: 40px; }
+html.layout-compact-material body.material-layout .win11-page-card { padding: var(--win11-spacing-xl); }
+html.layout-compact-material body.material-layout .win11-nav-brand { font-size: var(--win11-font-size-body); }

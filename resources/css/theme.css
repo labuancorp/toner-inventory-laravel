@@ -1,0 +1,148 @@
+/* Global modern theme: design tokens, typography, spacing, and component polish */
+
+/* Design Tokens */
+:root {
+  /* Fonts */
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+
+  /* Colors */
+  --color-bg: #ffffff;
+  --color-surface: #f8f9fb;
+  --color-border: #e5e7eb;
+  --color-text: #0f172a;          /* slate-900 */
+  --color-text-muted: #475569;     /* slate-600 */
+  --color-primary: #2563eb;        /* blue-600 */
+  --color-primary-contrast: #ffffff;
+  --color-accent: #10b981;         /* emerald-500 */
+
+  /* Radii & Shadows */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.06);
+  --shadow-md: 0 6px 16px rgba(0,0,0,.08);
+  --shadow-lg: 0 12px 24px rgba(0,0,0,.10);
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* Typography scale */
+  --font-size-xs: 12px;
+  --font-size-sm: 13px;
+  --font-size-base: 15px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 28px;
+  --line-height-tight: 1.25;
+  --line-height-base: 1.55;
+}
+
+/* Map to existing Windows 11 variables so components inherit the new look */
+:root {
+  --win11-font-family: var(--font-sans);
+  --win11-font-size-body: var(--font-size-base);
+  --win11-font-size-caption: var(--font-size-sm);
+  --win11-font-size-title: var(--font-size-xl);
+  --win11-font-size-subtitle: var(--font-size-lg);
+  --win11-color-bg: var(--color-bg);
+  --win11-color-surface: var(--color-surface);
+  --win11-color-border: var(--color-border);
+  --win11-color-text: var(--color-text);
+  --win11-color-text-muted: var(--color-text-muted);
+  --win11-color-primary: var(--color-primary);
+}
+
+/* Base reset & typography */
+html { font-size: 100%; }
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: var(--line-height-base);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: var(--space-4) 0 var(--space-2);
+}
+h1 { font-size: clamp(1.75rem, 1.2rem + 2vw, 2.25rem); line-height: var(--line-height-tight); }
+h2 { font-size: clamp(1.5rem, 1.1rem + 1.5vw, 2rem); line-height: var(--line-height-tight); }
+h3 { font-size: clamp(1.25rem, 1rem + 1vw, 1.5rem); }
+p { margin: 0 0 var(--space-4); font-size: var(--font-size-base); color: var(--color-text-muted); }
+
+a { color: var(--color-primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Containers */
+.container, .win11-container { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-5); }
+.container-fluid, .win11-container-fluid { width: 100%; padding: 0 var(--space-5); }
+
+/* Cards */
+.card, .win11-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); }
+.card-elevated, .win11-card-acrylic { box-shadow: var(--shadow-md); }
+.card-header { padding: var(--space-4) var(--space-5); border-bottom: 1px solid var(--color-border); }
+.card-body { padding: var(--space-5); }
+.card-footer { padding: var(--space-4) var(--space-5); border-top: 1px solid var(--color-border); }
+
+/* Buttons */
+button, .btn, .win11-button, .win11-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: var(--font-size-base);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: #fff; color: var(--color-text);
+  box-shadow: var(--shadow-sm);
+}
+.btn-primary, .win11-btn-primary { background: var(--color-primary); color: var(--color-primary-contrast); border-color: var(--color-primary); }
+.btn-outline, .win11-btn-outline { background: transparent; color: var(--color-primary); border-color: var(--color-primary); }
+.btn-success { background: var(--color-accent); color: var(--color-primary-contrast); border-color: var(--color-accent); }
+.btn-link { border-color: transparent; background: transparent; color: var(--color-primary); box-shadow: none; }
+
+/* Inputs */
+input, select, textarea, .win11-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: #fff;
+  font-size: var(--font-size-base);
+}
+input:focus, select:focus, textarea:focus { outline: 2px solid color-mix(in srgb, var(--color-primary) 60%, white); outline-offset: 2px; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; font-size: var(--font-size-base); }
+th, td { padding: 0.75rem; border-bottom: 1px solid var(--color-border); }
+thead th { color: var(--color-text); font-weight: 600; }
+
+/* Navigation basics */
+.nav, .navbar, .win11-nav { border-bottom: 1px solid var(--color-border); background: var(--color-bg); }
+.nav-pills .nav-link { border-radius: var(--radius-sm); }
+.nav-link.active { background: var(--color-primary); color: var(--color-primary-contrast); }
+
+/* Utility spacing */
+.py-4 { padding-top: var(--space-5); padding-bottom: var(--space-5); }
+.mb-3 { margin-bottom: var(--space-4); }
+.mb-0 { margin-bottom: 0; }
+.text-muted { color: var(--color-text-muted); }
+
+/* Accessibility */
+:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+}

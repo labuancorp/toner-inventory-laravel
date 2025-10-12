@@ -91,19 +91,19 @@
             <div class="flex items-center gap-4 overflow-x-auto py-2">
                 @if(Auth::check() && in_array(Auth::user()->role, ['admin','manager']))
                 <a href="{{ route('dashboard') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->routeIs('dashboard') ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-50' }}">
-                    <i class="ti ti-chart-bar" aria-hidden="true"></i>
+                    <i class="ti ti-chart-bar icon-gradient" aria-hidden="true"></i>
                     <span>{{ __('app.nav.dashboard') }}</span>
                 </a>
                 <a href="{{ route('items.index') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->routeIs('items.*') ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-50' }}">
-                    <i class="ti ti-box" aria-hidden="true"></i>
+                    <i class="ti ti-box icon-gradient" aria-hidden="true"></i>
                     <span>{{ __('app.nav.items') }}</span>
                 </a>
                 <a href="{{ route('categories.index') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->routeIs('categories.*') ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-50' }}">
-                    <i class="ti ti-folder" aria-hidden="true"></i>
+                    <i class="ti ti-folder icon-gradient" aria-hidden="true"></i>
                     <span>{{ __('app.nav.categories') }}</span>
                 </a>
                 <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->routeIs('admin.dashboard') ? 'bg-purple-50 text-purple-700' : 'text-gray-700 hover:bg-gray-50' }}">
-                    <i class="ti ti-shield-check" aria-hidden="true"></i>
+                    <i class="ti ti-shield-check icon-gradient warm" aria-hidden="true"></i>
                     <span>{{ __('app.nav.admin') }}</span>
                 </a>
                 @endif

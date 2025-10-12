@@ -5,13 +5,13 @@
   <!-- Tabs: Overview ↔ Yearly -->
   <div class="win11-flex win11-items-center win11-gap-sm">
     <a href="{{ route('reports.analytics') }}" class="win11-btn {{ request()->routeIs('reports.analytics') ? 'win11-btn-primary' : 'win11-btn-outline' }} win11-btn-sm">
-      <svg class="win11-w-4 win11-h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="win11-w-6 win11-h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
       </svg>
       Overview
     </a>
     <a href="{{ route('reports.analytics.yearly', ['year' => now()->year]) }}" class="win11-btn {{ request()->routeIs('reports.analytics.yearly') ? 'win11-btn-primary' : 'win11-btn-outline' }} win11-btn-sm">
-      <svg class="win11-w-4 win11-h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="win11-w-6 win11-h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
       </svg>
       Yearly
@@ -43,7 +43,7 @@
           <p class="win11-text-2xl win11-font-semibold">{{ number_format($summary['total_items']) }}</p>
         </div>
         <div class="win11-p-3 win11-bg-primary/10 win11-rounded-lg">
-          <svg class="win11-w-6 win11-h-6 win11-text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="win11-w-8 win11-h-8 win11-text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
           </svg>
         </div>
@@ -56,7 +56,7 @@
           <p class="win11-text-2xl win11-font-semibold">{{ number_format($summary['total_quantity']) }}</p>
         </div>
         <div class="win11-p-3 win11-bg-accent/10 win11-rounded-lg">
-          <svg class="win11-w-6 win11-h-6 win11-text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="win11-w-8 win11-h-8 win11-text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
           </svg>
         </div>
@@ -69,7 +69,7 @@
           <p class="win11-text-2xl win11-font-semibold">{{ number_format($summary['low_stock_count']) }}</p>
         </div>
         <div class="win11-p-3 win11-bg-warning/10 win11-rounded-lg">
-          <svg class="win11-w-6 win11-h-6 win11-text-warning" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="win11-w-8 win11-h-8 win11-text-warning" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
           </svg>
         </div>
@@ -95,7 +95,7 @@
           <small class="win11-text-secondary">Daily totals for In/Out</small>
         </div>
         <div class="win11-card-body">
-          <canvas id="analyticsMovementsChart" height="140"></canvas>
+          <canvas id="analyticsMovementsChart" height="240"></canvas>
         </div>
       </div>
     </div>
@@ -106,7 +106,7 @@
           <small class="win11-text-secondary">Current stock by category</small>
         </div>
         <div class="win11-card-body">
-          <canvas id="categoryPieChart" height="140"></canvas>
+          <canvas id="categoryPieChart" height="240"></canvas>
         </div>
       </div>
     </div>

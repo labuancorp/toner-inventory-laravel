@@ -9,30 +9,30 @@
     </div>
 
     {{-- Metric Cards Row --}}
-    <div class="win11-grid win11-grid-cols-1 sm:win11-grid-cols-2 lg:win11-grid-cols-4 win11-gap-md">
-        <div class="win11-card win11-p-md">
+    <div class="win11-grid win11-grid-cols-4 win11-gap-md">
+        <div class="win11-card win11-p-xl win11-bg-primary/10">
             <div class="win11-flex win11-items-center win11-justify-between">
                 <div>
-                    <p class="win11-text-sm win11-text-secondary">Total Items</p>
-                    <p class="win11-text-2xl win11-font-semibold">{{ number_format($metrics['items']) }}</p>
+                    <p class="win11-text-sm win11-text-secondary">Stock Left</p>
+                    <p class="win11-text-2xl win11-font-semibold">{{ number_format($metrics['stock_left']) }}</p>
                 </div>
-                <div class="win11-p-3 win11-bg-primary/10 win11-rounded-lg">
-                    <svg class="win11-w-6 win11-h-6 win11-text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="icon-badge-gradient">
+                    <svg class="win11-w-6 win11-h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                     </svg>
                 </div>
             </div>
-            <a href="{{ route('items.index') }}" class="win11-link win11-text-sm win11-mt-2 win11-inline-block">View all items →</a>
+            <a href="{{ route('items.index') }}" class="win11-link win11-text-sm win11-mt-2 win11-inline-block">View stock →</a>
         </div>
 
-        <div class="win11-card win11-p-md">
+        <div class="win11-card win11-p-xl win11-bg-warning/10">
             <div class="win11-flex win11-items-center win11-justify-between">
                 <div>
                     <p class="win11-text-sm win11-text-secondary">Items Needing Top-up</p>
                     <p class="win11-text-2xl win11-font-semibold win11-text-warning">{{ number_format($metrics['need_topup']) }}</p>
                 </div>
-                <div class="win11-p-3 win11-bg-warning/10 win11-rounded-lg">
-                    <svg class="win11-w-6 win11-h-6 win11-text-warning" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="icon-badge-gradient warm">
+                    <svg class="win11-w-6 win11-h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
                     </svg>
                 </div>
@@ -40,14 +40,14 @@
             <a href="{{ route('items.index', ['low' => 1]) }}" class="win11-link win11-text-sm win11-mt-2 win11-inline-block">View low stock →</a>
         </div>
 
-        <div class="win11-card win11-p-md">
+        <div class="win11-card win11-p-xl win11-bg-success/10">
             <div class="win11-flex win11-items-center win11-justify-between">
                 <div>
                     <p class="win11-text-sm win11-text-secondary">Stock In (Today)</p>
                     <p class="win11-text-2xl win11-font-semibold win11-text-success">{{ number_format($metrics['stock_in_today']) }}</p>
                 </div>
-                <div class="win11-p-3 win11-bg-success/10 win11-rounded-lg">
-                    <svg class="win11-w-6 win11-h-6 win11-text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="icon-badge-gradient accent">
+                    <svg class="win11-w-6 win11-h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                     </svg>
                 </div>
@@ -55,14 +55,14 @@
             <a href="{{ route('items.index', ['action' => 'in']) }}" class="win11-link win11-text-sm win11-mt-2 win11-inline-block">View stock in →</a>
         </div>
 
-        <div class="win11-card win11-p-md">
+        <div class="win11-card win11-p-xl win11-bg-danger/10">
             <div class="win11-flex win11-items-center win11-justify-between">
                 <div>
                     <p class="win11-text-sm win11-text-secondary">Stock Out (Today)</p>
                     <p class="win11-text-2xl win11-font-semibold win11-text-danger">{{ number_format($metrics['stock_out_today']) }}</p>
                 </div>
-                <div class="win11-p-3 win11-bg-danger/10 win11-rounded-lg">
-                    <svg class="win11-w-6 win11-h-6 win11-text-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="icon-badge-gradient warm">
+                    <svg class="win11-w-6 win11-h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
                     </svg>
                 </div>

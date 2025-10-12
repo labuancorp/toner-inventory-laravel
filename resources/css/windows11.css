@@ -1,7 +1,6 @@
 /* Windows 11 Theme - Official Color Palette and Design System */
 
-/* Import Segoe UI Variable font */
-@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;500;600;700&display=swap');
+/* Segoe UI webfont import removed to avoid external dependency; rely on system font or theme overrides. */
 
 /* Windows 11 Color Palette - CSS Variables */
 :root {

@@ -5,13 +5,13 @@
   <!-- Tabs: Overview ↔ Yearly -->
   <div class="win11-flex win11-items-center win11-gap-sm">
     <a href="{{ route('reports.analytics') }}" class="win11-btn {{ request()->routeIs('reports.analytics') ? 'win11-btn-primary' : 'win11-btn-outline' }} win11-btn-sm">
-      <svg class="win11-w-4 win11-h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="win11-w-6 win11-h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
       </svg>
       Overview
     </a>
     <a href="{{ route('reports.analytics.yearly', ['year' => $year]) }}" class="win11-btn {{ request()->routeIs('reports.analytics.yearly') ? 'win11-btn-primary' : 'win11-btn-outline' }} win11-btn-sm">
-      <svg class="win11-w-4 win11-h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="win11-w-6 win11-h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
       </svg>
       Yearly
@@ -33,7 +33,7 @@
         </select>
       </form>
       <a href="{{ route('reports.analytics.yearly.export', ['year' => $year]) }}" class="win11-btn win11-btn-outline win11-btn-sm">
-        <svg class="win11-w-4 win11-h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="win11-w-6 win11-h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
         </svg>
         Export to Excel
@@ -49,7 +49,7 @@
           <p class="win11-text-2xl win11-font-semibold">{{ number_format($totalOutYear) }}</p>
         </div>
         <div class="win11-p-3 win11-bg-accent/10 win11-rounded-lg">
-          <svg class="win11-w-6 win11-h-6 win11-text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="win11-w-8 win11-h-8 win11-text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
           </svg>
         </div>
@@ -65,7 +65,7 @@
           <small class="win11-text-secondary">Top categories by total OUT</small>
         </div>
         <div class="win11-card-body">
-          <canvas id="yearlyOutBarChart" height="160"></canvas>
+          <canvas id="yearlyOutBarChart" height="240"></canvas>
         </div>
       </div>
     </div>

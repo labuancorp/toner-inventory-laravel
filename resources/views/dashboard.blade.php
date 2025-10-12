@@ -6,8 +6,8 @@
             <!-- Metric cards -->
             <div class="win11-grid win11-grid-cols-4 win11-gap-lg">
                 <div class="win11-stagger-item">
-                    <div class="win11-card win11-card-acrylic">
-                        <div class="win11-p-lg" style="border-left: 4px solid #107c10;">
+                    <div class="win11-card win11-card-acrylic win11-bg-success/10">
+                        <div class="win11-p-xl" style="border-left: 4px solid #107c10;">
                             <div class="win11-text-sm win11-text-secondary">Stock In (Today)</div>
                             <div class="win11-mt-2 win11-text-3xl win11-font-bold win11-text-primary">{{ number_format($stockInToday) }}</div>
                             <div class="win11-mt-3 win11-progress" aria-label="Stock in progress">
@@ -17,8 +17,8 @@
                     </div>
                 </div>
                 <div class="win11-stagger-item">
-                    <div class="win11-card win11-card-acrylic">
-                        <div class="win11-p-lg" style="border-left: 4px solid #d13438;">
+                    <div class="win11-card win11-card-acrylic win11-bg-danger/10">
+                        <div class="win11-p-xl" style="border-left: 4px solid #d13438;">
                             <div class="win11-text-sm win11-text-secondary">Stock Out (Today)</div>
                             <div class="win11-mt-2 win11-text-3xl win11-font-bold win11-text-primary">{{ number_format($stockOutToday) }}</div>
                             <div class="win11-mt-3 win11-progress" aria-label="Stock out progress">
@@ -28,8 +28,8 @@
                     </div>
                 </div>
                 <div class="win11-stagger-item">
-                    <div class="win11-card win11-card-acrylic">
-                        <div class="win11-p-lg" style="border-left: 4px solid var(--win11-accent-primary);">
+                    <div class="win11-card win11-card-acrylic win11-bg-primary/10">
+                        <div class="win11-p-xl" style="border-left: 4px solid var(--win11-accent-primary);">
                             <div class="win11-text-sm win11-text-secondary">Stock Left</div>
                             <div class="win11-mt-2 win11-text-3xl win11-font-bold win11-text-primary">{{ number_format($stockLeft) }}</div>
                             <div class="win11-mt-3 win11-progress" aria-label="Stock left progress">
@@ -39,8 +39,8 @@
                     </div>
                 </div>
                 <div class="win11-stagger-item">
-                    <div class="win11-card win11-card-acrylic">
-                        <div class="win11-p-lg" style="border-left: 4px solid #ff8c00;">
+                    <div class="win11-card win11-card-acrylic win11-bg-warning/10">
+                        <div class="win11-p-xl" style="border-left: 4px solid #ff8c00;">
                             <div class="win11-text-sm win11-text-secondary">Stock Need Topup</div>
                             <div class="win11-mt-2 win11-text-3xl win11-font-bold win11-text-primary">{{ number_format($needTopupCount) }}</div>
                             <div class="win11-mt-3 win11-progress" aria-label="Topup need progress">

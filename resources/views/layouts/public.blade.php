@@ -7,12 +7,8 @@
 
         <title>{{ config('app.name', 'Laravel') }} - Shop</title>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <!-- Styles & Scripts -->
+        @vite(['resources/css/app.css', 'resources/css/theme.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-50 dark:bg-gray-900 dark:text-gray-100">
@@ -53,13 +49,13 @@
                 <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex items-center gap-4 overflow-x-auto py-2">
                         <a href="{{ url('/shop') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->is('shop') ? 'bg-amber-50 text-amber-700' : 'text-gray-700 hover:bg-gray-50' }}">
-                            <i class="ti ti-shopping-cart" aria-hidden="true"></i>
+                            <i class="ti ti-shopping-cart icon-gradient accent" aria-hidden="true"></i>
                             <span>Shop</span>
                         </a>
                         {{-- My Report tab removed per request --}}
                         {{-- Public Reports tab removed per request --}}
                         <a href="{{ url('/') }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded {{ request()->is('/') ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-50' }}">
-                            <i class="ti ti-home" aria-hidden="true"></i>
+                            <i class="ti ti-home icon-gradient" aria-hidden="true"></i>
                             <span>Home</span>
                         </a>
                     </div>

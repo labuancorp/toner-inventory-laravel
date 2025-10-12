@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Admin | Stock Manager</title>
 
-    <!-- Vite assets: app then global theme overrides -->
-    @vite(['resources/css/app.css', 'resources/css/theme.css', 'resources/js/app.js'])
+    <!-- Vite assets: Tabler (via JS import) and global theme overrides -->
+    @vite(['resources/css/theme.css', 'resources/js/app.js'])
 </head>
-<body class="win11-body win11-page-enter {{ (request()->routeIs('login') || request()->routeIs('register')) ? 'auth-layout' : 'material-layout' }}" data-theme="light">
+<body class="{{ (request()->routeIs('login') || request()->routeIs('register')) ? 'auth-layout' : 'material-layout' }}" data-theme="light">
     @php($isAuthPage = request()->routeIs('login') || request()->routeIs('register'))
     
     @unless($isAuthPage)
     <!-- Layout Container -->
     <div class="win11-flex win11-min-h-screen">
-        <!-- Windows 11 Sidebar -->
+        <!-- Sidenav (Tabler-styled via theme bridge) -->
         <aside class="win11-sidebar" id="sidenav-main" aria-label="Admin sidebar navigation">
         <div class="win11-sidebar-header">
             <a class="win11-sidebar-brand" href="{{ route('admin.dashboard') }}">
@@ -65,63 +65,7 @@
     <!-- Notification toast container -->
     <div id="notifToastContainer" class="win11-notification-container" aria-live="polite" aria-atomic="true"></div>
 
-    <!-- Windows 11 Theme Management -->
-    <script>
-        class Win11AdminThemeManager {
-            constructor() {
-                this.init();
-            }
-
-            init() {
-                // Set initial theme
-                const savedTheme = localStorage.getItem('theme');
-                const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                const theme = savedTheme || systemTheme;
-                
-                this.setTheme(theme);
-                
-                // Listen for system theme changes
-                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-                    if (!localStorage.getItem('theme')) {
-                        this.setTheme(e.matches ? 'dark' : 'light');
-                    }
-                });
-
-                // Setup sidebar toggle
-                this.setupSidebarToggle();
-            }
-
-            setTheme(theme) {
-                document.body.setAttribute('data-theme', theme);
-                document.documentElement.setAttribute('data-theme', theme);
-            }
-
-            setupSidebarToggle() {
-                const toggle = document.getElementById('sidebarToggle');
-                const sidebar = document.getElementById('sidenav-main');
-                const overlay = document.getElementById('sidebarOverlay');
-
-                if (toggle && sidebar && overlay) {
-                    toggle.addEventListener('click', () => {
-                        sidebar.classList.toggle('win11-sidebar-open');
-                        overlay.classList.toggle('win11-overlay-active');
-                        toggle.setAttribute('aria-expanded', sidebar.classList.contains('win11-sidebar-open'));
-                    });
-
-                    overlay.addEventListener('click', () => {
-                        sidebar.classList.remove('win11-sidebar-open');
-                        overlay.classList.remove('win11-overlay-active');
-                        toggle.setAttribute('aria-expanded', 'false');
-                    });
-                }
-            }
-        }
-
-        // Initialize theme manager when DOM is ready
-        document.addEventListener('DOMContentLoaded', () => {
-            new Win11AdminThemeManager();
-        });
-    </script>
+    <!-- Theme is handled in resources/js/app.js; legacy manager removed -->
 
     @stack('scripts')
 </body>

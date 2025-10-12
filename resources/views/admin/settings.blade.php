@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.material')
 
 @section('content')
 <div class="win11-max-w-4xl win11-mx-auto">

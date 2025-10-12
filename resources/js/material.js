@@ -36,16 +36,20 @@ function initMovementsChart() {
           {
             label: 'Stock In',
             data: inSeries,
-            borderColor: '#4CAF50',
-            backgroundColor: 'rgba(76, 175, 80, 0.2)',
+            borderColor: '#10b981',
+            backgroundColor: 'rgba(16, 185, 129, 0.15)',
             tension: 0.3,
+            borderWidth: 2,
+            pointRadius: 2,
           },
           {
             label: 'Stock Out',
             data: outSeries,
-            borderColor: '#F44336',
-            backgroundColor: 'rgba(244, 67, 54, 0.2)',
+            borderColor: '#ef4444',
+            backgroundColor: 'rgba(239, 68, 68, 0.15)',
             tension: 0.3,
+            borderWidth: 2,
+            pointRadius: 2,
           }
         ]
       },
@@ -81,27 +85,33 @@ function initAnalyticsCharts() {
             {
               label: 'Stock In',
               data: inSeries,
-              borderColor: '#4CAF50',
-              backgroundColor: 'rgba(76, 175, 80, 0.2)',
+              borderColor: '#10b981',
+              backgroundColor: 'rgba(16, 185, 129, 0.15)',
               tension: 0.3,
+              borderWidth: 3,
+              pointRadius: 3,
             },
             {
               label: 'Stock Out',
               data: outSeries,
-              borderColor: '#F44336',
-              backgroundColor: 'rgba(244, 67, 54, 0.2)',
+              borderColor: '#ef4444',
+              backgroundColor: 'rgba(239, 68, 68, 0.15)',
               tension: 0.3,
+              borderWidth: 3,
+              pointRadius: 3,
             }
           ]
         },
         options: {
           responsive: true,
+          maintainAspectRatio: false,
           plugins: {
-            legend: { position: 'top' },
+            legend: { position: 'top', labels: { font: { size: 13 } } },
             tooltip: { enabled: true }
           },
           scales: {
-            y: { beginAtZero: true }
+            y: { beginAtZero: true, ticks: { font: { size: 12 } } },
+            x: { ticks: { font: { size: 12 } } }
           }
         }
       });
@@ -128,8 +138,9 @@ function initAnalyticsCharts() {
         },
         options: {
           responsive: true,
+          maintainAspectRatio: false,
           plugins: {
-            legend: { position: 'right' },
+            legend: { position: 'right', labels: { font: { size: 13 } } },
             tooltip: { enabled: true }
           }
         }

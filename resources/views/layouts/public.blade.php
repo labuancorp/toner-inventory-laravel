@@ -23,7 +23,7 @@
                         <!-- Language Switcher -->
                         <x-language-switcher />
                         <!-- Theme Toggle -->
-                        <button id="theme-toggle" class="win11-button win11-flex items-center win11-gap-sm">
+                        <button id="theme-toggle" class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2 transition-colors">
                             <svg class="w-5 h-5 theme-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                             </svg>
@@ -70,8 +70,8 @@
         @stack('scripts')
         
         <script>
-            // Enhanced Windows 11 Theme Detection and Management
-            class Win11ThemeManager {
+            // Enhanced Theme Detection and Management
+            class ThemeManager {
                 constructor() {
                     this.themeToggle = document.getElementById('theme-toggle');
                     this.html = document.documentElement;
@@ -95,9 +95,6 @@
                     this.themeToggle.addEventListener('click', () => {
                         this.toggleTheme();
                     });
-                    
-                    // Add Windows 11 reveal effect to theme toggle
-                    this.addRevealEffect();
                 }
                 
                 setInitialTheme() {
@@ -115,14 +112,14 @@
                     this.html.setAttribute('data-theme', theme);
                     
                     // Add smooth transition class
-                    this.html.classList.add('win11-theme-transition');
+                    this.html.classList.add('theme-transition');
                     
                     // Update theme toggle icon with animation
                     this.updateThemeIcon(theme);
                     
                     // Remove transition class after animation
                     setTimeout(() => {
-                        this.html.classList.remove('win11-theme-transition');
+                        this.html.classList.remove('theme-transition');
                     }, 300);
                 }
                 
@@ -134,9 +131,9 @@
                     localStorage.setItem('theme', newTheme);
                     
                     // Add micro-interaction
-                    this.themeToggle.classList.add('win11-micro-bounce');
+                    this.themeToggle.classList.add('scale-95');
                     setTimeout(() => {
-                        this.themeToggle.classList.remove('win11-micro-bounce');
+                        this.themeToggle.classList.remove('scale-95');
                     }, 200);
                 }
                 
@@ -152,39 +149,30 @@
                         moonIcon.style.opacity = '1';
                     }
                 }
-                
-                addRevealEffect() {
-                    this.themeToggle.classList.add('win11-reveal');
-                }
             }
             
             // Initialize theme manager when DOM is loaded
             document.addEventListener('DOMContentLoaded', () => {
-                new Win11ThemeManager();
-            });
-            
-            // Add Windows 11 page entrance animation
-            document.addEventListener('DOMContentLoaded', () => {
-                document.body.classList.add('win11-page-enter');
+                new ThemeManager();
             });
         </script>
         
         <style>
-            /* Windows 11 Theme Transition */
-            .win11-theme-transition {
-                transition: background-color var(--win11-duration-normal) var(--win11-easing-standard),
-                            color var(--win11-duration-normal) var(--win11-easing-standard);
+            /* Theme Transition */
+            .theme-transition {
+                transition: background-color 300ms ease-in-out,
+                            color 300ms ease-in-out;
             }
             
-            .win11-theme-transition * {
-                transition: background-color var(--win11-duration-normal) var(--win11-easing-standard),
-                            color var(--win11-duration-normal) var(--win11-easing-standard),
-                            border-color var(--win11-duration-normal) var(--win11-easing-standard);
+            .theme-transition * {
+                transition: background-color 300ms ease-in-out,
+                            color 300ms ease-in-out,
+                            border-color 300ms ease-in-out;
             }
             
             /* Theme toggle icon transitions */
             #theme-toggle svg {
-                transition: opacity var(--win11-duration-fast) var(--win11-easing-standard);
+                transition: opacity 150ms ease-in-out;
             }
         </style>
     </body>

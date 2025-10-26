@@ -28,5 +28,8 @@
                 @yield('content')
             </main>
         </div>
+
+        <!-- Logout Confirmation Modal -->
+        <x-logout-confirmation />
     </body>
 </html>

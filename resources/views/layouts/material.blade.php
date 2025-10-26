@@ -5,67 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Admin | Stock Manager</title>
 
-    <!-- Vite assets: Tabler (via JS import) and global theme overrides -->
-    @vite(['resources/css/theme.css', 'resources/js/app.js'])
+    <!-- Vite assets: Tailwind CSS and JavaScript -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="{{ (request()->routeIs('login') || request()->routeIs('register')) ? 'auth-layout' : 'material-layout' }}" data-theme="light">
+<body class="font-sans antialiased bg-surface-50 text-surface-900" data-theme="light">
     @php($isAuthPage = request()->routeIs('login') || request()->routeIs('register'))
     
     @unless($isAuthPage)
     <!-- Layout Container -->
-    <div class="win11-flex win11-min-h-screen">
-        <!-- Sidenav (Tabler-styled via theme bridge) -->
-        <aside class="win11-sidebar" id="sidenav-main" aria-label="Admin sidebar navigation">
-        <div class="win11-sidebar-header">
-            <a class="win11-sidebar-brand" href="{{ route('admin.dashboard') }}">
-                <span class="win11-text-lg win11-font-semibold">Stock Manager Admin</span>
-            </a>
-        </div>
-        <div class="win11-sidebar-divider"></div>
-        <div class="win11-sidebar-content">
-            <nav aria-label="Primary">
-                <ul class="win11-nav-list" role="list">
-                    @include('layouts.sidebar-nav')
-                </ul>
-            </nav>
-        </div>
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white shadow-soft border-r border-surface-200 fixed h-full z-30 lg:relative lg:translate-x-0 transform -translate-x-full transition-transform duration-300 ease-in-out" id="sidenav-main" aria-label="Admin sidebar navigation">
+            <div class="p-6 border-b border-surface-200">
+                <a class="flex items-center space-x-3" href="{{ route('admin.dashboard') }}">
+                    <div class="w-8 h-8 bg-gradient-to-br from-brand-primary to-brand-accent rounded-lg flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                        </svg>
+                    </div>
+                    <span class="text-lg font-semibold text-surface-900">Stock Manager</span>
+                </a>
+            </div>
+            <div class="px-4 py-6">
+                <nav aria-label="Primary">
+                    <ul class="space-y-2" role="list">
+                        @include('layouts.sidebar-nav')
+                    </ul>
+                </nav>
+            </div>
         </aside>
+        
         <!-- Mobile overlay -->
-        <div id="sidebarOverlay" class="win11-overlay" aria-hidden="true"></div>
+        <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-20 lg:hidden hidden" aria-hidden="true"></div>
         
         <!-- Main content -->
-        <main class="win11-main-content win11-flex-1">
-        <!-- Mobile topbar -->
-        <div class="win11-mobile-topbar lg:win11-hidden">
-            <div class="win11-flex win11-items-center win11-justify-between">
-                <button id="sidebarToggle" class="win11-button win11-button-ghost" type="button" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidebar">
-                    <svg class="win11-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                        <line x1="3" y1="12" x2="21" y2="12"></line>
-                        <line x1="3" y1="18" x2="21" y2="18"></line>
-                    </svg>
-                    <span class="win11-ml-2">Menu</span>
-                </button>
-                <a href="{{ route('admin.dashboard') }}" class="win11-text-decoration-none win11-font-semibold">Admin</a>
+        <main class="flex-1 lg:ml-0">
+            <!-- Mobile topbar -->
+            <div class="lg:hidden bg-white border-b border-surface-200 px-4 py-3">
+                <div class="flex items-center justify-between">
+                    <button id="sidebarToggle" class="inline-flex items-center px-3 py-2 border border-surface-300 rounded-md text-surface-500 bg-white hover:bg-surface-50 hover:text-surface-700 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-brand-primary transition-colors" type="button" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidebar">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                        <span class="ml-2">Menu</span>
+                    </button>
+                    <a href="{{ route('admin.dashboard') }}" class="text-lg font-semibold text-surface-900 hover:text-brand-primary transition-colors">Admin</a>
+                </div>
             </div>
-        </div>
 
-            <div class="{{ $isAuthPage ? 'win11-container win11-py-4 win11-flex win11-justify-center win11-items-center win11-min-h-screen' : 'win11-content-container win11-container-fluid win11-py-4' }}">
+            <div class="{{ $isAuthPage ? 'container mx-auto py-4 flex justify-center items-center min-h-screen' : 'p-6' }}">
                 @yield('content')
             </div>
         </main>
     </div>
     @else
     <!-- Auth page content -->
-    <div class="win11-container win11-py-4 win11-flex win11-justify-center win11-items-center win11-min-h-screen">
+    <div class="container mx-auto py-4 flex justify-center items-center min-h-screen">
         @yield('content')
     </div>
     @endunless
 
     <!-- Notification toast container -->
-    <div id="notifToastContainer" class="win11-notification-container" aria-live="polite" aria-atomic="true"></div>
+    <div id="notifToastContainer" class="fixed top-4 right-4 z-50 space-y-2" aria-live="polite" aria-atomic="true"></div>
 
-    <!-- Theme is handled in resources/js/app.js; legacy manager removed -->
+    <!-- Logout Confirmation Modal -->
+    @unless($isAuthPage)
+        <x-logout-confirmation />
+    @endunless
 
     @stack('scripts')
 </body>

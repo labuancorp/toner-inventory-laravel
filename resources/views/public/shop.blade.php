@@ -1,59 +1,59 @@
 <x-layouts.public>
-    <div class="win11-page-card">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
         @if(session('status'))
-            <div class="win11-badge win11-badge-success win11-m-md">
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
                 {{ session('status') }}
             </div>
         @endif
 
-        <div class="win11-flex items-center justify-between win11-m-lg">
-            <h1 style="font-size: var(--win11-font-size-title); font-weight: var(--win11-font-weight-semibold); color: var(--win11-text-primary);">{{ __('app.shop.title') }}</h1>
-            <div class="win11-flex items-center win11-gap-sm" aria-label="View toggle">
-                <button id="shopToggleComfortable" type="button" class="win11-button">{{ __('app.shop.comfortable') }}</button>
-                <button id="shopToggleCompact" type="button" class="win11-button">{{ __('app.shop.compact') }}</button>
+        <div class="flex items-center justify-between mb-6">
+            <h1 class="text-2xl font-semibold text-gray-900 dark:text-gray-100">{{ __('app.shop.title') }}</h1>
+            <div class="flex items-center gap-2" aria-label="View toggle">
+                <button id="shopToggleComfortable" type="button" class="px-4 py-2 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">{{ __('app.shop.comfortable') }}</button>
+                <button id="shopToggleCompact" type="button" class="px-4 py-2 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">{{ __('app.shop.compact') }}</button>
             </div>
         </div>
         <div>
             <!-- safelist classes for Tailwind build -->
             <div class="hidden">
-                <span class="win11-grid win11-grid-cols-4"></span>
-                <span class="win11-grid win11-grid-cols-3"></span>
+                <span class="grid grid-cols-4"></span>
+                <span class="grid grid-cols-3"></span>
             </div>
-            <div class="win11-m-lg">
+            <div class="mb-6">
                 {{ $items->links() }}
             </div>
-            <div id="shopGrid" class="win11-grid win11-grid-cols-4">
+            <div id="shopGrid" class="grid grid-cols-4 gap-4">
                 @foreach($items as $item)
-                    <div class="win11-card win11-stagger-item win11-reveal">
-                        <div class="win11-flex items-start justify-between win11-m-md">
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 p-4">
+                        <div class="flex items-start justify-between mb-4">
                             <div>
-                                <div style="font-weight: var(--win11-font-weight-semibold); color: var(--win11-text-primary);">{{ $item->name }}</div>
-                                <div style="font-size: var(--win11-font-size-caption); color: var(--win11-text-secondary);">SKU: {{ $item->sku }} • {{ $item->category->name }}</div>
+                                <div class="font-semibold text-gray-900 dark:text-gray-100">{{ $item->name }}</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-400">SKU: {{ $item->sku }} • {{ $item->category->name }}</div>
                             </div>
-                            <span class="win11-badge {{ $item->quantity > 0 ? 'win11-badge-accent' : 'win11-badge-error' }}">Qty: {{ $item->quantity }}</span>
+                            <span class="px-2 py-1 text-xs rounded-full {{ $item->quantity > 0 ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' }}">Qty: {{ $item->quantity }}</span>
                         </div>
-                        <div class="win11-m-md">
+                        <div>
                             @auth
-                            <form method="POST" action="{{ route('order.store') }}" class="win11-flex win11-flex-col win11-gap-md">
+                            <form method="POST" action="{{ route('order.store') }}" class="flex flex-col gap-4">
                                 @csrf
                                 <input type="hidden" name="item_id" value="{{ $item->id }}" />
-                                <div class="win11-form-group">
-                                    <label for="quantity-{{ $item->id }}" class="win11-form-label">{{ __('app.shop.quantity') }}</label>
-                                    <input id="quantity-{{ $item->id }}" type="number" name="quantity" min="1" max="{{ max($item->quantity, 1) }}" required class="win11-input" aria-label="Order quantity for {{ $item->name }}" />
+                                <div>
+                                    <label for="quantity-{{ $item->id }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ __('app.shop.quantity') }}</label>
+                                    <input id="quantity-{{ $item->id }}" type="number" name="quantity" min="1" max="{{ max($item->quantity, 1) }}" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-100" aria-label="Order quantity for {{ $item->name }}" />
                                 </div>
-                                <div class="win11-form-group">
-                                    <input type="text" name="customer_name" placeholder="{{ __('app.form.customer_name_placeholder') }}" class="win11-input" />
+                                <div>
+                                    <input type="text" name="customer_name" placeholder="{{ __('app.form.customer_name_placeholder') }}" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-100" />
                                 </div>
-                                <div class="win11-form-group">
-                                    <input type="text" name="shipping_address" placeholder="{{ __('app.form.shipping_address_placeholder') }}" class="win11-input" />
+                                <div>
+                                    <input type="text" name="shipping_address" placeholder="{{ __('app.form.shipping_address_placeholder') }}" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-100" />
                                 </div>
-                                <div class="win11-form-group">
-                                    <input type="text" name="notes" placeholder="{{ __('app.form.notes_placeholder') }}" class="win11-input" />
+                                <div>
+                                    <input type="text" name="notes" placeholder="{{ __('app.form.notes_placeholder') }}" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-100" />
                                 </div>
                                 @error('quantity')
-                                    <p style="font-size: var(--win11-font-size-caption); color: var(--win11-system-error-text);">{{ $message }}</p>
+                                    <p class="text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                                 @enderror
-                                <button class="win11-button win11-button-accent win11-flex items-center win11-gap-sm">
+                                <button class="px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 transition-colors flex items-center gap-2">
                                     <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.293 2.293c-.63.63-.184 1.707.707 1.707H19M7 13v4a2 2 0 002 2h2m3-6v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m6 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01" />
                                     </svg>
@@ -61,16 +61,16 @@
                                 </button>
                             </form>
                             @else
-                            <div class="win11-flex win11-flex-col win11-gap-md">
-                                <p style="font-size: var(--win11-font-size-body); color: var(--win11-text-secondary);">{{ __('app.shop.please_login') }}</p>
-                                <div class="win11-flex win11-gap-sm">
-                                    <a href="{{ route('login') }}" class="win11-button win11-button-accent win11-flex items-center win11-gap-sm">
+                            <div class="flex flex-col gap-4">
+                                <p class="text-gray-600 dark:text-gray-400">{{ __('app.shop.please_login') }}</p>
+                                <div class="flex gap-2">
+                                    <a href="{{ route('login') }}" class="px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 transition-colors flex items-center gap-2">
                                         <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
                                         </svg>
                                         <span>{{ __('app.nav.login') }}</span>
                                     </a>
-                                    <a href="{{ route('register') }}" class="win11-button win11-flex items-center win11-gap-sm">
+                                    <a href="{{ route('register') }}" class="px-4 py-2 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors flex items-center gap-2">
                                         <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                                         </svg>

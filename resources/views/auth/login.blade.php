@@ -1,90 +1,135 @@
 <x-guest-layout>
     <!-- Session Status -->
-    <x-auth-session-status class="win11-mb-md" :status="session('status')" />
+    <x-auth-session-status class="mb-6" :status="session('status')" />
 
-    <div class="win11-space-y-lg">
-        <div class="win11-text-center">
-            <h1 class="win11-text-2xl win11-font-semibold win11-tracking-tight">Welcome back</h1>
-            <p class="win11-text-sm win11-text-secondary">Sign in to manage your toner inventory</p>
+    <div class="space-y-8">
+        <!-- Header with Logo and Branding -->
+        <div class="text-center space-y-4">
+            <!-- Logo/Icon -->
+            <div class="mx-auto flex justify-center mb-6">
+                <img src="{{ asset('images/pl-logo.svg') }}" alt="Perbadanan Labuan Logo" class="h-16 w-auto">
+            </div>
+            
+            <!-- Welcome Text -->
+            <div>
+                <h1 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100">Welcome Back</h1>
+                <p class="text-base text-gray-600 dark:text-gray-400 mt-2">Sign in to your Toner Inventory System</p>
+            </div>
         </div>
 
-        <form method="POST" action="{{ route('login') }}" class="win11-space-y-md" aria-describedby="loginHelp">
+        <!-- Login Form -->
+        <form method="POST" action="{{ route('login') }}" class="space-y-6" aria-describedby="loginHelp">
             @csrf
 
-            <div id="loginHelp" class="win11-sr-only">Enter your email and password to sign in.</div>
+            <div id="loginHelp" class="sr-only">Enter your email and password to sign in.</div>
 
             <!-- Email Address -->
-            <div>
-                <label for="email" class="win11-block win11-text-sm win11-font-medium win11-text-primary">Email</label>
-                <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username"
-                    class="win11-mt-1 win11-block win11-w-full win11-input win11-text-sm" />
-                <x-input-error :messages="$errors->get('email')" class="win11-mt-2" />
+            <div class="space-y-2">
+                <label for="email" class="block text-sm font-semibold text-gray-900 dark:text-gray-100">Email Address</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                        </svg>
+                    </div>
+                    <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username"
+                        class="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-sm"
+                        placeholder="Enter your email address" />
+                </div>
+                <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
 
             <!-- Password with visibility toggle -->
-            <div>
-                <label for="password" class="win11-block win11-text-sm win11-font-medium win11-text-primary">Password</label>
-                <div class="win11-mt-1 win11-relative">
+            <div class="space-y-2">
+                <label for="password" class="block text-sm font-semibold text-gray-900 dark:text-gray-100">Password</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
                     <input id="password" type="password" name="password" required autocomplete="current-password"
-                        class="win11-block win11-w-full win11-input win11-text-sm win11-pr-10" />
+                        class="block w-full pl-10 pr-12 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-sm"
+                        placeholder="Enter your password" />
                     <button type="button" id="togglePassword" aria-label="Toggle password visibility" aria-controls="password" aria-pressed="false"
-                        class="win11-absolute win11-inset-y-0 win11-right-0 win11-px-3 win11-flex win11-items-center win11-text-secondary hover:win11-text-primary win11-focus-outline-none win11-focus-ring-2 win11-focus-ring-accent win11-transition">
+                        class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
                         <!-- Eye icon -->
-                        <svg id="iconEye" xmlns="http://www.w3.org/2000/svg" class="win11-h-5 win11-w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <svg id="iconEye" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
                             <circle cx="12" cy="12" r="3" />
                         </svg>
                         <!-- Eye-off icon -->
-                        <svg id="iconEyeOff" xmlns="http://www.w3.org/2000/svg" class="win11-h-5 win11-w-5 win11-hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <svg id="iconEyeOff" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M17.94 17.94A10.94 10.94 0 0112 20c-7 0-11-8-11-8a21.58 21.58 0 015.06-6.94M9.88 4.12A10.94 10.94 0 0112 4c7 0 11 8 11 8a21.58 21.58 0 01-4.62 6.2" />
                             <path d="M1 1l22 22" />
                         </svg>
                     </button>
                 </div>
-                <x-input-error :messages="$errors->get('password')" class="win11-mt-2" />
+                <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
 
             <!-- Remember Me & Forgot Password -->
-            <div class="win11-flex win11-flex-col sm:win11-flex-row sm:win11-items-center sm:win11-justify-between win11-gap-2">
-                <label for="remember_me" class="win11-inline-flex win11-items-center win11-gap-2">
-                    <input id="remember_me" type="checkbox" class="win11-checkbox" name="remember">
-                    <span class="win11-text-sm win11-text-secondary">Remember me</span>
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <label for="remember_me" class="inline-flex items-center gap-3 cursor-pointer">
+                    <input id="remember_me" type="checkbox" class="w-4 h-4 rounded border-gray-300 dark:border-gray-600 text-blue-600 focus:ring-blue-500 focus:ring-2" name="remember">
+                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Remember me for 30 days</span>
                 </label>
                 @if (Route::has('password.request'))
-                <a class="win11-link win11-text-sm" href="{{ route('password.request') }}">
-                    Forgot your password?
+                <a class="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium text-sm transition-colors inline-flex items-center gap-1" href="{{ route('password.request') }}">
+                    <span>Forgot password?</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
                 </a>
                 @endif
             </div>
 
-            <!-- Submit -->
-            <button type="submit" class="win11-w-full win11-btn win11-btn-primary win11-inline-flex win11-items-center win11-justify-center win11-gap-2">
-                <span>Log in</span>
+            <!-- Submit Button -->
+            <button type="submit" class="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transform transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] inline-flex items-center justify-center gap-2 shadow-lg">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                </svg>
+                <span>Sign In to Your Account</span>
             </button>
 
-            <!-- Divider -->
-            <div class="win11-flex win11-items-center win11-gap-3">
-                <div class="win11-h-px win11-flex-1 win11-bg-border"></div>
-                <span class="win11-text-xs win11-text-secondary">or</span>
-                <div class="win11-h-px win11-flex-1 win11-bg-border"></div>
-            </div>
-
-            <!-- Optional Social Login (placeholders) -->
-            <div class="win11-grid win11-grid-cols-1 sm:win11-grid-cols-2 win11-gap-3" aria-label="Social login options">
-                <button type="button" aria-disabled="true" title="Social login coming soon"
-                    class="win11-btn win11-btn-outline win11-inline-flex win11-items-center win11-justify-center win11-gap-2">
-                    <!-- Google icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="win11-h-4 win11-w-4" aria-hidden="true"><path fill="#EA4335" d="M12 10.2v3.6h5.1c-.2 1.1-1.2 3.2-5.1 3.2-3 0-5.4-2.5-5.4-5.6s2.4-5.6 5.4-5.6c1.7 0 2.9.7 3.6 1.3l2.4-2.3C16.8 3.4 14.6 2.4 12 2.4 6.9 2.4 2.7 6.6 2.7 11.7s4.2 9.3 9.3 9.3c5.4 0 9-3.8 9-9.2 0-.6-.1-1-.2-1.5H12z"/></svg>
-                    <span>Continue with Google</span>
-                </button>
-                <button type="button" aria-disabled="true" title="Social login coming soon"
-                    class="win11-btn win11-btn-outline win11-inline-flex win11-items-center win11-justify-center win11-gap-2">
-                    <!-- Microsoft icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="win11-h-4 win11-w-4" aria-hidden="true"><path fill="#F25022" d="M11 11H3V3h8z"/><path fill="#7FBA00" d="M21 11h-8V3h8z"/><path fill="#00A4EF" d="M11 21H3v-8h8z"/><path fill="#FFB900" d="M21 21h-8v-8h8z"/></svg>
-                    <span>Continue with Microsoft</span>
-                </button>
-            </div>
         </form>
+
+        <!-- Additional Information -->
+        <div class="text-center space-y-4">
+            <div class="flex items-center gap-3">
+                <div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div>
+                <span class="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Secure Login</span>
+                <div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div>
+            </div>
+            
+            <!-- Security Features -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                <div class="flex flex-col items-center gap-2">
+                    <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
+                        <svg class="w-4 h-4 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <span class="text-xs text-gray-600 dark:text-gray-400">SSL Encrypted</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
+                        <svg class="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
+                    <span class="text-xs text-gray-600 dark:text-gray-400">Secure Access</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center">
+                        <svg class="w-4 h-4 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <span class="text-xs text-gray-600 dark:text-gray-400">Fast & Reliable</span>
+                </div>
+            </div>
+        </div>
     </div>
 
     @push('scripts')

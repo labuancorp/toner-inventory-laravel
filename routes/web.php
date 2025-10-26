@@ -20,7 +20,7 @@ use App\Http\Controllers\ShopHistoryController;
 // use App\Http\Controllers\ShopReportController; // removed: shop report feature
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('shop');
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])

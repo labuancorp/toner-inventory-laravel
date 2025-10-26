@@ -1,17 +1,23 @@
-<li class="win11-nav-item">
+<li>
     @php
         $unreadCount = optional(auth()->user())->unreadNotifications()->count();
     @endphp
-    <button class="win11-nav-link win11-w-full win11-text-start win11-flex win11-justify-between win11-items-center" type="button" onclick="toggleNotifications()" aria-controls="notifCollapse" aria-expanded="false" aria-label="Toggle notifications">
-        <span class="win11-nav-link-text">Notifications</span>
+    <button class="flex items-center justify-between gap-3 px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-200 text-surface-600 hover:bg-surface-100 hover:text-surface-900 w-full text-left" type="button" onclick="toggleNotifications()" aria-controls="notifCollapse" aria-expanded="false" aria-label="Toggle notifications">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span class="flex-1">Notifications</span>
+        </div>
         @if($unreadCount > 0)
-        <span class="win11-badge win11-badge-danger" id="notifBadge" aria-label="Unread notifications">{{ $unreadCount }}</span>
+        <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-danger-500 rounded-full" id="notifBadge" aria-label="Unread notifications">{{ $unreadCount }}</span>
         @endif
     </button>
-    <div id="notifCollapse" class="win11-hidden" aria-labelledby="notifCollapse">
-        <ul class="win11-list-none win11-pl-3 win11-pr-2 win11-py-2 win11-mb-0">
-            <li class="win11-flex win11-justify-end win11-mb-2">
-                <button type="button" class="win11-button win11-button-secondary win11-button-sm" id="notifCloseBtn" aria-label="Close notifications">Close</button>
+    <div id="notifCollapse" class="hidden" aria-labelledby="notifCollapse">
+        <ul class="list-none pl-3 pr-2 py-2 mb-0">
+            <li class="flex justify-end mb-2">
+                <button type="button" class="px-3 py-1 text-xs font-medium text-surface-600 bg-surface-100 border border-surface-300 rounded-md hover:bg-surface-200 transition-colors duration-200" id="notifCloseBtn" aria-label="Close notifications">Close</button>
             </li>
             @php
                 $unread = optional(auth()->user())->unreadNotifications()->take(5)->get();
@@ -36,7 +42,7 @@
                     $summary = implode(' • ', $summaryParts);
                 @endphp
                 <li>
-                    <a class="win11-dropdown-item win11-px-0 win11-py-2"
+                    <a class="block px-0 py-2 text-surface-700 hover:bg-surface-50 rounded-md transition-colors duration-200"
                        href="{{ $link }}"
                        data-order-id="{{ $orderId }}"
                        data-order-number="{{ $orderNumber }}"
@@ -45,23 +51,23 @@
                        data-total="{{ $totalAmount }}"
                        data-message="{{ $message }}"
                        data-created-at="{{ $n->created_at->diffForHumans() }}">
-                        <strong class="win11-block win11-text-truncate" style="max-width: 240px;">
+                        <strong class="block truncate font-semibold text-sm" style="max-width: 240px;">
                             {{ $hasOrder ? ($orderNumber ? 'Incoming Order ' . $orderNumber : 'Incoming Order #' . $orderId) : $message }}
                         </strong>
                         @if($hasOrder && $summary)
-                            <div class="win11-text-sm win11-text-secondary win11-text-truncate" style="max-width: 240px;">{{ $summary }}</div>
+                            <div class="text-xs text-surface-500 truncate" style="max-width: 240px;">{{ $summary }}</div>
                         @else
-                            <div class="win11-text-sm win11-text-secondary">{{ $n->created_at->diffForHumans() }}</div>
+                            <div class="text-xs text-surface-500">{{ $n->created_at->diffForHumans() }}</div>
                         @endif
                     </a>
                 </li>
             @empty
-                <li><span class="win11-dropdown-item win11-text-secondary win11-px-0 win11-py-2">No unread notifications</span></li>
+                <li><span class="block text-surface-500 px-0 py-2 text-sm">No unread notifications</span></li>
             @endforelse
-            <li class="win11-mt-2">
+            <li class="mt-2">
                 <form method="POST" action="{{ route('notifications.readAll') }}" class="">
                     @csrf
-                    <button type="submit" class="win11-button win11-button-secondary win11-button-sm win11-w-full">Mark all as read</button>
+                    <button type="submit" class="w-full px-3 py-1 text-xs font-medium text-surface-600 bg-surface-100 border border-surface-300 rounded-md hover:bg-surface-200 transition-colors duration-200">Mark all as read</button>
                 </form>
             </li>
         </ul>

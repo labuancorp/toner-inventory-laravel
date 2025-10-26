@@ -15,23 +15,23 @@
             </style>
         @endif
     </head>
-    <body class="win11-bg-primary win11-text-primary win11-flex win11-p-lg win11-items-center win11-justify-center win11-min-h-screen win11-flex-col">
-        <header class="win11-w-full win11-max-w-4xl win11-text-sm win11-mb-lg">
+    <body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 flex p-8 items-center justify-center min-h-screen flex-col">
+        <header class="w-full max-w-4xl text-sm mb-8">
             @if (Route::has('login'))
-                <nav class="win11-flex win11-items-center win11-justify-end win11-gap-md">
+                <nav class="flex items-center justify-end gap-4">
                     <!-- Language Switcher -->
                     <x-language-switcher />
                     @auth
                         <a
                             href="{{ url('/dashboard') }}"
-                            class="win11-btn win11-btn-outline win11-px-lg win11-py-sm"
+                            class="px-6 py-2 rounded-md border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                         >
                             Dashboard
                         </a>
                     @else
                         <a
                             href="{{ route('login') }}"
-                            class="win11-btn win11-btn-ghost win11-px-lg win11-py-sm"
+                            class="px-6 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                         >
                             Log in
                         </a>
@@ -39,7 +39,7 @@
                         @if (Route::has('register'))
                             <a
                                 href="{{ route('register') }}"
-                                class="win11-btn win11-btn-outline win11-px-lg win11-py-sm">
+                                class="px-6 py-2 rounded-md border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
                                 Register
                             </a>
                         @endif
@@ -47,19 +47,19 @@
                 </nav>
             @endif
         </header>
-        <div class="win11-flex win11-items-center win11-justify-center win11-w-full win11-transition-opacity win11-opacity-100 win11-duration-750 win11-grow">
-            <main class="win11-flex win11-max-w-4xl win11-w-full win11-flex-col-reverse lg:win11-flex-row win11-gap-lg">
-                <div class="win11-card win11-card-acrylic win11-flex-1 win11-p-xl">
-                    <h1 class="win11-text-2xl win11-font-semibold win11-mb-sm win11-text-primary">Let's get started</h1>
-                    <p class="win11-mb-md win11-text-secondary">Laravel has an incredibly rich ecosystem. <br>We suggest starting with the following.</p>
-                    <ul class="win11-list-group win11-mb-lg">
-                        <li class="win11-list-item win11-flex win11-items-center win11-gap-md win11-py-sm">
-                            <span class="win11-flex win11-items-center win11-justify-center win11-w-4 win11-h-4 win11-bg-accent win11-rounded-full">
-                                <span class="win11-w-2 win11-h-2 win11-bg-white win11-rounded-full"></span>
+        <div class="flex items-center justify-center w-full transition-opacity opacity-100 duration-700 grow">
+            <main class="flex max-w-4xl w-full flex-col-reverse lg:flex-row gap-8">
+                <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg flex-1 p-8">
+                    <h1 class="text-2xl font-semibold mb-2 text-gray-900 dark:text-gray-100">Let's get started</h1>
+                    <p class="mb-6 text-gray-600 dark:text-gray-400">Laravel has an incredibly rich ecosystem. <br>We suggest starting with the following.</p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-4 py-2">
+                            <span class="flex items-center justify-center w-4 h-4 bg-blue-600 rounded-full">
+                                <span class="w-2 h-2 bg-white rounded-full"></span>
                             </span>
-                            <span class="win11-text-primary">
+                            <span class="text-gray-900 dark:text-gray-100">
                                 Read the
-                                <a href="https://laravel.com/docs" target="_blank" class="win11-link win11-inline-flex win11-items-center win11-gap-1 win11-ml-1">
+                                <a href="https://laravel.com/docs" target="_blank" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 inline-flex items-center gap-1 ml-1 transition-colors">
                                     <span>Documentation</span>
                                     <svg
                                         width="10"
@@ -67,7 +67,7 @@
                                         viewBox="0 0 10 11"
                                         fill="none"
                                         xmlns="http://www.w3.org/2000/svg"
-                                        class="win11-w-3 win11-h-3"
+                                        class="w-3 h-3"
                                     >
                                         <path
                                             d="M7.70833 6.95834V2.79167H3.54167M2.5 8L7.5 3.00001"
@@ -78,13 +78,13 @@
                                 </a>
                             </span>
                         </li>
-                        <li class="win11-list-item win11-flex win11-items-center win11-gap-md win11-py-sm">
-                            <span class="win11-flex win11-items-center win11-justify-center win11-w-4 win11-h-4 win11-bg-accent win11-rounded-full">
-                                <span class="win11-w-2 win11-h-2 win11-bg-white win11-rounded-full"></span>
+                        <li class="flex items-center gap-4 py-2">
+                            <span class="flex items-center justify-center w-4 h-4 bg-blue-600 rounded-full">
+                                <span class="w-2 h-2 bg-white rounded-full"></span>
                             </span>
-                            <span class="win11-text-primary">
+                            <span class="text-gray-900 dark:text-gray-100">
                                 Watch video tutorials at
-                                <a href="https://laracasts.com" target="_blank" class="win11-link win11-inline-flex win11-items-center win11-gap-1 win11-ml-1">
+                                <a href="https://laracasts.com" target="_blank" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 inline-flex items-center gap-1 ml-1 transition-colors">
                                     <span>Laracasts</span>
                                     <svg
                                         width="10"
@@ -92,7 +92,7 @@
                                         viewBox="0 0 10 11"
                                         fill="none"
                                         xmlns="http://www.w3.org/2000/svg"
-                                        class="win11-w-3 win11-h-3"
+                                        class="w-3 h-3"
                                     >
                                         <path
                                             d="M7.70833 6.95834V2.79167H3.54167M2.5 8L7.5 3.00001"
@@ -104,15 +104,15 @@
                             </span>
                         </li>
                     </ul>
-                    <div class="win11-flex win11-gap-md">
-                        <a href="https://cloud.laravel.com" target="_blank" class="win11-btn win11-btn-primary win11-px-lg win11-py-sm">
+                    <div class="flex gap-4">
+                        <a href="https://cloud.laravel.com" target="_blank" class="px-6 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 transition-colors">
                             Deploy now
                         </a>
                     </div>
                 </div>
-                <div class="win11-card win11-card-acrylic win11-relative win11-w-full lg:win11-w-96 win11-shrink-0 win11-overflow-hidden win11-flex win11-flex-col win11-items-center win11-justify-center win11-p-xl">
+                <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg relative w-full lg:w-96 shrink-0 overflow-hidden flex flex-col items-center justify-center p-8">
                     {{-- Laravel Logo --}}
-                    <svg class="win11-w-full win11-text-accent win11-transition-all win11-translate-y-0 win11-opacity-100 win11-max-w-none win11-duration-750" viewBox="0 0 438 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-full text-blue-600 transition-all translate-y-0 opacity-100 max-w-none duration-700" viewBox="0 0 438 104" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M17.2036 -3H0V102.197H49.5189V86.7187H17.2036V-3Z" fill="currentColor" />
                         <path d="M110.256 41.6337C108.061 38.1275 104.945 35.3731 100.905 33.3681C96.8667 31.3647 92.8016 30.3618 88.7131 30.3618C83.4247 30.3618 78.5885 31.3389 74.201 33.2923C69.8111 35.2456 66.0474 37.928 62.9059 41.3333C59.7643 44.7401 57.3198 48.6726 55.5754 53.1293C53.8287 57.589 52.9572 62.274 52.9572 67.1813C52.9572 72.1925 53.8287 76.8995 55.5754 81.3069C57.3191 85.7173 59.7636 89.6241 62.9059 93.0293C66.0474 96.4361 69.8119 99.1155 74.201 101.069C78.5885 103.022 83.4247 103.999 88.7131 103.999C92.8016 103.999 96.8667 102.997 100.905 100.994C104.945 98.9911 108.061 96.2359 110.256 92.7282V102.195H126.563V32.1642H110.256V41.6337ZM108.76 75.7472C107.762 78.4531 106.366 80.8078 104.572 82.8112C102.776 84.8161 100.606 86.4183 98.0637 87.6206C95.5202 88.823 92.7004 89.4238 89.6103 89.4238C86.5178 89.4238 83.7252 88.823 81.2324 87.6206C78.7388 86.4183 76.5949 84.8161 74.7998 82.8112C73.004 80.8078 71.6319 78.4531 70.6856 75.7472C69.7356 73.0421 69.2644 70.1868 69.2644 67.1821C69.2644 64.1758 69.7356 61.3205 70.6856 58.6154C71.6319 55.9102 73.004 53.5571 74.7998 51.5522C76.5949 49.5495 78.738 47.9451 81.2324 46.7427C83.7252 45.5404 86.5178 44.9396 89.6103 44.9396C92.7012 44.9396 95.5202 45.5404 98.0637 46.7427C100.606 47.9451 102.776 49.5487 104.572 51.5522C106.367 53.5571 107.762 55.9102 108.76 58.6154C109.756 61.3205 110.256 64.1758 110.256 67.1821C110.256 70.1868 109.756 73.0421 108.76 75.7472Z" fill="currentColor" />
                         <path d="M242.805 41.6337C240.611 38.1275 237.494 35.3731 233.455 33.3681C229.416 31.3647 225.351 30.3618 221.262 30.3618C215.974 30.3618 211.138 31.3389 206.75 33.2923C202.36 35.2456 198.597 37.928 195.455 41.3333C192.314 44.7401 189.869 48.6726 188.125 53.1293C186.378 57.589 185.507 62.274 185.507 67.1813C185.507 72.1925 186.378 76.8995 188.125 81.3069C189.868 85.7173 192.313 89.6241 195.455 93.0293C198.597 96.4361 202.361 99.1155 206.75 101.069C211.138 103.022 215.974 103.999 221.262 103.999C225.351 103.999 229.416 102.997 233.455 100.994C237.494 98.9911 240.611 96.2359 242.805 92.7282V102.195H259.112V32.1642H242.805V41.6337ZM241.31 75.7472C240.312 78.4531 238.916 80.8078 237.122 82.8112C235.326 84.8161 233.156 86.4183 230.614 87.6206C228.07 88.823 225.251 89.4238 222.16 89.4238C219.068 89.4238 216.275 88.823 213.782 87.6206C211.289 86.4183 209.145 84.8161 207.35 82.8112C205.554 80.8078 204.182 78.4531 203.236 75.7472C202.286 73.0421 201.814 70.1868 201.814 67.1821C201.814 64.1758 202.286 61.3205 203.236 58.6154C204.182 55.9102 205.554 53.5571 207.35 51.5522C209.145 49.5495 211.288 47.9451 213.782 46.7427C216.275 45.5404 219.068 44.9396 222.16 44.9396C225.251 44.9396 228.07 45.5404 230.614 46.7427C233.156 47.9451 235.326 49.5487 237.122 51.5522C238.917 53.5571 240.312 55.9102 241.31 58.6154C242.306 61.3205 242.806 64.1758 242.806 67.1821C242.805 70.1868 242.305 73.0421 241.31 75.7472Z" fill="currentColor" />
@@ -123,8 +123,8 @@
                     </svg>
 
                     {{-- Light Mode 12 SVG --}}
-                    <svg class="win11-w-full win11-max-w-none win11-relative win11-mt-lg dark:win11-hidden" viewBox="0 0 440 376" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g class="win11-transition-all win11-delay-300 win11-translate-y-0 win11-opacity-100 win11-duration-750">
+                    <svg class="w-full max-w-none relative mt-6 dark:hidden" viewBox="0 0 440 376" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g class="transition-all delay-300 translate-y-0 opacity-100 duration-700">
                             <path d="M188.263 355.73L188.595 355.73C195.441 348.845 205.766 339.761 219.569 328.477C232.93 317.193 242.978 308.205 249.714 301.511C256.34 294.626 260.867 287.358 263.296 279.708C265.725 272.058 264.565 264.121 259.816 255.896C254.516 246.716 247.062 239.352 237.454 233.805C227.957 228.067 217.908 225.198 207.307 225.198C196.927 225.197 190.136 227.97 186.934 233.516C183.621 238.872 184.726 246.331 190.247 255.894L125.647 255.891C116.371 239.825 112.395 225.481 113.72 212.858C115.265 200.235 121.559 190.481 132.602 183.596C143.754 176.52 158.607 172.982 177.159 172.983C196.594 172.984 215.863 176.523 234.968 183.6C253.961 190.486 271.299 200.241 286.98 212.864C302.661 225.488 315.14 239.833 324.416 255.899C333.03 270.817 336.841 283.918 335.847 295.203C335.075 306.487 331.376 316.336 324.75 324.751C318.346 333.167 308.408 343.494 294.936 355.734L377.094 355.737L405.917 405.656L217.087 405.649L188.263 355.73Z" fill="black" />
                             <path d="M9.11884 226.339L-13.7396 226.338L-42.7286 176.132L43.0733 176.135L175.595 405.649L112.651 405.647L9.11884 226.339Z" fill="black" />
                             <path d="M188.263 355.73L188.595 355.73C195.441 348.845 205.766 339.761 219.569 328.477C232.93 317.193 242.978 308.205 249.714 301.511C256.34 294.626 260.867 287.358 263.296 279.708C265.725 272.058 264.565 264.121 259.816 255.896C254.516 246.716 247.062 239.352 237.454 233.805C227.957 228.067 217.908 225.198 207.307 225.198C196.927 225.197 190.136 227.97 186.934 233.516C183.621 238.872 184.726 246.331 190.247 255.894L125.647 255.891C116.371 239.825 112.395 225.481 113.72 212.858C115.265 200.235 121.559 190.481 132.602 183.596C143.754 176.52 158.607 172.982 177.159 172.983C196.594 172.984 215.863 176.523 234.968 183.6C253.961 190.486 271.299 200.241 286.98 212.864C302.661 225.488 315.14 239.833 324.416 255.899C333.03 270.817 336.841 283.918 335.847 295.203C335.075 306.487 331.376 316.336 324.75 324.751C318.346 333.167 308.408 343.494 294.936 355.734L377.094 355.737L405.917 405.656L217.087 405.649L188.263 355.73Z" stroke="#1B1B18" stroke-width="1" />
@@ -192,8 +192,8 @@
                     </svg>
 
                     {{-- Dark Mode 12 SVG --}}
-                    <svg class="win11-w-full win11-max-w-none win11-relative win11-mt-lg win11-hidden dark:win11-block" viewBox="0 0 440 376" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g class="win11-transition-all win11-delay-300 win11-translate-y-0 win11-opacity-100 win11-duration-750">
+                    <svg class="w-full max-w-none relative mt-6 hidden dark:block" viewBox="0 0 440 376" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g class="transition-all delay-300 translate-y-0 opacity-100 duration-700">
                             <path d="M188.263 355.73L188.595 355.73C195.441 348.845 205.766 339.761 219.569 328.477C232.93 317.193 242.978 308.205 249.714 301.511C256.34 294.626 260.867 287.358 263.296 279.708C265.725 272.058 264.565 264.121 259.816 255.896C254.516 246.716 247.062 239.352 237.454 233.805C227.957 228.067 217.908 225.198 207.307 225.198C196.927 225.197 190.136 227.97 186.934 233.516C183.621 238.872 184.726 246.331 190.247 255.894L125.647 255.891C116.371 239.825 112.395 225.481 113.72 212.858C115.265 200.235 121.559 190.481 132.602 183.596C143.754 176.52 158.607 172.982 177.159 172.983C196.594 172.984 215.863 176.523 234.968 183.6C253.961 190.486 271.299 200.241 286.98 212.864C302.661 225.488 315.14 239.833 324.416 255.899C333.03 270.817 336.841 283.918 335.847 295.203C335.075 306.487 331.376 316.336 324.75 324.751C318.346 333.167 308.408 343.494 294.936 355.734L377.094 355.737L405.917 405.656L217.087 405.649L188.263 355.73Z" fill="black"/>
                             <path d="M9.11884 226.339L-13.7396 226.338L-42.7286 176.132L43.0733 176.135L175.595 405.649L112.651 405.647L9.11884 226.339Z" fill="black"/>
                             <path d="M188.263 355.73L188.595 355.73C195.441 348.845 205.766 339.761 219.569 328.477C232.93 317.193 242.978 308.205 249.714 301.511C256.34 294.626 260.867 287.358 263.296 279.708C265.725 272.058 264.565 264.121 259.816 255.896C254.516 246.716 247.062 239.352 237.454 233.805C227.957 228.067 217.908 225.198 207.307 225.198C196.927 225.197 190.136 227.97 186.934 233.516C183.621 238.872 184.726 246.331 190.247 255.894L125.647 255.891C116.371 239.825 112.395 225.481 113.72 212.858C115.265 200.235 121.559 190.481 132.602 183.596C143.754 176.52 158.607 172.982 177.159 172.983C196.594 172.984 215.863 176.523 234.968 183.6C253.961 190.486 271.299 200.241 286.98 212.864C302.661 225.488 315.14 239.833 324.416 255.899C333.03 270.817 336.841 283.918 335.847 295.203C335.075 306.487 331.376 316.336 324.75 324.751C318.346 333.167 308.408 343.494 294.936 355.734L377.094 355.737L405.917 405.656L217.087 405.649L188.263 355.73Z" stroke="#FF750F" stroke-width="1"/>

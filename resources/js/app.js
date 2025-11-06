@@ -12,6 +12,7 @@ Alpine.start();
 // --- Theme & Appearance Helpers ---
 
 const THEME_COLORS = {
+    'indigo': '#4f46e5',
     'blue': '#206bc4',
     'green': '#2fb344',
     'purple': '#ae3ec9',
@@ -30,7 +31,7 @@ function applyTheme(isDark) {
 }
 
 function applyColor(colorName) {
-    const colorValue = THEME_COLORS[colorName] || THEME_COLORS['blue'];
+    const colorValue = THEME_COLORS[colorName] || THEME_COLORS['indigo'];
     document.documentElement.style.setProperty('--theme-primary-color', colorValue);
 }
 
@@ -63,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const theme = localStorage.getItem('theme') || 'light';
         applyTheme(theme === 'dark');
 
-        const color = localStorage.getItem('theme_color') || 'blue';
+        const color = localStorage.getItem('theme_color') || 'indigo';
         applyColor(color);
 
     const density = localStorage.getItem('theme_density') || 'default';

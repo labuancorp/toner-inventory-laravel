@@ -13,20 +13,23 @@
   --font-sans: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
 
   /* Colors */
-  --color-bg: #ffffff;
-  --color-surface: #f8f9fb;
-  --color-border: #e5e7eb;
-  --color-text: #0f172a;          /* slate-900 */
+  --color-bg: #f8fafc;             /* slate-50 */
+  --color-surface: #ffffff;
+  --color-border: #e2e8f0;         /* slate-200 */
+  --color-text: #0f172a;           /* slate-900 */
   --color-text-muted: #475569;     /* slate-600 */
-  --color-primary: #2563eb;        /* blue-600 */
+  --color-primary: #4f46e5;        /* indigo-600 */
   --color-primary-contrast: #ffffff;
-  --color-accent: #10b981;         /* emerald-500 */
+  --color-accent: #6366f1;         /* indigo-500 */
+
+  /* Default runtime primary for Tailwind brand mapping */
+  --theme-primary-color: #4f46e5;  /* indigo-600 */
 
   /* Gradients */
-  --grad-primary: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
-  --grad-accent: linear-gradient(135deg, #10b981 0%, #22d3ee 100%);
+  --grad-primary: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+  --grad-accent: linear-gradient(135deg, #6366f1 0%, #818cf8 100%);
   --grad-warm: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
-  --grad-soft: linear-gradient(180deg, #f8fafc 0%, #ffffff 65%);
+  --grad-soft: none; /* Minimal look: remove page background gradient */
 
   /* Radii & Shadows */
   --radius-sm: 8px;
@@ -124,7 +127,7 @@ html { font-size: 100%; }
 body {
   font-family: var(--font-sans);
   color: var(--color-text);
-  background: var(--grad-soft);
+  background: var(--color-bg);
   line-height: var(--line-height-base);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -376,4 +379,21 @@ thead th { color: var(--color-text); font-weight: 600; }
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+}
+
+/* Dark Mode Variables */
+.dark {
+  --color-bg: #0f172a;             /* slate-900 */
+  --color-surface: #111827;         /* gray-900 */
+  --color-border: #334155;          /* slate-700 */
+  --color-text: #e5e7eb;            /* slate-200 */
+  --color-text-muted: #94a3b8;      /* slate-400 */
+  --color-primary: #6366f1;         /* indigo-500 */
+  --color-primary-contrast: #111827;
+  --color-accent: #818cf8;          /* indigo-400 */
+}
+
+/* Explicit Minimal Indigo preset (optional, for future presets) */
+[data-theme="minimal-indigo"] {
+  --theme-primary-color: #4f46e5;   /* indigo-600 */
 }

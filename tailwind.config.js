@@ -18,7 +18,10 @@ export default {
             },
             colors: {
                 brand: {
-                    primary: '#2563eb',   // blue-600
+                    // Primary color is driven by a CSS variable so it can be
+                    // changed at runtime (via JS) without rebuilding assets.
+                    // Fallback defaults to blue-600.
+                    primary: 'var(--theme-primary-color, #2563eb)',
                     secondary: '#475569', // slate-600
                     accent: '#10b981',    // emerald-500
                     success: '#10b981',   // emerald-500
